@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    	<property name="jndiName" value="java:/OEEDS"/>
+	</bean>
+	<!-- 
+	<bean id="entityInterceptor" class="com.bullcontrol.sistema.BullcontrolHibernateInterceptor" />
+	 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	    <property name="hibernateProperties">
+    		<props>
+		      <prop key="hibernate.show_sql">true</prop>
+		      <prop key="hibernate.format_sql">true</prop>
+		      <prop key="hibernate.dialect">${hibernate_dialect}</prop>
+   		      <prop key="hibernate.useOuterJoin">true</prop>
+		      <prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+   		      <prop key="hibernate.connection.autoReconnect">true</prop>
+   		      <prop key="hibernate.connection.autoReconnectForPools">true</prop>
+   		      <prop key="hibernate.cache.use_second_level_cache">false</prop>
+   		      <prop key="hibernate.cache.use_query_cache">false</prop>
+   		      <prop key="hibernate.connection.release_mode">after_transaction</prop>
+   		      <prop key="hibernate.query.substitutions">true 'Y', false 'N</prop>
+			</props>
+		</property>
+		<property name="mappingLocations">
+			<value>classpath:orm/**/*.hbm.xml</value>
+		</property>
+	</bean>
+	
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" />
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"></bean>  
+  	<tx:annotation-driven proxy-target-class="true"/>
+  	
+	
+</beans>

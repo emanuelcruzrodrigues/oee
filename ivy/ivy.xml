@@ -1,0 +1,44 @@
+<ivy-module version="2.0">
+	<info organisation="br.feevale.emanuel" module="oee" />
+	
+	<configurations>
+        <conf name="compile" description="Required to compile application"/>
+        <conf name="sources" description="Source code"/>
+        <conf name="javadoc" description="Javadocs"/>
+    </configurations>
+		
+	<dependencies>
+		<!-- HIBERNATE -->
+		<dependency org="org.hibernate" name="hibernate-core" rev="3.6.10.Final" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.hibernate" name="hibernate-entitymanager" rev="3.6.10.Final" conf="compile->default;sources;javadoc"/>
+		<dependency org="javassist" name="javassist" rev="3.12.1.GA" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.7.6" conf="compile->default;sources;javadoc"/>
+		<dependency org="cglib" name="cglib" rev="2.2.2" conf="compile->default;sources;javadoc"/>
+		<dependency org="joda-time" name="joda-time-hibernate" rev="1.3" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.hibernate" name="hibernate-validator" rev="5.1.0.Final"  conf="compile->default;sources;javadoc"/>
+            
+
+		<!-- SPRING -->
+		<dependency org="org.springframework" name="spring-webmvc" rev="3.2.2.RELEASE" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.springframework" name="spring-tx" rev="3.2.2.RELEASE" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.springframework" name="spring-jdbc" rev="3.2.2.RELEASE" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.springframework" name="spring-orm" rev="3.2.2.RELEASE" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.springframework" name="spring-aop" rev="3.2.2.RELEASE" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.springframework.integration" name="spring-integration-core" rev="2.1.3.RELEASE"/>
+		<dependency org="org.springframework.ws" name="spring-ws-core" rev="2.2.1.RELEASE" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.aspectj" name="aspectjrt" rev="1.6.11" conf="compile->default;sources;javadoc"/>
+		<dependency org="org.aspectj" name="aspectjweaver" rev="1.6.11" conf="compile->default;sources;javadoc"/>
+		
+		<!-- JSTL -->
+		<dependency org="javax.servlet" name="jstl" rev="1.1.2" conf="compile->default;sources;javadoc"/>
+		<dependency org="taglibs" name="standard" rev="1.1.2" conf="compile->default;sources;javadoc"/>
+		
+		<!-- UTILS -->
+		<dependency org="org.apache.commons" name="commons-lang3" rev="3.3.1" conf="compile->default;sources;javadoc"/>
+		<dependency org="commons-collections" name="commons-collections" rev="3.2.1" conf="compile->default;sources;javadoc"/>
+		<dependency org="joda-time" name="joda-time" rev="2.3"  conf="compile->default;sources;javadoc"/>
+		<dependency org="javax.validation" name="validation-api" rev="1.0.0.GA"  conf="compile->default;sources;javadoc"/>
+		
+	</dependencies>
+
+</ivy-module>

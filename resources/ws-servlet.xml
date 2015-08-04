@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sws="http://www.springframework.org/schema/web-services"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+	<!-- Detects @Endpoint since it is a specialization of @Component -->
+	<context:component-scan base-package="ws.*" />
+	
+	<!-- detects @PayloadRoot -->
+	<sws:annotation-driven />
+	
+	<!-- 
+	<sws:dynamic-wsdl 
+	    id="sessoesAtivasDefinition" 
+	    portTypeName="SessoesAtivas"
+		locationUri="/ws/sessoes-ativas/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/sessoes-ativas-service.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
+	    id="temperaturaDefinition" 
+	    portTypeName="Temperatura"
+		locationUri="/ws/temperatura/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/temperatura-service.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:interceptors>
+  		<bean class="com.bullcontrol.ws.WSDebugInterceptor" name="wsDebugInterceptor"/>
+	</sws:interceptors>
+ 	 -->
+</beans>
