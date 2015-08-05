@@ -13,9 +13,9 @@
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
     	<property name="jndiName" value="java:/OEEDS"/>
 	</bean>
-	<!-- 
-	<bean id="entityInterceptor" class="com.bullcontrol.sistema.BullcontrolHibernateInterceptor" />
-	 -->
+	
+	<bean id="entityInterceptor" class="br.feevale.tc.oee.utils.OEEHibernateInterceptor" />
+    
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 	    <property name="hibernateProperties">
     		<props>

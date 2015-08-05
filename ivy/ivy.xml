@@ -28,8 +28,11 @@
 		<dependency org="org.springframework.ws" name="spring-ws-core" rev="2.2.1.RELEASE" conf="compile->default;sources;javadoc"/>
 		<dependency org="org.aspectj" name="aspectjrt" rev="1.6.11" conf="compile->default;sources;javadoc"/>
 		<dependency org="org.aspectj" name="aspectjweaver" rev="1.6.11" conf="compile->default;sources;javadoc"/>
+		<dependency org="wsdl4j" name="wsdl4j" rev="1.6.3" conf="compile->default;sources;javadoc"/>
 		
-		<!-- JSTL -->
+		
+		<!-- COMMON -->
+		<dependency org="org.jboss.spec" name="jboss-javaee-6.0" rev="3.0.3.Final" conf="compile->default;sources;javadoc"/>
 		<dependency org="javax.servlet" name="jstl" rev="1.1.2" conf="compile->default;sources;javadoc"/>
 		<dependency org="taglibs" name="standard" rev="1.1.2" conf="compile->default;sources;javadoc"/>
 		
@@ -38,6 +41,11 @@
 		<dependency org="commons-collections" name="commons-collections" rev="3.2.1" conf="compile->default;sources;javadoc"/>
 		<dependency org="joda-time" name="joda-time" rev="2.3"  conf="compile->default;sources;javadoc"/>
 		<dependency org="javax.validation" name="validation-api" rev="1.0.0.GA"  conf="compile->default;sources;javadoc"/>
+		
+		<!-- TEST -->
+		<dependency org="junit" name="junit" rev="4.12"  conf="compile->default;sources;javadoc"/>
+		<dependency org="org.mockito" name="mockito-all" rev="1.10.19" conf="compile->default;sources;javadoc"/>
+		
 		
 	</dependencies>
 

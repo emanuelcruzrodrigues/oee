@@ -1,0 +1,33 @@
+<project name="Ant-Generate-Schema-With-Trang" default="generate" basedir=".">
+	
+	<taskdef resource="net/sf/antcontrib/antlib.xml" />
+	
+	<property name="trang.dir" location="." />
+	<property name="source.dir" location="samples" />
+	<property name="schema.dir" location="generated-xsd" />
+
+
+	<target name="generate">
+	    <delete dir="${schema.dir}" />
+		<mkdir dir="${schema.dir}" />
+		
+		<foreach target="generate-xsd" param="theFile">
+			<path>
+				<fileset dir="${source.dir}" casesensitive="yes">
+					<include name="**/*.xml" />
+				</fileset>
+			</path>
+		</foreach>
+	</target>
+
+	<target name="generate-xsd">
+		<echo message="Genetare xsd for: ${theFile}" />
+		
+		<basename property="FileName" file="${theFile}" suffix=".xml"/>
+		
+		<java jar="trang.jar" fork="true">
+			<arg value="${source.dir}/${FileName}.xml" />
+			<arg value="${schema.dir}/${FileName}.xsd" />
+		</java>
+	</target>
+</project>

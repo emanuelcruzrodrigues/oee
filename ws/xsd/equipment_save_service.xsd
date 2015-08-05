@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" 
+	targetNamespace="ws.oee.equipmentSave"
+	xmlns:equipment="ws.oee.equipmentSave">
+
+	<xs:element name="saveRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="equipment:equipment" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="saveResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="equipment:equipment" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="equipment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="equipment:id" />
+				<xs:element ref="equipment:name" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="id" type="xs:integer" />
+	<xs:element name="name" type="xs:string" />
+</xs:schema>

@@ -9,7 +9,8 @@ public class Equipment implements Serializable{
 	private Integer id;
 	private String name;
 	private Date dtCreation;
-	private Date dtUpdate;
+	private Date dtLastUpdate;
+	private String ipLastUpdate;
 	
 	public Integer getId() {
 		return id;
@@ -32,12 +33,18 @@ public class Equipment implements Serializable{
 		this.dtCreation = dtCreation;
 	}
 	
-	public Date getDtUpdate() {
-		return dtUpdate;
+	public Date getDtLastUpdate() {
+		return dtLastUpdate;
 	}
-	public void setDtUpdate(Date dtUpdate) {
-		this.dtUpdate = dtUpdate;
+	public void setDtLastUpdate(Date dtLastUpdate) {
+		this.dtLastUpdate = dtLastUpdate;
 	}
 	
+	public String getIpLastUpdate() {
+		return ipLastUpdate;
+	}
+	public void setIpLastUpdate(String ipLastUpdate) {
+		this.ipLastUpdate = ipLastUpdate;
+	}
 
 }

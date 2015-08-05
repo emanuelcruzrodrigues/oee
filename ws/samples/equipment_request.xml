@@ -1,0 +1,6 @@
+<equipmentSaveRequest xmlns="ws.oee.equipmentSave">
+    <equipment>
+	    <id>1</id>
+	    <name>equipment name</name>
+    </equipment>
+</equipmentSaveRequest>

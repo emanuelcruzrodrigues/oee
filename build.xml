@@ -1,17 +1,17 @@
-<project name="OEE-Server" basedir="." default="deploy" >
+<project name="oee-service" basedir="." default="deploy" >
 	<property file="./build.properties" />
 	
-	<property name="src.dir" value="../src"/>
-	<property name="lib.dir" value="../lib"/>
-	<property name="resources.dir" value="../resources"/>
-	<property name="web.dir" value="../web"/>
-	<property name="orm.dir" value="../orm"/>
-	<property name="build.dir" value="ant-build"/>
-	<property name="dist.dir" value="../dist"/>
-	<property name="xsd.dir" value="../ws/xsd"/>
+	<property name="src.dir" value="src"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="resources.dir" value="resources"/>
+	<property name="web.dir" value="web"/>
+	<property name="orm.dir" value="orm"/>
+	<property name="build.dir" value="build/ant-build"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="xsd.dir" value="ws/xsd"/>
 		
     <path id="classpath">
-		<fileset dir="${deploy.dir}/server.war/WEB-INF/lib" includes="**/*.jar"/>
+		<fileset dir="${deploy.dir}/oee.war/WEB-INF/lib" includes="**/*.jar"/>
 	</path>
 	
     <target name="clean">
@@ -21,42 +21,36 @@
     
     <target name="clean-all">
         <antcall target="clean"/>
-	    <delete dir="${deploy.dir}"/>
+	    <delete dir="${deploy.dir}/oee.war"/>
     </target>
     
     <target name="deploy">
 		
-		<echo message="criando META-INF" />
-		<mkdir dir="${deploy.dir}/META-INF" />
-		<copy todir="${deploy.dir}/META-INF">
-			<fileset dir="META-INF" includes="**/*" />
-		</copy>
-		
 		<antcall target="generate-dist"/>
 		<echo message="Copiando jars gerado" />
-		<copy todir="${deploy.dir}/server.war/WEB-INF/lib">
+		<copy todir="${deploy.dir}/oee.war/WEB-INF/lib">
 			<fileset dir="${dist.dir}" includes="**/*" />
 		</copy>
 		       	
 	    <echo message="Copiando arquivos de configuracao" />
-		<copy todir="${deploy.dir}/server.war/WEB-INF/">
+		<copy todir="${deploy.dir}/oee.war/WEB-INF/">
 			<fileset dir="${resources.dir}" includes="**/*" />
 		</copy>
 		
 	    <echo message="Copiando arquivos hbm" />
-		<copy todir="${deploy.dir}/server.war/WEB-INF/classes/orm">
+		<copy todir="${deploy.dir}/oee.war/WEB-INF/classes/orm">
 			<fileset dir="${orm.dir}" includes="**/*" />
 		</copy>
 	    
 		<echo message="Copiando arquivos web" />
-		<copy todir="${deploy.dir}/server.war/">
+		<copy todir="${deploy.dir}/oee.war/">
 		  <fileset dir="${web.dir}">
 		    <include name="**/*"/>
 		  </fileset>
 		</copy>
 		
 		<echo message="Copiando schemas" />
-		<copy todir="${deploy.dir}/server.war/WEB-INF/schemas/xsd">
+		<copy todir="${deploy.dir}/oee.war/WEB-INF/schemas/xsd">
 			<fileset dir="${xsd.dir}" includes="**/*" />
 		</copy>
 		
@@ -78,8 +72,8 @@
     <target name="compile" >
         
         <echo message="Copiando libs para formacao do classpath" />
-        <mkdir dir="${deploy.dir}/server.war/WEB-INF/lib" />
-		<copy todir="${deploy.dir}/server.war/WEB-INF/lib">
+        <mkdir dir="${deploy.dir}/oee.war/WEB-INF/lib" />
+		<copy todir="${deploy.dir}/oee.war/WEB-INF/lib">
 			<fileset dir="${lib.dir}" includes="**/*">
 				<exclude name="*junit*.jar"/>
 				<exclude name="*mockito*.jar"/>

@@ -6,7 +6,15 @@
     id="WebApp_ID" 
     version="2.5">
   
-  <display-name>Bullcontrol Server</display-name>
+  <display-name>OEE Service</display-name>
+  
+  <description>
+	This system aims to calculate and provide information to all levels of the 
+	organization by providing the Overall Equipment Effectiveness (OEE) index 
+	in real time as an independent service, enabling existing systems to add 
+	the overall efficiency index of equipment between its functionality in a 
+	minimally invasive way.
+  </description>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -18,16 +26,6 @@
 	</welcome-file-list>
 	
 	<!-- SERVLETS -->
-	
-	<servlet>
-		<servlet-name>server</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>server</servlet-name>
-		<url-pattern>/server</url-pattern>
-	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>ws</servlet-name>

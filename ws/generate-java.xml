@@ -1,0 +1,30 @@
+<project name="Ant-Generate-Classes-With-JAXB2" default="generate" basedir=".">
+    
+    <taskdef resource="net/sf/antcontrib/antlib.xml" />
+    
+    <property name="java.dir" location="generated-src" />
+    <property name="schema.dir" location="xsd" />
+    
+    <target name="generate">
+        <delete dir="${java.dir}" />
+		<mkdir dir="${java.dir}" />
+		
+        <foreach target="generate-java" param="theFile">
+			<path>
+				<fileset dir="${schema.dir}" casesensitive="yes">
+					<include name="**/*.xsd" />
+				</fileset>
+			</path>
+		</foreach>
+    </target>
+    
+    <target name="generate-java">
+        <echo message="Genetare java classes for: ${theFile}" />
+		
+		<basename property="FileName" file="${theFile}" suffix=".xsd"/>
+    	<mkdir dir="${java.dir}/${FileName}" />
+        <exec executable="xjc">
+            <arg line=" -d ${java.dir}/${FileName} -p ws.oee ${schema.dir}/${FileName}.xsd" />
+        </exec>
+    </target>
+</project>
