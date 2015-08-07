@@ -6,6 +6,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public class ReflectionUtils {
 
 	public static Method getMethod(String methodName, Class<?> clazz) throws Exception {

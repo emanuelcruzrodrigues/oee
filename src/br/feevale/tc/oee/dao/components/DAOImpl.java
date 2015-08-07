@@ -38,6 +38,11 @@ import org.springframework.stereotype.Repository;
 
 import br.feevale.tc.oee.utils.HQLUtils;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 @Repository(value="dao")
 public class DAOImpl implements DAO {
 

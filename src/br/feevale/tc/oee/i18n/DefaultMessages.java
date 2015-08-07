@@ -7,6 +7,11 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public class DefaultMessages {
 	
 	public static final String BUNDLE_LOCATION = "br.feevale.tc.oee.i18n.i18n";

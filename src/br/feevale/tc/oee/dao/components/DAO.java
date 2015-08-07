@@ -7,6 +7,11 @@ import java.util.Map;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public interface DAO {
 
 	/**

@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public abstract class OEEValidationStack {
 
 	public void validate() {

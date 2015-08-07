@@ -7,15 +7,15 @@ import br.feevale.tc.oee.i18n.DefaultMessages;
  * emanuelcruzrodrigues@gmail.com
  * 06/08/2015
  */
-public enum AtivoInativo implements OEEEnum{
-	 ATIVO("A", "ATIVO")
-	,INATIVO("I", "INATIVO")
+public enum QualidadeProducao implements OEEEnum{
+	 DENTRO_DOS_PADROES("P", "DENTRO_DOS_PADROES")
+	,REFUGO("R", "REFUGO")
 	;
 	 
 	private String value;
 	private String meaningKey;
 	
-	private AtivoInativo(String value, String meaningKey) {
+	private QualidadeProducao(String value, String meaningKey) {
 		this.value = value;
 		this.meaningKey = meaningKey;
 	}

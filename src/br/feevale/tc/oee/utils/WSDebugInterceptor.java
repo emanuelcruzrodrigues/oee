@@ -15,6 +15,11 @@ import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.soap.saaj.SaajSoapMessage;
 import org.w3c.dom.Document;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public class WSDebugInterceptor implements EndpointInterceptor{
 
 	@Override

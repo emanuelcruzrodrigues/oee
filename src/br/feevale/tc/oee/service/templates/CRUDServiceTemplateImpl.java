@@ -12,6 +12,12 @@ import br.feevale.tc.oee.validation.OEEValidationFakeStack;
 import br.feevale.tc.oee.validation.OEEValidationHandler;
 import br.feevale.tc.oee.validation.OEEValidationStack;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ * @param <T>
+ */
 public abstract class CRUDServiceTemplateImpl<T extends Serializable> implements CRUDServiceTemplate<T>{
 
 	@Resource

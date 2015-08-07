@@ -5,6 +5,11 @@ import java.util.List;
 import br.feevale.tc.oee.i18n.DefaultMessages;
 import br.feevale.tc.oee.validation.OEEValidationMessage;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 @SuppressWarnings("serial")
 public class OEEException extends RuntimeException{
 	

@@ -1,5 +1,10 @@
 package br.feevale.tc.oee.enums;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public interface OEEEnum {
 
 	public String getValue();

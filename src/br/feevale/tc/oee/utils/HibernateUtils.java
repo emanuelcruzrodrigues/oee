@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.hibernate.collection.PersistentBag;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public class HibernateUtils {
 	
 	public static <T> List<T> getDeletedItens(List<T> list){

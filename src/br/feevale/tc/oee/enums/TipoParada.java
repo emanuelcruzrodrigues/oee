@@ -7,15 +7,18 @@ import br.feevale.tc.oee.i18n.DefaultMessages;
  * emanuelcruzrodrigues@gmail.com
  * 06/08/2015
  */
-public enum AtivoInativo implements OEEEnum{
-	 ATIVO("A", "ATIVO")
-	,INATIVO("I", "INATIVO")
+public enum TipoParada implements OEEEnum{
+	 DT_TECNICA("DTT", "DOWNTIME_TECNICA"),
+	 DT_OPERACIONAL("DTO", "DOWNTIME_OPERACIONAL"),
+	 DT_QUALIDADE("DTQ", "DOWNTIME_QUALIDADE"),
+	 ST_OPERACIONAL("STO", "STOPTIME_QUALIDADE"),
+	 ST_INDUZIDO("STI", "STOPTIME_INDUZIDO"),
 	;
 	 
 	private String value;
 	private String meaningKey;
 	
-	private AtivoInativo(String value, String meaningKey) {
+	private TipoParada(String value, String meaningKey) {
 		this.value = value;
 		this.meaningKey = meaningKey;
 	}
@@ -28,5 +31,6 @@ public enum AtivoInativo implements OEEEnum{
 	public String toString() {
 		return DefaultMessages.get(meaningKey);
 	}
+
 
 }

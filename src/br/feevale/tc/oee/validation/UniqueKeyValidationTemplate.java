@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import br.feevale.tc.oee.dao.templates.UniqueKeyDAO;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public abstract class UniqueKeyValidationTemplate<T> implements OEEValidation{
 	
 	@Override

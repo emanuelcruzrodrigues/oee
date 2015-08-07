@@ -11,6 +11,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import br.feevale.tc.oee.enums.OEEEnum;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 public class HQLUtils {
 
 	public static String createNotInCommand(String fieldName, Collection<?> collection) {

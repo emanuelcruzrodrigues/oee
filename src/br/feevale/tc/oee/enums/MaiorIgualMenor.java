@@ -7,15 +7,18 @@ import br.feevale.tc.oee.i18n.DefaultMessages;
  * emanuelcruzrodrigues@gmail.com
  * 06/08/2015
  */
-public enum AtivoInativo implements OEEEnum{
-	 ATIVO("A", "ATIVO")
-	,INATIVO("I", "INATIVO")
+public enum MaiorIgualMenor implements OEEEnum{
+	 MAIOR("G", ">"),
+	 MAIOR_OU_IGUAL("GE", ">="),
+	 IGUAL("E", "="),
+	 MENOR_OU_IGUAL("LE", "<="),
+	 MENOR("L", "<"),
 	;
 	 
 	private String value;
 	private String meaningKey;
 	
-	private AtivoInativo(String value, String meaningKey) {
+	private MaiorIgualMenor(String value, String meaningKey) {
 		this.value = value;
 		this.meaningKey = meaningKey;
 	}

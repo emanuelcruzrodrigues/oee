@@ -10,6 +10,11 @@ import org.hibernate.type.Type;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 @SuppressWarnings("serial")
 public class OEEHibernateInterceptor extends EmptyInterceptor{
 

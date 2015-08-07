@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import br.feevale.tc.oee.exceptions.OEEException;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 @Service
 public class OEEValidationServerHandler implements OEEValidationHandler, ApplicationContextAware{
 	

@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import br.feevale.tc.oee.i18n.DefaultMessages;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ */
 @SuppressWarnings("serial")
 public class OEEValidationMessage implements Serializable{
 	

@@ -3,6 +3,12 @@ package br.feevale.tc.oee.service.templates;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 06/08/2015
+ * @param <T>
+ */
 public interface CRUDServiceTemplate<T extends Serializable> {
 	
 	public T save(T t);
