@@ -1,4 +1,4 @@
-package br.feevale.tc.oee.utils;
+package br.feevale.tc.oee.dao.components;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -36,12 +36,12 @@ public class OEEHibernateInterceptor extends EmptyInterceptor{
 			
 			for (int i = 0; i < propertyNames.length; i++) {
 				
-				if("ipLastUpdate".equals(propertyNames[i])){
+				if("ipUltimaAlteracao".equals(propertyNames[i])){
 					HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 					state[i] = request.getLocalAddr();
 				}
 				
-				if("dtCreation".equals(propertyNames[i])){
+				if("dtCriacao".equals(propertyNames[i])){
 					if (state[i] == null){
 						state[i] = new Date();
 					}

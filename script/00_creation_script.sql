@@ -1,9 +1,10 @@
-drop table if exists equipment;
+drop table if exists equipamentos;
 
-create table equipment(
+create table equipamentos(
   id numeric(10,0) not null primary key,
-  name varchar(100) not null,
-  dt_creation timestamp not null,
-  dt_last_update timestamp not null,
-  ip_last_update varchar(50) not null
+  nome varchar(100) not null,
+  dm_situacao varchar(1) not null,
+  dt_criacao timestamp not null,
+  dt_ultima_alteracao timestamp not null,
+  ip_ultima_alteracao varchar(50) not null
 );

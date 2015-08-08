@@ -1,4 +1,4 @@
-package br.feevale.tc.oee.utils;
+package ws.oee;
 
 import java.io.StringWriter;
 

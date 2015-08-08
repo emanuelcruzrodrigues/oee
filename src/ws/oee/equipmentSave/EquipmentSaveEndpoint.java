@@ -9,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import br.feevale.tc.oee.cadastros.domain.Equipamento;
 import br.feevale.tc.oee.cadastros.service.EquipamentoService;
+import br.feevale.tc.oee.enums.AtivoInativo;
 
 @Endpoint
 public class EquipmentSaveEndpoint {
@@ -25,7 +26,7 @@ public class EquipmentSaveEndpoint {
 		if (storedEquipment == null){
 			storedEquipment = new Equipamento();
 			storedEquipment.setId(id);
-//			storedEquipment.setDtCreation(new Date());
+			storedEquipment.setDmSituacao(AtivoInativo.ATIVO);
 		}
 		
 		storedEquipment.setNome(equipment.getName());

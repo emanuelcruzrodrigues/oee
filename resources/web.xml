@@ -40,6 +40,15 @@
 		<servlet-name>ws</servlet-name>
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>OEEController</servlet-name>
+		<servlet-class>br.feevale.tc.oee.controller.FrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OEEController</servlet-name>
+		<url-pattern>/web/*</url-pattern>
+	</servlet-mapping>
 		
 	<!-- LISTENERS -->
 

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<typedef name="ativo_inativo" class='br.feevale.tc.oee.dao.components.PersistentEnum'>
+		<param name="enumClassName">br.feevale.tc.oee.enums.AtivoInativo</param>
+    </typedef>
+	<class name="br.feevale.tc.oee.cadastros.domain.Equipamento" table="equipamentos">
+		<id name="id" column="id" />
+		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
+		<property name="nome" column="nome" />
+		<property name="dmSituacao" column="dm_situacao" type="ativo_inativo" />
+		<property name="dtCriacao" column="dt_criacao" />
+		<property name="ipUltimaAlteracao" column="ip_ultima_alteracao" />
+	</class>
+</hibernate-mapping>

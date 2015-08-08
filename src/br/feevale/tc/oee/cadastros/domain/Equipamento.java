@@ -1,6 +1,7 @@
 package br.feevale.tc.oee.cadastros.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import br.feevale.tc.oee.enums.AtivoInativo;
 
@@ -15,6 +16,9 @@ public class Equipamento implements Serializable{
 	private Integer id;
 	private String nome;
 	private AtivoInativo dmSituacao;
+	private Date dtCriacao;
+	private Date dtUltimaAlteracao;
+	private String ipUltimaAlteracao;
 	
 	public Integer getId() {
 		return id;
@@ -36,5 +40,28 @@ public class Equipamento implements Serializable{
 	public void setDmSituacao(AtivoInativo dmSituacao) {
 		this.dmSituacao = dmSituacao;
 	}
+	
+	public Date getDtCriacao() {
+		return dtCriacao;
+	}
+	public void setDtCriacao(Date dtCriacao) {
+		this.dtCriacao = dtCriacao;
+	}
+	
+	public Date getDtUltimaAlteracao() {
+		return dtUltimaAlteracao;
+	}
+	public void setDtUltimaAlteracao(Date dtUltimaAlteracao) {
+		this.dtUltimaAlteracao = dtUltimaAlteracao;
+	}
+	
+	public String getIpUltimaAlteracao() {
+		return ipUltimaAlteracao;
+	}
+	public void setIpUltimaAlteracao(String ipUltimaAlteracao) {
+		this.ipUltimaAlteracao = ipUltimaAlteracao;
+	}
+	
+	
 	
 }
