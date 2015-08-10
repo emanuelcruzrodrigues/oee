@@ -4,10 +4,10 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<typedef name="ativo_inativo" class='br.feevale.tc.oee.dao.components.PersistentEnum'>
+	<typedef name="ativo_inativo" class='br.feevale.tc.oee.framework.dao.PersistentEnum'>
 		<param name="enumClassName">br.feevale.tc.oee.enums.AtivoInativo</param>
     </typedef>
-	<class name="br.feevale.tc.oee.cadastros.domain.Equipamento" table="equipamentos">
+	<class name="br.feevale.tc.oee.domain.Equipamento" table="equipamentos">
 		<id name="id" column="id" />
 		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
 		<property name="nome" column="nome" />

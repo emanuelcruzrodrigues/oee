@@ -1,6 +1,6 @@
 package br.feevale.tc.oee.enums;
 
-import br.feevale.tc.oee.i18n.DefaultMessages;
+import br.feevale.tc.oee.framework.domain.OEEEnum;
 
 /**
  * @author Emanuel
@@ -8,8 +8,8 @@ import br.feevale.tc.oee.i18n.DefaultMessages;
  * 06/08/2015
  */
 public enum AtivoInativo implements OEEEnum{
-	 ATIVO("A", "ATIVO")
-	,INATIVO("I", "INATIVO")
+	ATIVO("A", "ATIVO"),
+	INATIVO("I", "INATIVO"),
 	;
 	 
 	private String value;
@@ -24,9 +24,18 @@ public enum AtivoInativo implements OEEEnum{
 		return value;
 	}
 	
-	@Override
-	public String toString() {
-		return DefaultMessages.get(meaningKey);
+	public String getMeaningKey() {
+		return meaningKey;
+	}
+	
+	public static AtivoInativo getFromValue(String value) {
+		if ("A".equals(value)){
+			return ATIVO;
+		}
+		if ("I".equals(value)){
+			return INATIVO;
+		}
+		return null;
 	}
 
 }

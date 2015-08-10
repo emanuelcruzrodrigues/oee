@@ -1,6 +1,6 @@
 package br.feevale.tc.oee.enums;
 
-import br.feevale.tc.oee.i18n.DefaultMessages;
+import br.feevale.tc.oee.framework.domain.OEEEnum;
 
 /**
  * @author Emanuel
@@ -27,9 +27,8 @@ public enum MaiorIgualMenor implements OEEEnum{
 		return value;
 	}
 	
-	@Override
-	public String toString() {
-		return DefaultMessages.get(meaningKey);
+	public String getMeaningKey() {
+		return meaningKey;
 	}
-
+	
 }

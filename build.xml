@@ -25,13 +25,16 @@
     </target>
     
     <target name="deploy">
+    	
+		<antcall target="update-oee_framework.jar"/>
 		
 		<antcall target="generate-dist"/>
-		<echo message="Copiando jars gerado" />
+    	
+		<echo message="Copiando oee.jar gerado" />
 		<copy todir="${deploy.dir}/oee.war/WEB-INF/lib">
 			<fileset dir="${dist.dir}" includes="**/*" />
 		</copy>
-		       	
+    	
 	    <echo message="Copiando arquivos de configuracao" />
 		<copy todir="${deploy.dir}/oee.war/WEB-INF/">
 			<fileset dir="${resources.dir}" includes="**/*" />
@@ -88,5 +91,10 @@
     	</copy>
         
     </target>    
+	
+	<target name="update-oee_framework.jar">
+		<echo message="executando build do framework" />
+		<ant antfile="build-framework.xml" target="generate-jar" inheritall="false" />
+	</target>
 	
 </project>

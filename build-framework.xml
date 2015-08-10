@@ -1,0 +1,45 @@
+<project name="oee-framework" basedir="." default="generate-jar" >
+	
+	<property name="build.dir" value="build/ant-framework-build"/>
+	<property name="src.dir" value="src_framework"/>
+	<property name="lib.dir" value="lib"/>
+		
+    <path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar"/>
+	</path>
+	
+    <target name="generate-jar">
+    	
+    	<antcall target="clean"/>
+    	<antcall target="compile"/>
+    	
+    	<echo message="Copiando arquivos web" />
+    	<copy todir="${build.dir}/br/feevale/tc/oee/framework/i18n/">
+    		<fileset dir="${src.dir}/br/feevale/tc/oee/framework/i18n/">
+    			<include name="**/*.properties"/>
+    		</fileset>
+    	</copy>
+    	
+        <jar destfile="${lib.dir}/oee-framework.jar" basedir="${build.dir}">
+        	<manifest>
+        	   <attribute name="Permissions"   value="all-permissions"/>
+        	   <attribute name="Codebase"      value="*"/>
+        	</manifest>
+        </jar>
+    </target>
+	
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+	
+    <target name="clean-all">
+        <delete dir="${build.dir}"/>
+	    <delete file="${lib.dir}/oee-framework.jar"/>
+    </target>
+	
+    <target name="compile">
+    	<mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath" debug="true" />
+    </target>    
+	
+</project>

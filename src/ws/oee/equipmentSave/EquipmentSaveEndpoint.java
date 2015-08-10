@@ -7,9 +7,9 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import br.feevale.tc.oee.cadastros.domain.Equipamento;
-import br.feevale.tc.oee.cadastros.service.EquipamentoService;
+import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.enums.AtivoInativo;
+import br.feevale.tc.oee.service.EquipamentoService;
 
 @Endpoint
 public class EquipmentSaveEndpoint {
