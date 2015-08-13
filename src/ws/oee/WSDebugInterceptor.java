@@ -23,14 +23,10 @@ import org.w3c.dom.Document;
 public class WSDebugInterceptor implements EndpointInterceptor{
 
 	@Override
-	public void afterCompletion(MessageContext messageContext, Object object, Exception exception) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
+	public void afterCompletion(MessageContext messageContext, Object object, Exception exception) throws Exception {}
 
 	@Override
 	public boolean handleFault(MessageContext messageContext, Object object) throws Exception {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

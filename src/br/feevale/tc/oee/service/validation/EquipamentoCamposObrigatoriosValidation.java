@@ -16,7 +16,7 @@ public class EquipamentoCamposObrigatoriosValidation implements OEEValidation {
 
 	@Override
 	public void validate(OEEValidationResult result) {
-		if (equipamento.getId() == null){
+		if (equipamento.getCodigo() == null){
 			result.addFieldNotNullError("CODIGO");
 		}
 		if (StringUtils.isBlank(equipamento.getNome())){

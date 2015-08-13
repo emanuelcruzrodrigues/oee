@@ -4,18 +4,22 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
+	<typedef name="tipo_parada" class='br.feevale.tc.oee.framework.dao.PersistentEnum'>
+		<param name="enumClassName">br.feevale.tc.oee.enums.TipoParada</param>
+    </typedef>
 	<typedef name="ativo_inativo" class='br.feevale.tc.oee.framework.dao.PersistentEnum'>
 		<param name="enumClassName">br.feevale.tc.oee.enums.AtivoInativo</param>
     </typedef>
-	<class name="br.feevale.tc.oee.domain.Equipamento" table="equipamentos">
+	<class name="br.feevale.tc.oee.domain.MotivoParada" table="motivos_paradas">
 		<id name="id" column="id">
 			<generator class="sequence">
-				<param name="sequence">sq_equipamento</param>
+				<param name="sequence">sq_motivo_parada</param>
 			</generator>
 		</id>
 		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
 		<property name="codigo" column="codigo" />
-		<property name="nome" column="nome" />
+		<property name="descricao" column="descricao" />
+		<property name="dmTipoParada" column="dm_tipo_parada" type="tipo_parada" />
 		<property name="dmSituacao" column="dm_situacao" type="ativo_inativo" />
 		<property name="dtCriacao" column="dt_criacao" />
 	</class>

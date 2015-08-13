@@ -3,10 +3,6 @@ package br.feevale.tc.oee.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.feevale.tc.oee.enums.AtivoInativo;
@@ -21,11 +17,10 @@ public class Equipamento implements Serializable{
 	
 	private Integer id;
 	
-	@NotBlank
-	@Size (max=30)
+	private Integer codigo;
+	
 	private String nome;
 	
-	@NotNull
 	private AtivoInativo dmSituacao;
 	
 	private Date dtCriacao;
@@ -33,13 +28,18 @@ public class Equipamento implements Serializable{
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
 	private Date dtUltimaAlteracao;
 	
-	private String ipUltimaAlteracao;
-	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Integer getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 	
 	public String getNome() {
@@ -68,13 +68,6 @@ public class Equipamento implements Serializable{
 	}
 	public void setDtUltimaAlteracao(Date dtUltimaAlteracao) {
 		this.dtUltimaAlteracao = dtUltimaAlteracao;
-	}
-	
-	public String getIpUltimaAlteracao() {
-		return ipUltimaAlteracao;
-	}
-	public void setIpUltimaAlteracao(String ipUltimaAlteracao) {
-		this.ipUltimaAlteracao = ipUltimaAlteracao;
 	}
 	
 	@Override

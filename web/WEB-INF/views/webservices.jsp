@@ -1,5 +1,5 @@
+<%@page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
 <%@page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
-<%@page import="br.feevale.tc.oee.framework.domain.Usuario"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -51,24 +51,7 @@
             <li><a href="../databases/"><spring:message code="BANCO_DE_DADOS" text="BANCO_DE_DADOS" /></a></li>
             <li class="active"><a href="../webservices/"><spring:message code="WEBSERVICES" text="WEBSERVICES" /></a></li>
           </ul>
-                    <% 
-          	Usuario usuario = ((Usuario)request.getSession().getAttribute("usuarioLogado"));
-          	String label;
-	       	String clazz;
-	       	String action;
-          	if (usuario == null){
-	          	label = DefaultMessages.get(request, "ENTRAR");
-		       	clazz = "btn btn-success";
-		       	action = "../login/";          		
-          	}else{
-	          	label = DefaultMessages.get(request, "SAIR");
-		       	clazz = "btn btn-info";
-		       	action = "../login/sair";          		
-          	}
-          	out.print("<form class=\"navbar-form navbar-right\" action=\"" + action + "\">");
-          	out.print("  <button type=\"submit\" class=\"" + clazz + "\">" + label + "</button>");
-          	out.print("</form>");
-          %>
+          <%=JSPUtils.printEntrarSairButton(request)%>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

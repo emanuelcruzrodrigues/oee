@@ -12,9 +12,8 @@ import java.util.List;
 public class OrdemProducao implements Serializable{
 
 	private Integer id;
-	private Produto produto;
-	private List<CaracteristicaProdutoOrdemProducao> caracteristicas;
-	private TempoCicloTeorico tempoCicloTeorico;
 	private Double unidadesPorMinuto;
+	
+	
 	
 }

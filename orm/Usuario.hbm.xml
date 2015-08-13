@@ -14,6 +14,5 @@
 		<property name="nome" column="nome" />
 		<property name="senha" column="senha" />
 		<property name="dtCriacao" column="dt_criacao" />
-		<property name="ipUltimaAlteracao" column="ip_ultima_alteracao" />
 	</class>
 </hibernate-mapping>

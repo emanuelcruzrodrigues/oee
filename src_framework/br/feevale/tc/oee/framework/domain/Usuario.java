@@ -3,9 +3,6 @@ package br.feevale.tc.oee.framework.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("serial")
@@ -13,8 +10,6 @@ public class Usuario implements Serializable{
 	
 	private Integer id;
 	
-	@NotBlank
-	@Size (max=30)
 	private String nome;
 	
 	private Integer senha;
@@ -23,8 +18,6 @@ public class Usuario implements Serializable{
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
 	private Date dtUltimaAlteracao;
-	
-	private String ipUltimaAlteracao;
 	
 	public Integer getId() {
 		return id;
@@ -61,13 +54,6 @@ public class Usuario implements Serializable{
 		this.dtUltimaAlteracao = dtUltimaAlteracao;
 	}
 
-	public String getIpUltimaAlteracao() {
-		return ipUltimaAlteracao;
-	}
-	public void setIpUltimaAlteracao(String ipUltimaAlteracao) {
-		this.ipUltimaAlteracao = ipUltimaAlteracao;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

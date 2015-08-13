@@ -1,5 +1,4 @@
-<%@page import="br.feevale.tc.oee.framework.validation.OEEValidationMessage"%>
-<%@page import="br.feevale.tc.oee.framework.validation.OEEValidationResult"%>
+<%@page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
 <%@page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -61,14 +60,7 @@
             <li class="active"><a href="../databases/"><spring:message code="BANCO_DE_DADOS" text="BANCO_DE_DADOS" /></a></li>
             <li><a href="../webservices/"><spring:message code="WEBSERVICES" text="WEBSERVICES" /></a></li>
           </ul>
-          <% 
-	       	String label = DefaultMessages.get(request, "SAIR");
-		    String clazz = "btn btn-info";
-		    String action = "../login/sair";          		
-          	out.print("<form class=\"navbar-form navbar-right\" action=\"" + action + "\">");
-          	out.print("  <button type=\"submit\" class=\"" + clazz + "\">" + label + "</button>");
-          	out.print("</form>");
-          %>
+          <%=JSPUtils.printEntrarSairButton(request)%>
           
         </div><!--/.nav-collapse -->
       </div>
@@ -77,12 +69,13 @@
 	<div class="container">	
 
 		<form:form action="salvar" modelAttribute="bean" method="POST" class="form-horizontal">
+			<form:input type="hidden" path="id" />
 			<form:input type="hidden" path="dtUltimaAlteracao" />
 	
 			<div class="form-group">
 				<div class="col-md-4">
-					<label for="id"><spring:message code="CODIGO" text="CODIGO" /></label>
-					<form:input type="text" path="id" id="id" class="form-control" />
+					<label for="codigo"><spring:message code="CODIGO" text="CODIGO" /></label>
+					<form:input type="text" path="codigo" id="codigo" class="form-control" />
 				</div>					
 				<div class="col-md-8">
 					<label for="nome"><spring:message code="NOME" text="NOME" /></label>
@@ -92,7 +85,7 @@
 			
 			<div class="form-group">
 				<div class="col-md-12">
-					<label for="situacao"><spring:message code="SITUACAO" text="SITUACAO" /></label>
+					<label for="dmSituacao"><spring:message code="SITUACAO" text="SITUACAO" /></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<c:set var="enumValues" value="<%=br.feevale.tc.oee.enums.AtivoInativo.values()%>"/>
 					<form:select path="dmSituacao" class="form-control">
@@ -105,17 +98,7 @@
 				</div>
 			</div>
 			
-			
-			<% 
-			OEEValidationResult validationResult = (OEEValidationResult)request.getAttribute("errors");
-			if (validationResult != null && validationResult.hasErrors()){
-				for (OEEValidationMessage error : validationResult.getErrors()){
-					out.print("\t\t\t<div class=\"alert alert-danger\" role=\"alert\">\n\t\t\t\t");
-				  	out.print(DefaultMessages.get(request, error));
-				  	out.print("\t\t\t</div>");
-				}
-			}
-			%>
+			<%=JSPUtils.printErrors(request)%>
 	
 			<button type="submit" class="btn btn-default"><spring:message code="SALVAR" text="SALVAR" /></button>
 		
