@@ -9,6 +9,28 @@ import br.feevale.tc.oee.framework.validation.OEEValidationResult;
 
 public class JSPUtils {
 	
+	public static String printCRUDJavaScripts(HttpServletRequest request){
+		StringBuilder result = new StringBuilder();
+		result.append("\n<script lang=\"javascript\">\n");
+		
+		result.append("\nfunction actionEditar(id){ \n");
+		result.append(" 	var link = \"editar?id=\" + id;\n");
+		result.append(" 	window.location.href = link;\n");
+		result.append(" }\n");
+				
+		result.append("\nfunction actionExcluir(id){\n");
+		result.append(" 	var question = \"").append(DefaultMessages.get(request, "CONFIRMA_EXCLUSAO")).append("\";\n");
+		result.append(" 	if (confirm(question)) {\n");
+		result.append(" 		var link = \"excluir?id=\" + id;\n");
+		result.append(" 		window.location.href = link;\n");
+		result.append(" 	}\n");
+		result.append(" }\n");
+		
+		result.append("</script>");
+		
+		return result.toString();
+	}
+	
 	public static String printEntrarSairButton(HttpServletRequest request){
 		Usuario usuario = ((Usuario)request.getSession().getAttribute("usuarioLogado"));
       	String label;

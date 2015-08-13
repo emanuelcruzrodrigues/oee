@@ -30,17 +30,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-	<script language="javascript">
-		function afterLoad(){
-			var idComponent = document.getElementById("id");
-			if (idComponent.value.length > 0){
-				idComponent.readOnly = true;
-			}
-		}
-	</script>
 </head>
-<body onload="afterLoad();">
+<body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -70,6 +61,7 @@
 
 		<form:form action="salvar" modelAttribute="bean" method="POST" class="form-horizontal">
 			<form:input type="hidden" path="id" />
+			<form:input type="hidden" path="dtCriacao" />
 			<form:input type="hidden" path="dtUltimaAlteracao" />
 	
 			<div class="form-group">

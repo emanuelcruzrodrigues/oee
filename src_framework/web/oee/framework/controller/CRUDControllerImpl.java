@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,13 +25,13 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 	private String beanName;
 	
 	@RequestMapping("/")
-	public String acaoDefault(T example, Model model, HttpServletRequest request){
-		return acaoListar(example, model, request);
+	public String acaoDefault(@Valid T example, BindingResult result, Model model, HttpServletRequest request){
+		return acaoListar(example, result,  model, request);
 	}
 	
 	@Override
 	@RequestMapping("/listar")
-	public String acaoListar(T example, Model model, HttpServletRequest request){
+	public String acaoListar(@Valid T example, BindingResult bindingResult, Model model, HttpServletRequest request){
 		if (request.getSession().getAttribute("usuarioLogado") == null) return "redirect:/login/logar";
 		
 		updateExampleBean(example);
@@ -71,7 +73,7 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 	
 	@Override
 	@RequestMapping("/salvar")
-	public String acaoSalvar(T bean, Model model, HttpServletRequest request){
+	public String acaoSalvar(@Valid T bean, BindingResult result, Model model, HttpServletRequest request){
 		if (request.getSession().getAttribute("usuarioLogado") == null) return "redirect:/login/logar";
 		
 		try {

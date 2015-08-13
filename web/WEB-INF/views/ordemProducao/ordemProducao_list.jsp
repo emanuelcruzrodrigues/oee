@@ -1,9 +1,11 @@
 <%@page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
 <%@page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,15 +24,16 @@
     <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../resources/css/databases.css" rel="stylesheet">
+    <link href="../resources/css/list.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <![endif]-->    
+    
+    <%=JSPUtils.printCRUDJavaScripts(request) %>
 </head>
-
 <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -51,7 +54,7 @@
             <li class="active"><a href="../databases/"><spring:message code="BANCO_DE_DADOS" text="BANCO_DE_DADOS" /></a></li>
             <li><a href="../webservices/"><spring:message code="WEBSERVICES" text="WEBSERVICES" /></a></li>
           </ul>
-         <%=JSPUtils.printEntrarSairButton(request)%>
+          <%=JSPUtils.printEntrarSairButton(request)%>
           
         </div><!--/.nav-collapse -->
       </div>
@@ -59,69 +62,66 @@
     		
 	<div class="container">	
 	
-	  <div class="title">
-        <div class="title_img">
-          <img src="../resources/img/database.png">
-        </div>
-        <div class="title_text">
-          <h2><spring:message code="DADOS_PARA_GERACAO_DO_INDICE" text="DADOS_PARA_GERACAO_DO_INDICE" /></h2>
-        </div>
-		<hr>
-      </div>
-      
-      <br/>
+		<form:form action="listar" modelAttribute="example" method="POST" class="form-inline">
+			<div class="form-group">
+				<label for="codigo"><spring:message code="CODIGO" />:</label>
+				<form:input type="text" path="codigo" id="codigo" class="form-control"/>
+			</div>
 	
-      <div class="row">
-      
-        <div class="col-md-4">
-          <h2><spring:message code="EQUIPAMENTOS" text="EQUIPAMENTOS" /></h2>
-          <p><spring:message code="DESCRICAO_TABELA_EQUIPAMENTOS" /></p>
-          <p><a class="btn btn-default" href="../equipamento/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
-        </div>
-        
-        <div class="col-md-4">
-          <h2><spring:message code="MOTIVOS_PARADA" text="MOTIVOS_PARADA" /></h2>
-          <p><spring:message code="DESCRICAO_TABELA_MOTIVOS_PARADA" /></p>
-          <p><a class="btn btn-default" href="../motivoParada/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
-        </div>
-        
-        <div class="col-md-4">
-          <h2><spring:message code="ORDENS_PRODUCAO" /></h2>
-          <p><spring:message code="DESCRICAO_TABELA_ORDENS_PRODUCAO" /></p>
-          <p><a class="btn btn-default" href="../ordemProducao/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
-        </div>
-        
-      </div>
-      
-      
-      <br/>
+			<div class="form-group">
+				<label for="dmSituacao"><spring:message code="SITUACAO" text="SITUACAO" /></label>
+				<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
+				<c:set var="enumValues" value="<%=br.feevale.tc.oee.enums.SituacaoOrdemProducao.values()%>"/>
+				<form:select path="dmSituacao" class="form-control">
+					<form:option value="" label="${selecione}" />
+					<c:forEach items="${enumValues}" var="option">
+						<c:set var="optionLabel"><spring:message code="${option.meaningKey}"/></c:set>
+						<form:option value="${option}" label="${optionLabel}" />
+					</c:forEach>
+				</form:select>
+			</div>
 	
-      <div class="title">
-        <div class="title_img">
-          <img src="../resources/img/settings.png">
-        </div>
-        <div class="title_text">
-          <h2><spring:message code="DADOS_DE_SISTEMA" text="DADOS_DE_SISTEMA" /></h2>
-        </div>
-		<hr>
-      </div>
-      
-      <br/>
-      
-      <div class="row">
-        <div class="col-md-4">
-          <h2><spring:message code="USUARIOS" text="USUARIOS" /></h2>
-          <p><spring:message code="DESCRICAO_TABELA_USUARIOS" /></p>
-          <p><a class="btn btn-default" href="../usuario/" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></p>
-        </div>
-      </div>
-
-	  <br/>
-
-      <footer>
-        <p>&copy; Emanuel Cruz Rodrigues 2015</p>
-      </footer>
+			<button type="submit" class="btn btn-default"><spring:message code="PESQUISAR" text="PESQUISAR" /></button>
+		</form:form>
+		
+		<br/>
+	
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th><spring:message code="CODIGO" /></th>
+					<th><spring:message code="UNIDADES_POR_MINUTO" /></th>
+					<th><spring:message code="SITUACAO" /></th>
+					<th><spring:message code="ACOES" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="ordemProducao">
+					<tr class="gradeA">
+						<td class="numeric">${ordemProducao.codigo}</td>
+						<td class="numeric"><fmt:formatNumber type="number" value="${ordemProducao.unidadesPorMinuto}" minFractionDigits="3" maxFractionDigits="3"/></td>
+						<td><spring:message code="${ordemProducao.dmSituacao.meaningKey}" /></td>
+						<td>
+							<button class="btn btn-default" onclick="actionEditar(${ordemProducao.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
+							<button class="btn btn-danger" onclick="actionExcluir(${ordemProducao.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	
+		<form:form action="novo" method="GET" class="form-inline">
+			<button type="submit" class="btn btn-default"><spring:message code="NOVO" text="NOVO" /></button>
+		</form:form>
+		
+		<br/>
+		
+		<footer>
+	       	<p>&copy; Emanuel Cruz Rodrigues 2015</p>
+	    </footer>
+	    
     </div> <!-- /container -->
+    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

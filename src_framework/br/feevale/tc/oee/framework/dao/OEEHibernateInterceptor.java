@@ -3,12 +3,8 @@ package br.feevale.tc.oee.framework.dao;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.type.Type;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * @author Emanuel
@@ -33,13 +29,7 @@ public class OEEHibernateInterceptor extends EmptyInterceptor{
 	private void updateAutomaticValues(Object[] state, String[] propertyNames) {
 		try {
 			
-			
 			for (int i = 0; i < propertyNames.length; i++) {
-				
-				if("ipUltimaAlteracao".equals(propertyNames[i])){
-					HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-					state[i] = request.getLocalAddr();
-				}
 				
 				if("dtCriacao".equals(propertyNames[i])){
 					if (state[i] == null){

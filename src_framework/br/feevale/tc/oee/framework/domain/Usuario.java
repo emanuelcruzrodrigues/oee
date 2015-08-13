@@ -14,6 +14,7 @@ public class Usuario implements Serializable{
 	
 	private Integer senha;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
 	private Date dtCriacao;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")

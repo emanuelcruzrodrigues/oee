@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<typedef name="situacao" class='br.feevale.tc.oee.framework.dao.PersistentEnum'>
+		<param name="enumClassName">br.feevale.tc.oee.enums.SituacaoOrdemProducao</param>
+    </typedef>
+	<class name="br.feevale.tc.oee.domain.OrdemProducao" table="ordens_producoes">
+		<id name="id" column="id">
+			<generator class="sequence">
+				<param name="sequence">sq_ordem_producao</param>
+			</generator>
+		</id>
+		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
+		<property name="codigo" column="codigo" />
+		<property name="unidadesPorMinuto" column="UNIDADES_POR_MINUTO" />
+		<property name="dmSituacao" column="dm_situacao" type="situacao" />
+		<property name="dtCriacao" column="dt_criacao" />
+	</class>
+</hibernate-mapping>

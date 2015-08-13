@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 import br.feevale.tc.oee.enums.AtivoInativo;
 
@@ -17,12 +19,14 @@ public class Equipamento implements Serializable{
 	
 	private Integer id;
 	
+	@NumberFormat(style=Style.NUMBER,pattern="###,###")
 	private Integer codigo;
 	
 	private String nome;
 	
 	private AtivoInativo dmSituacao;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
 	private Date dtCriacao;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")

@@ -66,6 +66,7 @@
 
 		<form:form action="salvar" modelAttribute="bean" method="POST" class="form-horizontal">
 			<form:input type="hidden" path="id" />
+			<form:input type="hidden" path="dtCriacao" />
 			<form:input type="hidden" path="dtUltimaAlteracao" />
 	
 			<div class="form-group">

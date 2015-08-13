@@ -32,22 +32,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <script lang="javascript">
-    
-		function actionEditar(id){
-			var link = "editar?id=" + id;
-			window.location.href = link;
-		}
-		
-		function actionExcluir(id){
-    		<%="var question = \"" + DefaultMessages.get(request, "CONFIRMA_EXCLUSAO") + "\""%>
-			if (confirm(question)) {
-				var link = "excluir?id=" + id;
-				window.location.href = link;
-			}
-		}
-	
-	</script>
+    <%=JSPUtils.printCRUDJavaScripts(request) %>
 </head>
 <body>
 
@@ -127,7 +112,7 @@
 			<tbody>
 				<c:forEach items="${list}" var="motivoParada">
 					<tr class="gradeA">
-						<td>${motivoParada.codigo}</td>
+						<td class="numeric">${motivoParada.codigo}</td>
 						<td>${motivoParada.descricao}</td>
 						<td><spring:message code="${motivoParada.dmTipoParada.meaningKey}" text="${motivoParada.dmTipoParada}" /></td>
 						<td><spring:message code="${motivoParada.dmSituacao.meaningKey}" text="${motivoParada.dmSituacao}" /></td>
@@ -143,6 +128,8 @@
 		<form:form action="novo" method="GET" class="form-inline">
 			<button type="submit" class="btn btn-default"><spring:message code="NOVO" text="NOVO" /></button>
 		</form:form>
+		
+		<br/>
 		
 		<footer>
 	       	<p>&copy; Emanuel Cruz Rodrigues 2015</p>
