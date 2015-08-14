@@ -34,16 +34,20 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 	public String acaoListar(@Valid T example, BindingResult bindingResult, Model model, HttpServletRequest request){
 		if (request.getSession().getAttribute("usuarioLogado") == null) return "redirect:/login/logar";
 		
-		updateExampleBean(example);
+		updateExampleBean(example, request);
 		
 		List<T> result = getService().getByExample(example);
 		model.addAttribute("list", result);
 		model.addAttribute("example", example);
 		
+		updateRequestBeforeGoToList(request);
+		
 		return getListView();
 	}
 
-	protected abstract void updateExampleBean(T example);
+	protected void updateRequestBeforeGoToList(HttpServletRequest request) {}
+
+	protected abstract void updateExampleBean(T example, HttpServletRequest request);
 
 	@Override
 	@RequestMapping("/novo")
@@ -52,6 +56,8 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 		
 		T bean = getNewInstance(request);
 		model.addAttribute("bean", bean);
+		
+		updateRequestBeforeGoToForm(request);
 		
 		return getFormView();
 	}
@@ -66,6 +72,8 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 		T bean = getService().get(id);
 		model.addAttribute("bean", bean);
 		
+		updateRequestBeforeGoToForm(request);
+		
 		return getFormView();
 	}
 	
@@ -75,19 +83,23 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 	@RequestMapping("/salvar")
 	public String acaoSalvar(@Valid T bean, BindingResult result, Model model, HttpServletRequest request){
 		if (request.getSession().getAttribute("usuarioLogado") == null) return "redirect:/login/logar";
-		
 		try {
 			getService().save(bean);
 			
 		} catch (OEEException e) {
 			model.addAttribute("errors", e.getValidationResult());
 			model.addAttribute("bean", bean);
+			
+			updateRequestBeforeGoToForm(request);
+			
 			return getFormView();
 		}
 		
 		return redirectToRoot();	
 	}
 	
+	protected void updateRequestBeforeGoToForm(HttpServletRequest request) {}
+
 	@Override
 	@RequestMapping("/excluir")
 	public String acaoExcluir(@RequestParam(value = "id") int id, Model model, HttpServletRequest request){
@@ -102,6 +114,9 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 			} catch (OEEException e) {
 				model.addAttribute("errors", e.getValidationResult());
 				model.addAttribute("bean", bean);
+				
+				updateRequestBeforeGoToForm(request);
+				
 				return getFormView();
 			}
 		}

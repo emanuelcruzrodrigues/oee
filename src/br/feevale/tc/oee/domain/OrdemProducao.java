@@ -3,6 +3,8 @@ package br.feevale.tc.oee.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
@@ -21,6 +23,14 @@ public class OrdemProducao implements Serializable{
 	
 	@NumberFormat(style=Style.NUMBER,pattern="###,###")
 	private Integer codigo;
+	
+	@NotBlank
+	@Length(max = 100)
+	private String descricao;
+	
+	private Operacao operacao;
+	
+	private Equipamento equipamento;
 	
 	@NumberFormat(style=Style.NUMBER,pattern="###,###.###")
 	private Double unidadesPorMinuto;
@@ -45,6 +55,27 @@ public class OrdemProducao implements Serializable{
 	}
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	public Operacao getOperacao() {
+		return operacao;
+	}
+	public void setOperacao(Operacao operacao) {
+		this.operacao = operacao;
+	}
+	
+	public Equipamento getEquipamento() {
+		return equipamento;
+	}
+	public void setEquipamento(Equipamento equipamento) {
+		this.equipamento = equipamento;
 	}
 	
 	public Double getUnidadesPorMinuto() {

@@ -15,6 +15,9 @@
 		</id>
 		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
 		<property name="codigo" column="codigo" />
+		<property name="descricao" column="descricao" />
+		<many-to-one name="operacao" column="id_operacao" />
+		<many-to-one name="equipamento" column="id_equipamento" />
 		<property name="unidadesPorMinuto" column="UNIDADES_POR_MINUTO" />
 		<property name="dmSituacao" column="dm_situacao" type="situacao" />
 		<property name="dtCriacao" column="dt_criacao" />

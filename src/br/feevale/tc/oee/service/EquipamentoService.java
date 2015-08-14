@@ -1,5 +1,7 @@
 package br.feevale.tc.oee.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -30,6 +32,10 @@ public class EquipamentoService extends CRUDServiceTemplateImpl<Equipamento>{
 	@Override
 	protected OEEValidationStack getBeforeSaveValidationStack(Equipamento equipamento) {
 		return new EquipamentoSaveValidationStack(equipamento, handler);
+	}
+
+	public List<Equipamento> getEquipamentosAtivos() {
+		return equipamentoDAO.queryEquipamentosAtivos();
 	}
 
 }

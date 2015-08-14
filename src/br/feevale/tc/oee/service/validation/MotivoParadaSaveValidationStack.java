@@ -8,6 +8,11 @@ import br.feevale.tc.oee.framework.validation.OEEValidation;
 import br.feevale.tc.oee.framework.validation.OEEValidationHandler;
 import br.feevale.tc.oee.framework.validation.OEEValidationStack;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 public class MotivoParadaSaveValidationStack extends OEEValidationStack {
 
 	private MotivoParada motivoParada;

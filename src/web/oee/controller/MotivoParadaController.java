@@ -12,6 +12,11 @@ import br.feevale.tc.oee.enums.AtivoInativo;
 import br.feevale.tc.oee.framework.service.CRUDServiceTemplate;
 import br.feevale.tc.oee.service.MotivoParadaService;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 @Controller
 @RequestMapping("/motivoParada")
 public class MotivoParadaController extends CRUDControllerImpl<MotivoParada>{
@@ -32,7 +37,7 @@ public class MotivoParadaController extends CRUDControllerImpl<MotivoParada>{
 	}
 
 	@Override
-	protected void updateExampleBean(MotivoParada example) {
+	protected void updateExampleBean(MotivoParada example, HttpServletRequest request) {
 		if (example.getDmSituacao() == null){
 			example.setDmSituacao(AtivoInativo.ATIVO);
 		}

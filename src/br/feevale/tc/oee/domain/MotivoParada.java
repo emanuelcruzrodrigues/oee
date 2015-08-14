@@ -3,6 +3,8 @@ package br.feevale.tc.oee.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
@@ -23,6 +25,8 @@ public class MotivoParada implements Serializable{
 	@NumberFormat(style=Style.NUMBER,pattern="###,###")
 	private Integer codigo;
 	
+	@NotBlank
+	@Length(max = 100)
 	private String descricao;
 	
 	private TipoParada dmTipoParada;

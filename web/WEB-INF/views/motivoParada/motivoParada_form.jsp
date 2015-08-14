@@ -77,7 +77,7 @@
 			
 			<div class="form-group">
 				<div class="col-md-12">
-					<label for="dmTipoParada"><spring:message code="SITUACAO" text="SITUACAO" /></label>
+					<label for="dmTipoParada"><spring:message code="TIPO_PARADA" /></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<c:set var="enumValues" value="<%=br.feevale.tc.oee.enums.TipoParada.values()%>"/>
 					<form:select path="dmTipoParada" class="form-control">

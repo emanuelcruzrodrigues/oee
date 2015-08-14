@@ -6,6 +6,11 @@ import br.feevale.tc.oee.domain.MotivoParada;
 import br.feevale.tc.oee.framework.validation.OEEValidation;
 import br.feevale.tc.oee.framework.validation.OEEValidationResult;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 public class MotivoParadaCamposObrigatoriosValidation implements OEEValidation {
 
 	private MotivoParada motivoParada;

@@ -27,5 +27,12 @@ public enum QualidadeProducao implements OEEEnum{
 	public String getMeaningKey() {
 		return meaningKey;
 	}
+	
+	public static QualidadeProducao getFromValue(String value) {
+		for (QualidadeProducao qualidadeProducao : values()) {
+			if (qualidadeProducao.getValue().equals(value)) return qualidadeProducao;
+		}
+		return null;
+	}
 
 }

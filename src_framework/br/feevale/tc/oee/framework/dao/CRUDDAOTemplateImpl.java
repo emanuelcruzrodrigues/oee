@@ -1,10 +1,20 @@
 package br.feevale.tc.oee.framework.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ * @param <T>
+ */
 public abstract class CRUDDAOTemplateImpl<T extends Serializable> implements CRUDDAOTemplate<T>{
 
 	@Resource
@@ -18,9 +28,17 @@ public abstract class CRUDDAOTemplateImpl<T extends Serializable> implements CRU
 
 	@Override
 	public List<T> queryByExample(T example) {
-		return dao.queryByExample(getBeanClazz(), example);
+		List<Criterion> filtrosAdicionais = getAdicionalFiltersAtQueryByExample(example);
+		List<Order> ordenacoes = getDefaultOrders();
+		return dao.queryByExample(getBeanClazz(), example, filtrosAdicionais, ordenacoes);
 	}
 	
+	protected abstract List<Order> getDefaultOrders();
+
+	protected List<Criterion> getAdicionalFiltersAtQueryByExample(T example) {
+		return new ArrayList<Criterion>();
+	}
+
 	protected abstract Class<T> getBeanClazz();
 
 	@Override

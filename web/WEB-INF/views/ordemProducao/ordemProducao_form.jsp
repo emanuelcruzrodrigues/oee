@@ -73,6 +73,35 @@
 			</div>
 			
 			<div class="form-group">
+				<div class="col-md-12">
+					<label for="descricao"><spring:message code="DESCRICAO" /></label>
+					<form:input type="text" path="descricao" id="descricao" class="form-control" />
+				</div>					
+			</div>
+			
+			<div class="form-group">
+				<div class="col-md-12">
+					<label for="equipamento"><spring:message code="EQUIPAMENTO"/></label>
+					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
+					<form:select path="equipamento" class="form-control">
+						<form:option value="" label="${selecione}" />
+						<form:options items="${equipamentos}" itemLabel="nome" itemValue="id" />
+					</form:select>
+				</div>
+			</div>
+			
+			<div class="form-group">
+			 	<div class="col-md-12">
+					<label for="operacao"><spring:message code="OPERACAO"/></label>
+					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
+					<form:select path="operacao" class="form-control">
+						<form:option value="" label="${selecione}" />
+						<form:options items="${operacoes}" itemLabel="nome" itemValue="id" />
+					</form:select>
+			 	</div>
+			</div>
+			
+			<div class="form-group">
 				<div class="col-md-4">
 					<label for="unidadesPorMinuto"><spring:message code="UNIDADES_POR_MINUTO" /></label>
 					<form:input type="text" path="unidadesPorMinuto" id="unidadesPorMinuto" class="form-control" />
@@ -101,6 +130,7 @@
 		
 		</form:form>
 		
+		<br/>
 		
 		<footer>
         	<p>&copy; Emanuel Cruz Rodrigues 2015</p>

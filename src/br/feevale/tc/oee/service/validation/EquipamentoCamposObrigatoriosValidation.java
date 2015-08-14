@@ -6,6 +6,11 @@ import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.framework.validation.OEEValidation;
 import br.feevale.tc.oee.framework.validation.OEEValidationResult;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 public class EquipamentoCamposObrigatoriosValidation implements OEEValidation {
 
 	private Equipamento equipamento;

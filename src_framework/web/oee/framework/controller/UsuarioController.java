@@ -10,6 +10,11 @@ import br.feevale.tc.oee.framework.domain.Usuario;
 import br.feevale.tc.oee.framework.service.CRUDServiceTemplate;
 import br.feevale.tc.oee.framework.service.UsuarioService;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController extends CRUDControllerImpl<Usuario>{
@@ -18,7 +23,7 @@ public class UsuarioController extends CRUDControllerImpl<Usuario>{
 	protected UsuarioService usuarioService;
 
 	@Override
-	protected void updateExampleBean(Usuario example) {}
+	protected void updateExampleBean(Usuario example, HttpServletRequest request) {}
 
 	@Override
 	protected Usuario getNewInstance(HttpServletRequest request) {

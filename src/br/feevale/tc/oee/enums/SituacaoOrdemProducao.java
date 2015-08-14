@@ -29,11 +29,8 @@ public enum SituacaoOrdemProducao implements OEEEnum{
 	}
 	
 	public static SituacaoOrdemProducao getFromValue(String value) {
-		if ("A".equals(value)){
-			return ABERTA;
-		}
-		if ("I".equals(value)){
-			return ENCERRADA;
+		for (SituacaoOrdemProducao situacaoOrdemProducao : values()) {
+			if (situacaoOrdemProducao.getValue().equals(value)) return situacaoOrdemProducao;
 		}
 		return null;
 	}

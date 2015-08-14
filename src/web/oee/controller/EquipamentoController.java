@@ -12,6 +12,11 @@ import br.feevale.tc.oee.enums.AtivoInativo;
 import br.feevale.tc.oee.framework.service.CRUDServiceTemplate;
 import br.feevale.tc.oee.service.EquipamentoService;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 @Controller
 @RequestMapping("/equipamento")
 public class EquipamentoController extends CRUDControllerImpl<Equipamento>{
@@ -32,7 +37,7 @@ public class EquipamentoController extends CRUDControllerImpl<Equipamento>{
 	}
 
 	@Override
-	protected void updateExampleBean(Equipamento example) {
+	protected void updateExampleBean(Equipamento example, HttpServletRequest request) {
 		if (example.getDmSituacao() == null){
 			example.setDmSituacao(AtivoInativo.ATIVO);
 		}

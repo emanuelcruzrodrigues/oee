@@ -15,6 +15,11 @@ import br.feevale.tc.oee.framework.domain.Usuario;
 import br.feevale.tc.oee.framework.i18n.DefaultMessages;
 import br.feevale.tc.oee.framework.service.LoginService;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 @Controller
 @RequestMapping("/login")
 public class LoginController {

@@ -8,6 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import br.feevale.tc.oee.framework.domain.Login;
 import br.feevale.tc.oee.framework.domain.Usuario;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 @Service
 public class LoginService {
 	

@@ -29,11 +29,8 @@ public enum AtivoInativo implements OEEEnum{
 	}
 	
 	public static AtivoInativo getFromValue(String value) {
-		if ("A".equals(value)){
-			return ATIVO;
-		}
-		if ("I".equals(value)){
-			return INATIVO;
+		for (AtivoInativo ativoInativo : values()) {
+			if (ativoInativo.getValue().equals(value)) return ativoInativo;
 		}
 		return null;
 	}

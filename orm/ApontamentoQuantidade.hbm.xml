@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<typedef name="qualidade" class='br.feevale.tc.oee.framework.dao.PersistentEnum'>
+		<param name="enumClassName">br.feevale.tc.oee.enums.QualidadeProducao</param>
+    </typedef>
+	<class name="br.feevale.tc.oee.domain.ApontamentoQuantidade" table="apontamentos_quantidades">
+		<id name="id" column="id">
+			<generator class="sequence">
+				<param name="sequence">sq_apontamento_quantidade</param>
+			</generator>
+		</id>
+		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
+		<many-to-one name="ordemProducao" column="id_ordem_producao" />
+		<property name="dtHr" column="dt_hr" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
+		<property name="quantidade" column="quantidade" />
+		<property name="dmQualidade" column="dm_qualidade" type="qualidade" />
+		<property name="dtCriacao" column="dt_criacao" />
+	</class>
+</hibernate-mapping>

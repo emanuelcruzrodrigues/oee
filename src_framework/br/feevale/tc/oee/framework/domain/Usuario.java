@@ -5,6 +5,11 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 @SuppressWarnings("serial")
 public class Usuario implements Serializable{
 	

@@ -10,6 +10,11 @@ import br.feevale.tc.oee.framework.dao.UniqueKeyDAO;
 import br.feevale.tc.oee.framework.validation.OEEValidationMessage;
 import br.feevale.tc.oee.framework.validation.UniqueKeyValidationTemplate;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 public class MotivoParadaUniqueKeyValidation extends UniqueKeyValidationTemplate<MotivoParada> {
 	
 	@Resource

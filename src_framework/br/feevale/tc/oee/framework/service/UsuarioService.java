@@ -8,6 +8,11 @@ import br.feevale.tc.oee.framework.dao.CRUDDAOTemplate;
 import br.feevale.tc.oee.framework.dao.UsuarioDAO;
 import br.feevale.tc.oee.framework.domain.Usuario;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 @Service
 public class UsuarioService extends CRUDServiceTemplateImpl<Usuario>{
 	

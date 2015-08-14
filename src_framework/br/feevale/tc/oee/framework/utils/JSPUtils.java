@@ -7,6 +7,11 @@ import br.feevale.tc.oee.framework.i18n.DefaultMessages;
 import br.feevale.tc.oee.framework.validation.OEEValidationMessage;
 import br.feevale.tc.oee.framework.validation.OEEValidationResult;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 14/08/2015
+ */
 public class JSPUtils {
 	
 	public static String printCRUDJavaScripts(HttpServletRequest request){

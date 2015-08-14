@@ -31,5 +31,11 @@ public enum TipoParada implements OEEEnum{
 		return meaningKey;
 	}
 
+	public static TipoParada getFromValue(String value) {
+		for (TipoParada tipoParada : values()) {
+			if (tipoParada.getValue().equals(value)) return tipoParada;
+		}
+		return null;
+	}
 
 }

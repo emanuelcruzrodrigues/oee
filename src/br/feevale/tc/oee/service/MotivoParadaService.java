@@ -11,6 +11,11 @@ import br.feevale.tc.oee.framework.service.CRUDServiceTemplateImpl;
 import br.feevale.tc.oee.framework.validation.OEEValidationStack;
 import br.feevale.tc.oee.service.validation.MotivoParadaSaveValidationStack;
 
+/**
+ * @author Emanuel
+ * emanuelcruzrodrigues@gmail.com
+ * 12/08/2015
+ */
 @Service
 public class MotivoParadaService extends CRUDServiceTemplateImpl<MotivoParada>{
 	

@@ -67,6 +67,25 @@
 				<label for="codigo"><spring:message code="CODIGO" />:</label>
 				<form:input type="text" path="codigo" id="codigo" class="form-control"/>
 			</div>
+			
+			<div class="form-group">
+				<label for="descricao"><spring:message code="DESCRICAO" /></label>
+				<form:input type="text" path="descricao" id="descricao" class="form-control" />
+			</div>
+			
+			<div class="form-group">
+				<label for="equipamento"><spring:message code="EQUIPAMENTO"/></label>
+				<form:select path="equipamento" items="${equipamentos}" itemLabel="nome" itemValue="id" class="form-control"/>
+			</div>
+			
+			<div class="form-group">
+				<label for="operacao"><spring:message code="OPERACAO"/></label>
+				<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
+				<form:select path="operacao" class="form-control">
+					<form:option value="" label="${selecione}" />
+					<form:options items="${operacoes}" itemLabel="nome" itemValue="id" />
+				</form:select>
+			</div>
 	
 			<div class="form-group">
 				<label for="dmSituacao"><spring:message code="SITUACAO" text="SITUACAO" /></label>
@@ -90,6 +109,9 @@
 			<thead>
 				<tr>
 					<th><spring:message code="CODIGO" /></th>
+					<th><spring:message code="DESCRICAO" /></th>
+					<th><spring:message code="EQUIPAMENTO" /></th>
+					<th><spring:message code="OPERACAO" /></th>
 					<th><spring:message code="UNIDADES_POR_MINUTO" /></th>
 					<th><spring:message code="SITUACAO" /></th>
 					<th><spring:message code="ACOES" /></th>
@@ -97,7 +119,11 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="ordemProducao">
-					<tr class="gradeA">
+					<tr>
+						<td>${ordemProducao.codigo}</td>
+						<td>${ordemProducao.descricao}</td>
+						<td>${ordemProducao.equipamento.nome}</td>
+						<td>${ordemProducao.operacao.nome}</td>
 						<td class="numeric">${ordemProducao.codigo}</td>
 						<td class="numeric"><fmt:formatNumber type="number" value="${ordemProducao.unidadesPorMinuto}" minFractionDigits="3" maxFractionDigits="3"/></td>
 						<td><spring:message code="${ordemProducao.dmSituacao.meaningKey}" /></td>
