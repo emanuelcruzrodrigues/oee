@@ -42,7 +42,7 @@ public class MotivoParadaUniqueKeyValidation extends UniqueKeyValidationTemplate
 
 	@Override
 	protected OEEValidationMessage getErrorMessage() {
-		return new OEEValidationMessage("JA_EXISTE_X_COM_Y_IGUAL_A_Z", new String[]{"MOTIVO_PARADA", "CODIGO", motivoParada.getCodigo().toString()});	
+		return new OEEValidationMessage("JA_EXISTE_X_COM_Y_IGUAL_A_Z", new String[]{"MOTIVO_PARADA", "CODIGO", motivoParada.getCodigo().toString()}, "codigo");	
 	}
 
 }

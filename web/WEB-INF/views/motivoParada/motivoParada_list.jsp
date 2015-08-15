@@ -99,31 +99,33 @@
 		
 		<br/>
 	
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th><spring:message code="CODIGO" text="CODIGO" /></th>
-					<th><spring:message code="DESCRICAO" text="DESCRICAO" /></th>
-					<th><spring:message code="TIPO_PARADA" text="TIPO_PARADA" /></th>
-					<th><spring:message code="SITUACAO" text="SITUACAO" /></th>
-					<th><spring:message code="ACOES" text="ACOES" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="motivoParada">
-					<tr class="gradeA">
-						<td class="numeric">${motivoParada.codigo}</td>
-						<td>${motivoParada.descricao}</td>
-						<td><spring:message code="${motivoParada.dmTipoParada.meaningKey}" text="${motivoParada.dmTipoParada}" /></td>
-						<td><spring:message code="${motivoParada.dmSituacao.meaningKey}" text="${motivoParada.dmSituacao}" /></td>
-						<td>
-							<button class="btn btn-default" onclick="actionEditar(${motivoParada.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
-							<button class="btn btn-danger" onclick="actionExcluir(${motivoParada.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
-						</td>
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th><spring:message code="CODIGO" text="CODIGO" /></th>
+						<th><spring:message code="DESCRICAO" text="DESCRICAO" /></th>
+						<th><spring:message code="TIPO_PARADA" text="TIPO_PARADA" /></th>
+						<th><spring:message code="SITUACAO" text="SITUACAO" /></th>
+						<th><spring:message code="ACOES" text="ACOES" /></th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach items="${list}" var="motivoParada">
+						<tr class="gradeA">
+							<td class="numeric">${motivoParada.codigo}</td>
+							<td>${motivoParada.descricao}</td>
+							<td><spring:message code="${motivoParada.dmTipoParada.meaningKey}" text="${motivoParada.dmTipoParada}" /></td>
+							<td><spring:message code="${motivoParada.dmSituacao.meaningKey}" text="${motivoParada.dmSituacao}" /></td>
+							<td>
+								<button class="btn btn-default" onclick="actionEditar(${motivoParada.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
+								<button class="btn btn-danger" onclick="actionExcluir(${motivoParada.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	
 		<form:form action="novo" method="GET" class="form-inline">
 			<button type="submit" class="btn btn-default"><spring:message code="NOVO" text="NOVO" /></button>

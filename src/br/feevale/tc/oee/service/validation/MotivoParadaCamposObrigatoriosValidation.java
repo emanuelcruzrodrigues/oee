@@ -1,7 +1,5 @@
 package br.feevale.tc.oee.service.validation;
 
-import org.apache.commons.lang3.StringUtils;
-
 import br.feevale.tc.oee.domain.MotivoParada;
 import br.feevale.tc.oee.framework.validation.OEEValidation;
 import br.feevale.tc.oee.framework.validation.OEEValidationResult;
@@ -21,17 +19,15 @@ public class MotivoParadaCamposObrigatoriosValidation implements OEEValidation {
 
 	@Override
 	public void validate(OEEValidationResult result) {
-		if (motivoParada.getCodigo() == null){
-			result.addFieldNotNullError("CODIGO");
-		}
-		if (StringUtils.isBlank(motivoParada.getDescricao())){
-			result.addFieldNotNullError("DESCRICAO");
-		}
+		
+		result.validateNumberField(motivoParada.getCodigo(), "CODIGO", 99999999, "codigo");
+		result.validateStringField(motivoParada.getDescricao(), "DESCRICAO", 100, "descricao");
+		
 		if (motivoParada.getDmTipoParada() == null){
-			result.addFieldNotNullError("TIPO_PARADA");
+			result.addFieldNotNullError("TIPO_PARADA", "dmTipoParada");
 		}
 		if (motivoParada.getDmSituacao() == null){
-			result.addFieldNotNullError("SITUACAO");
+			result.addFieldNotNullError("SITUACAO", "dmSituacao");
 		}
 	}
 

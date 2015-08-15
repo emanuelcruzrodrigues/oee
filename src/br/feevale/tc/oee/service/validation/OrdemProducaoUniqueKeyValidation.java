@@ -43,7 +43,7 @@ public class OrdemProducaoUniqueKeyValidation extends UniqueKeyValidationTemplat
 
 	@Override
 	protected OEEValidationMessage getErrorMessage() {
-		return new OEEValidationMessage("JA_EXISTE_X_COM_Y_IGUAL_A_Z", new String[]{"ORDEM_PRODUCAO", "CODIGO", ordemProducao.getCodigo().toString()});	
+		return new OEEValidationMessage("JA_EXISTE_X_COM_Y_IGUAL_A_Z", new String[]{"ORDEM_PRODUCAO", "CODIGO", ordemProducao.getCodigo().toString()}, "codigo");	
 
 	}
 

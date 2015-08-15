@@ -69,5 +69,20 @@ public class JSPUtils {
 		}
 		return result.toString();
 	}
+	
+	public static String printFormGroupFeedback(HttpServletRequest request, String id){
+		StringBuilder result = new StringBuilder();
+		OEEValidationResult validationResult = (OEEValidationResult)request.getAttribute("errors");
+		result.append("\"form-group");
+		if (validationResult != null){
+			if (validationResult.hasError(id)){
+				result.append(" has-error");
+			}else{
+				result.append(" has-success");
+			}
+		}
+		result.append("\"");
+		return result.toString();
+	}
 
 }

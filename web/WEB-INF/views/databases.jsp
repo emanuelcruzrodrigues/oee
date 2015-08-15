@@ -80,27 +80,19 @@
         </div>
         
         <div class="col-md-4">
-          <h2><spring:message code="OPERACOES" text="OPERACOES" /></h2>
-          <p><spring:message code="DESCRICAO_TABELA_OPERACOES" /></p>
-          <p><a class="btn btn-default" href="../operacao/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
-        </div>
-        
-        <div class="col-md-4">
           <h2><spring:message code="MOTIVOS_PARADA" text="MOTIVOS_PARADA" /></h2>
           <p><spring:message code="DESCRICAO_TABELA_MOTIVOS_PARADA" /></p>
           <p><a class="btn btn-default" href="../motivoParada/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
         </div>
         
-        
-      </div>
-      
-      <div class="row">
         <div class="col-md-4">
           <h2><spring:message code="ORDENS_PRODUCAO" /></h2>
           <p><spring:message code="DESCRICAO_TABELA_ORDENS_PRODUCAO" /></p>
           <p><a class="btn btn-default" href="../ordemProducao/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
         </div>
+        
       </div>
+      
       
       <div class="row">
         <div class="col-md-4">

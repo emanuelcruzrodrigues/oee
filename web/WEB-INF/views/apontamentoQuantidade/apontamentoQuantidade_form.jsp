@@ -65,34 +65,34 @@
 			<form:input type="hidden" path="dtCriacao" />
 			<form:input type="hidden" path="dtUltimaAlteracao" />
 	
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "ordemProducao")%>>
 				<div class="col-md-12">
-					<label for="ordemProducao"><spring:message code="ORDEM_PRODUCAO"/></label>
+					<label class="control-label" for="ordemProducao"><spring:message code="ORDEM_PRODUCAO"/></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<form:select path="ordemProducao" class="form-control">
 						<form:option value="" label="${selecione}" />
-						<form:options items="${ordensProducao}" itemLabel="nome" itemValue="id" />
+						<form:options items="${ordensProducao}" itemLabel="descricao" itemValue="id" />
 					</form:select>
 				</div>
 			</div>
 			
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "dtHr")%>>
 				<div class="col-md-4">
-					<label for="dtHr"><spring:message code="DATA_HORA" /></label>
+					<label class="control-label" for="dtHr"><spring:message code="DATA_HORA" /></label>
 					<form:input type="text" path="dtHr" id="dtHr" class="form-control" />
 				</div>					
 			</div>
 			
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "quantidade")%>>
 				<div class="col-md-4">
-					<label for="quantidade"><spring:message code="QUANTIDADE" /></label>
+					<label class="control-label" for="quantidade"><spring:message code="QUANTIDADE" /></label>
 					<form:input type="text" path="quantidade" id="quantidade" class="form-control" />
 				</div>					
 			</div>
 			
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "dmQualidade")%>>
 				<div class="col-md-12">
-					<label for="dmQualidade"><spring:message code="QUALIDADE_PRODUCAO" /></label>
+					<label class="control-label" for="dmQualidade"><spring:message code="QUALIDADE_PRODUCAO" /></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<c:set var="enumValues" value="<%=br.feevale.tc.oee.enums.QualidadeProducao.values()%>"/>
 					<form:select path="dmQualidade" class="form-control">

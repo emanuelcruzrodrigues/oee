@@ -28,8 +28,6 @@ public class OrdemProducao implements Serializable{
 	@Length(max = 100)
 	private String descricao;
 	
-	private Operacao operacao;
-	
 	private Equipamento equipamento;
 	
 	@NumberFormat(style=Style.NUMBER,pattern="###,###.###")
@@ -62,13 +60,6 @@ public class OrdemProducao implements Serializable{
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	
-	public Operacao getOperacao() {
-		return operacao;
-	}
-	public void setOperacao(Operacao operacao) {
-		this.operacao = operacao;
 	}
 	
 	public Equipamento getEquipamento() {

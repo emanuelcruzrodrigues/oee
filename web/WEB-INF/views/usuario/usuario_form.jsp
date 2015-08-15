@@ -69,16 +69,20 @@
 			<form:input type="hidden" path="dtCriacao" />
 			<form:input type="hidden" path="dtUltimaAlteracao" />
 	
-			<div class="form-group">
-				<label for="nome"><spring:message code="NOME" text="NOME" />:</label>
-				<form:input type="text" path="nome" id="nome" class="form-control"/>
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "nome")%>>
+				<div class="col-md-12">
+					<label class="control-label" for="nome"><spring:message code="NOME" text="NOME" />:</label>
+					<form:input type="text" path="nome" id="nome" class="form-control"/>
+				</div>
 			</div>
 	
-			<div class="form-group">
-				<label for="senha"><spring:message code="SENHA" text="SENHA" />:</label>
-				<div class="form-inline">
-					<form:input type="password" path="senha" id="senha" readOnly="readOnly" class="form-control"/>
-					<button id="btnLimparSenha" onclick="actionLimparSenha();" class="btn btn-danger"><spring:message code="RESETAR_SENHA" text="RESETAR_SENHA" /></button>
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "senha")%>>
+				<div class="col-md-12">
+					<label class="control-label" for="senha"><spring:message code="SENHA" text="SENHA" />:</label>
+					<div class="form-inline">
+						<form:input type="password" path="senha" id="senha" readOnly="readOnly" class="form-control"/>
+						<button id="btnLimparSenha" onclick="actionLimparSenha();" class="btn btn-danger"><spring:message code="RESETAR_SENHA" text="RESETAR_SENHA" /></button>
+					</div>
 				</div>
 			</div>
 	

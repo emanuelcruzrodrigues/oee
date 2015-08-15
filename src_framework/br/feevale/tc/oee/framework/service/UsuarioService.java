@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import br.feevale.tc.oee.framework.dao.CRUDDAOTemplate;
 import br.feevale.tc.oee.framework.dao.UsuarioDAO;
 import br.feevale.tc.oee.framework.domain.Usuario;
+import br.feevale.tc.oee.framework.service.validation.UsuarioSaveValidationStack;
+import br.feevale.tc.oee.framework.validation.OEEValidationStack;
 
 /**
  * @author Emanuel
@@ -26,6 +28,11 @@ public class UsuarioService extends CRUDServiceTemplateImpl<Usuario>{
 
 	public Usuario getUsuario(String nomeUsuario) {
 		return usuarioDAO.getUsuario(nomeUsuario);
+	}
+	
+	@Override
+	protected OEEValidationStack getBeforeSaveValidationStack(Usuario usuario) {
+		return new UsuarioSaveValidationStack(usuario, handler);
 	}
 
 }

@@ -8,6 +8,8 @@ import br.feevale.tc.oee.dao.ApontamentoQuantidadeDAO;
 import br.feevale.tc.oee.domain.ApontamentoQuantidade;
 import br.feevale.tc.oee.framework.dao.CRUDDAOTemplate;
 import br.feevale.tc.oee.framework.service.CRUDServiceTemplateImpl;
+import br.feevale.tc.oee.framework.validation.OEEValidationStack;
+import br.feevale.tc.oee.service.validation.ApontamentoQuantidadeSaveValidationStack;
 
 /**
  * @author Emanuel
@@ -23,6 +25,11 @@ public class ApontamentoQuantidadeService extends CRUDServiceTemplateImpl<Aponta
 	@Override
 	protected CRUDDAOTemplate<ApontamentoQuantidade> getCRUDDAO() {
 		return apontamentoQuantidadeDAO;
+	}
+	
+	@Override
+	protected OEEValidationStack getBeforeSaveValidationStack(ApontamentoQuantidade apontamento) {
+		return new ApontamentoQuantidadeSaveValidationStack(apontamento, handler);
 	}
 
 }

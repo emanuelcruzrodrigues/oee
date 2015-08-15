@@ -65,23 +65,23 @@
 			<form:input type="hidden" path="dtCriacao" />
 			<form:input type="hidden" path="dtUltimaAlteracao" />
 	
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "codigo")%>>
 				<div class="col-md-4">
-					<label for="codigo"><spring:message code="CODIGO" text="CODIGO" /></label>
+					<label class="control-label" for="codigo"><spring:message code="CODIGO" text="CODIGO" /></label>
 					<form:input type="text" path="codigo" id="codigo" class="form-control" />
 				</div>					
 			</div>
 			
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "descricao")%>>
 				<div class="col-md-12">
-					<label for="descricao"><spring:message code="DESCRICAO" /></label>
+					<label class="control-label" for="descricao"><spring:message code="DESCRICAO" /></label>
 					<form:input type="text" path="descricao" id="descricao" class="form-control" />
 				</div>					
 			</div>
 			
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "equipamento")%>>
 				<div class="col-md-12">
-					<label for="equipamento"><spring:message code="EQUIPAMENTO"/></label>
+					<label class="control-label" for="equipamento"><spring:message code="EQUIPAMENTO"/></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<form:select path="equipamento" class="form-control">
 						<form:option value="" label="${selecione}" />
@@ -90,28 +90,17 @@
 				</div>
 			</div>
 			
-			<div class="form-group">
-			 	<div class="col-md-12">
-					<label for="operacao"><spring:message code="OPERACAO"/></label>
-					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
-					<form:select path="operacao" class="form-control">
-						<form:option value="" label="${selecione}" />
-						<form:options items="${operacoes}" itemLabel="nome" itemValue="id" />
-					</form:select>
-			 	</div>
-			</div>
-			
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "unidadesPorMinuto")%>>
 				<div class="col-md-4">
-					<label for="unidadesPorMinuto"><spring:message code="UNIDADES_POR_MINUTO" /></label>
+					<label class="control-label" for="unidadesPorMinuto"><spring:message code="UNIDADES_POR_MINUTO" /></label>
 					<form:input type="text" path="unidadesPorMinuto" id="unidadesPorMinuto" class="form-control" />
 				</div>					
 			</div>
 			
 			
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "dmSituacao")%>>
 				<div class="col-md-12">
-					<label for="dmSituacao"><spring:message code="SITUACAO" text="SITUACAO" /></label>
+					<label class="control-label" for="dmSituacao"><spring:message code="SITUACAO" text="SITUACAO" /></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<c:set var="enumValues" value="<%=br.feevale.tc.oee.enums.SituacaoOrdemProducao.values()%>"/>
 					<form:select path="dmSituacao" class="form-control">

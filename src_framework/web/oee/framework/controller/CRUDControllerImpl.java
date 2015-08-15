@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.feevale.tc.oee.framework.exceptions.OEEException;
 import br.feevale.tc.oee.framework.service.CRUDServiceTemplate;
+import br.feevale.tc.oee.framework.validation.OEEValidationResult;
 
 /**
  * @author Emanuel
@@ -86,8 +87,12 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 		try {
 			getService().save(bean);
 			
-		} catch (OEEException e) {
-			model.addAttribute("errors", e.getValidationResult());
+		} catch (Throwable e) {
+			if (e instanceof OEEException){
+				model.addAttribute("errors", ((OEEException)e).getValidationResult());
+			}else{
+				model.addAttribute("errors", new OEEValidationResult(e));
+			}
 			model.addAttribute("bean", bean);
 			
 			updateRequestBeforeGoToForm(request);
@@ -111,8 +116,12 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 			try {
 				getService().delete(bean);
 				
-			} catch (OEEException e) {
-				model.addAttribute("errors", e.getValidationResult());
+			} catch (Throwable e) {
+				if (e instanceof OEEException){
+					model.addAttribute("errors", ((OEEException)e).getValidationResult());
+				}else{
+					model.addAttribute("errors", new OEEValidationResult(e));
+				}
 				model.addAttribute("bean", bean);
 				
 				updateRequestBeforeGoToForm(request);

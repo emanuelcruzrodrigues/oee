@@ -1,9 +1,13 @@
 package br.feevale.tc.oee.dao;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.joda.time.LocalTime;
 import org.springframework.stereotype.Repository;
 
 import br.feevale.tc.oee.domain.ApontamentoQuantidade;
@@ -28,6 +32,18 @@ public class ApontamentoQuantidadeDAO extends CRUDDAOTemplateImpl<ApontamentoQua
 	@Override
 	protected List<Order> getDefaultOrders() {
 		return Arrays.asList(Order.asc("dtHr"));
+	}
+	
+	@Override
+	protected List<Criterion> getAdicionalFiltersAtQueryByExample(ApontamentoQuantidade example) {
+		List<Criterion> result = new ArrayList<>();
+		if (example.getDtInicial() != null){
+			result.add(Restrictions.ge("dtHr", example.getDtInicial().toLocalDateTime(new LocalTime(0,0,0,0))));
+		}
+		if (example.getDtFinal() != null){
+			result.add(Restrictions.le("dtHr", example.getDtFinal().toLocalDateTime(new LocalTime(23,59,59,999))));
+		}
+		return result;
 	}
 
 }

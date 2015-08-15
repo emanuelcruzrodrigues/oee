@@ -3,7 +3,7 @@ package br.feevale.tc.oee.service.validation;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.feevale.tc.oee.domain.Operacao;
+import br.feevale.tc.oee.domain.ApontamentoQuantidade;
 import br.feevale.tc.oee.framework.validation.OEEValidation;
 import br.feevale.tc.oee.framework.validation.OEEValidationHandler;
 import br.feevale.tc.oee.framework.validation.OEEValidationStack;
@@ -13,14 +13,14 @@ import br.feevale.tc.oee.framework.validation.OEEValidationStack;
  * emanuelcruzrodrigues@gmail.com
  * 14/08/2015
  */
-public class OperacaoSaveValidationStack extends OEEValidationStack {
+public class ApontamentoQuantidadeSaveValidationStack extends OEEValidationStack{
 
-	private Operacao operacao;
+	private ApontamentoQuantidade apontamento;
 	private OEEValidationHandler handler;
 
-	public OperacaoSaveValidationStack(Operacao operacao, OEEValidationHandler handler) {
+	public ApontamentoQuantidadeSaveValidationStack(ApontamentoQuantidade apontamento, OEEValidationHandler handler) {
+		this.apontamento = apontamento;
 		this.handler = handler;
-		this.operacao = operacao;
 	}
 
 	@Override
@@ -30,9 +30,8 @@ public class OperacaoSaveValidationStack extends OEEValidationStack {
 
 	@Override
 	public List<OEEValidation> getValidations() {
-		List<OEEValidation> validations = new ArrayList<OEEValidation>();
-		validations.add(new OperacaoCamposObrigatoriosValidation(operacao));
-		validations.add(new OperacaoUniqueKeyValidation(operacao));
+		List<OEEValidation> validations = new ArrayList<>();
+		validations.add(new ApontamentoQuantidadeCamposObrigatoriosValidation(apontamento));
 		return validations;
 	}
 

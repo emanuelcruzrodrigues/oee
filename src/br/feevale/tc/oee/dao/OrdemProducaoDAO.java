@@ -26,7 +26,9 @@ public class OrdemProducaoDAO extends CRUDDAOTemplateImpl<OrdemProducao> impleme
 	}
 
 	@Override
-	protected void initialize(OrdemProducao t) {}
+	protected void initialize(OrdemProducao ordemProducao) {
+		dao.initialize(ordemProducao.getEquipamento());
+	}
 
 	@Override
 	public Serializable queryUniqueKeyId(OrdemProducao example) {

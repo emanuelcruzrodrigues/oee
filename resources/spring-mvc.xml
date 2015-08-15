@@ -47,7 +47,6 @@
 	    <property name="converters">
 	       <list>
 	          <bean class="br.feevale.tc.oee.converters.IdToEquipamentoConverter"/>
-	          <bean class="br.feevale.tc.oee.converters.IdToOperacaoConverter"/>
 	          <bean class="br.feevale.tc.oee.converters.IdToOrdemProducaoConverter"/>
 	       </list>
 	    </property>

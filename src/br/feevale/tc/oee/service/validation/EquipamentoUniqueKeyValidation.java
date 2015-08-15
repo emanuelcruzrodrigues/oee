@@ -43,7 +43,7 @@ public class EquipamentoUniqueKeyValidation extends UniqueKeyValidationTemplate<
 
 	@Override
 	protected OEEValidationMessage getErrorMessage() {
-		return new OEEValidationMessage("JA_EXISTE_X_COM_Y_IGUAL_A_Z", new String[]{"EQUIPAMENTO", "CODIGO", equipamento.getCodigo().toString()});
+		return new OEEValidationMessage("JA_EXISTE_X_COM_Y_IGUAL_A_Z", new String[]{"EQUIPAMENTO", "CODIGO", equipamento.getCodigo().toString()}, "codigo");
 	}
 
 

@@ -29,8 +29,12 @@ public class ApontamentoQuantidadeController extends CRUDControllerImpl<Apontame
 
 	@Override
 	protected void updateExampleBean(ApontamentoQuantidade example, HttpServletRequest request) {
-		example.setDtInicial(new LocalDate().minusDays(1));
-		example.setDtFinal(new LocalDate());
+		if (example.getDtInicial() == null){
+			example.setDtInicial(new LocalDate().minusDays(1));
+		}
+		if (example.getDtFinal() == null){
+			example.setDtFinal(example.getDtInicial().plusDays(1));
+		}
 	}
 
 	@Override

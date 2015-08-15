@@ -86,29 +86,31 @@
 		
 		<br/>
 	
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th><spring:message code="CODIGO" text="CODIGO" /></th>
-					<th><spring:message code="NOME" text="NOME" /></th>
-					<th><spring:message code="SITUACAO" text="SITUACAO" /></th>
-					<th><spring:message code="ACOES" text="ACOES" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="equipamento">
-					<tr class="gradeA">
-						<td class="numeric">${equipamento.codigo}</td>
-						<td>${equipamento.nome}</td>
-						<td><spring:message code="${equipamento.dmSituacao.meaningKey}" text="${equipamento.dmSituacao}" /></td>
-						<td>
-							<button class="btn btn-default" onclick="actionEditar(${equipamento.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
-							<button class="btn btn-danger" onclick="actionExcluir(${equipamento.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
-						</td>
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th><spring:message code="CODIGO" text="CODIGO" /></th>
+						<th><spring:message code="NOME" text="NOME" /></th>
+						<th><spring:message code="SITUACAO" text="SITUACAO" /></th>
+						<th><spring:message code="ACOES" text="ACOES" /></th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach items="${list}" var="equipamento">
+						<tr class="gradeA">
+							<td class="numeric">${equipamento.codigo}</td>
+							<td>${equipamento.nome}</td>
+							<td><spring:message code="${equipamento.dmSituacao.meaningKey}" text="${equipamento.dmSituacao}" /></td>
+							<td>
+								<button class="btn btn-default" onclick="actionEditar(${equipamento.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
+								<button class="btn btn-danger" onclick="actionExcluir(${equipamento.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	
 		<form:form action="novo" method="GET" class="form-inline">
 			<button type="submit" class="btn btn-default"><spring:message code="NOVO" text="NOVO" /></button>

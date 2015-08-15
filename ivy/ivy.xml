@@ -14,8 +14,8 @@
 		<dependency org="javassist" name="javassist" rev="3.12.1.GA" conf="compile->default;sources;javadoc"/>
 		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.7.6" conf="compile->default;sources;javadoc"/>
 		<dependency org="cglib" name="cglib" rev="2.2.2" conf="compile->default;sources;javadoc"/>
-		<dependency org="joda-time" name="joda-time-hibernate" rev="1.3" conf="compile->default;sources;javadoc"/>
 		<dependency org="org.hibernate" name="hibernate-validator" rev="5.1.0.Final"  conf="compile->default;sources;javadoc"/>
+		<dependency org="joda-time" name="joda-time-hibernate" rev="1.3" conf="compile->default;sources;javadoc"/>
             
 
 		<!-- SPRING -->
@@ -35,6 +35,7 @@
 		<dependency org="org.jboss.spec" name="jboss-javaee-6.0" rev="3.0.3.Final" conf="compile->default;sources;javadoc"/>
 		<dependency org="javax.servlet" name="jstl" rev="1.1.2" conf="compile->default;sources;javadoc"/>
 		<dependency org="taglibs" name="standard" rev="1.1.2" conf="compile->default;sources;javadoc"/>
+		<dependency org="joda-time" name="joda-time-jsptags" rev="1.1.1" conf="compile->default;sources;javadoc"/>
 		
 		<!-- UTILS -->
 		<dependency org="org.apache.commons" name="commons-lang3" rev="3.3.1" conf="compile->default;sources;javadoc"/>

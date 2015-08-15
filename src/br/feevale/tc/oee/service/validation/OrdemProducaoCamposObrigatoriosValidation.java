@@ -1,7 +1,5 @@
 package br.feevale.tc.oee.service.validation;
 
-import org.apache.commons.lang3.StringUtils;
-
 import br.feevale.tc.oee.domain.OrdemProducao;
 import br.feevale.tc.oee.framework.validation.OEEValidation;
 import br.feevale.tc.oee.framework.validation.OEEValidationResult;
@@ -21,23 +19,18 @@ public class OrdemProducaoCamposObrigatoriosValidation implements OEEValidation 
 
 	@Override
 	public void validate(OEEValidationResult result) {
-		if (ordemProducao.getCodigo() == null){
-			result.addFieldNotNullError("CODIGO");
-		}
-		if (StringUtils.isBlank(ordemProducao.getDescricao())){
-			result.addFieldNotNullError("DESCRICAO");
-		}
+		
+		result.validateNumberField(ordemProducao.getCodigo(), "CODIGO", 99999999, "codigo");
+		result.validateStringField(ordemProducao.getDescricao(), "DESCRICAO", 100, "descricao");
+		
 		if (ordemProducao.getEquipamento() == null){
-			result.addFieldNotNullError("EQUIPAMENTO");
-		}
-		if (ordemProducao.getOperacao() == null){
-			result.addFieldNotNullError("OPERACAO");
+			result.addFieldNotNullError("EQUIPAMENTO", "equipamento");
 		}
 		if (ordemProducao.getUnidadesPorMinuto() == null){
-			result.addFieldNotNullError("UNIDADES_POR_MINUTO");
+			result.addFieldNotNullError("UNIDADES_POR_MINUTO", "unidadesPorMinuto");
 		}
 		if (ordemProducao.getDmSituacao() == null){
-			result.addFieldNotNullError("SITUACAO");
+			result.addFieldNotNullError("SITUACAO", "dmSituacao");
 		}
 	}
 

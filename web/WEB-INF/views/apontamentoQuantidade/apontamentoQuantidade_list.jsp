@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
@@ -80,7 +81,7 @@
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<form:select path="ordemProducao" class="form-control">
 						<form:option value="" label="${selecione}" />
-						<form:options items="${ordensProducao}" itemLabel="nome" itemValue="id" />
+						<form:options items="${ordensProducao}" itemLabel="descricao" itemValue="id" />
 					</form:select>
 				</div>
 				
@@ -107,32 +108,34 @@
 		
 		<br/>
 	
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th><spring:message code="DATA_HORA" /></th>
-					<th><spring:message code="ORDEM_PRODUCAO" /></th>
-					<th><spring:message code="QUANTIDADE" /></th>
-					<th><spring:message code="QUALIDADE_PRODUCAO" /></th>
-					<th><spring:message code="ACOES" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="apontamento">
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+				<thead>
 					<tr>
-						<td>${apontamento.dtHr}</td>
-						<td>${apontamento.ordemProducao.descricao}</td>
-						<td class="numeric"><fmt:formatNumber type="number" value="${apontamento.quantidade}" minFractionDigits="3" maxFractionDigits="3"/></td>
-						<td><spring:message code="${apontamento.dmQualidade.meaningKey}" /></td>
-						<td>
-							<button class="btn btn-default" onclick="actionEditar(${ordemProducao.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
-							<button class="btn btn-danger" onclick="actionExcluir(${ordemProducao.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
-						</td>
+						<th><spring:message code="DATA_HORA" /></th>
+						<th><spring:message code="ORDEM_PRODUCAO" /></th>
+						<th><spring:message code="QUANTIDADE" /></th>
+						<th><spring:message code="QUALIDADE_PRODUCAO" /></th>
+						<th><spring:message code="ACOES" /></th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	
+				</thead>
+				<tbody>
+					<c:forEach items="${list}" var="apontamento">
+						<tr>
+							<td><joda:format value="${apontamento.dtHr}" style="SM" /></td>
+							<td>${apontamento.ordemProducao.descricao}</td>
+							<td class="numeric"><fmt:formatNumber type="number" value="${apontamento.quantidade}" minFractionDigits="3" maxFractionDigits="3"/></td>
+							<td><spring:message code="${apontamento.dmQualidade.meaningKey}" /></td>
+							<td>
+								<button class="btn btn-default" onclick="actionEditar(${apontamento.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
+								<button class="btn btn-danger" onclick="actionExcluir(${apontamento.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
 		<form:form action="novo" method="GET" class="form-inline">
 			<button type="submit" class="btn btn-default"><spring:message code="NOVO" text="NOVO" /></button>
 		</form:form>

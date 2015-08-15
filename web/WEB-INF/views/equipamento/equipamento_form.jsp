@@ -64,20 +64,23 @@
 			<form:input type="hidden" path="dtCriacao" />
 			<form:input type="hidden" path="dtUltimaAlteracao" />
 	
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "codigo") %>>
 				<div class="col-md-4">
-					<label for="codigo"><spring:message code="CODIGO" text="CODIGO" /></label>
+					<label class="control-label" for="codigo"><spring:message code="CODIGO" text="CODIGO" /></label>
 					<form:input type="text" path="codigo" id="codigo" class="form-control" />
 				</div>					
-				<div class="col-md-8">
-					<label for="nome"><spring:message code="NOME" text="NOME" /></label>
-					<form:input type="text" path="nome" id="nome" class="form-control"/>
+			</div>
+			
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "nome") %>>
+				<div class="col-md-12">
+					<label class="control-label" for="nome"><spring:message code="NOME" text="NOME" /></label>
+					<form:input type="text" path="nome" id="nome" class="form-control" />
 				</div>
 			</div>
 			
-			<div class="form-group">
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "dmSituacao") %>>
 				<div class="col-md-12">
-					<label for="dmSituacao"><spring:message code="SITUACAO" text="SITUACAO" /></label>
+					<label class="control-label" for="dmSituacao"><spring:message code="SITUACAO" text="SITUACAO" /></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<c:set var="enumValues" value="<%=br.feevale.tc.oee.enums.AtivoInativo.values()%>"/>
 					<form:select path="dmSituacao" class="form-control">
@@ -96,6 +99,7 @@
 		
 		</form:form>
 		
+		<br/>
 		
 		<footer>
         	<p>&copy; Emanuel Cruz Rodrigues 2015</p>
