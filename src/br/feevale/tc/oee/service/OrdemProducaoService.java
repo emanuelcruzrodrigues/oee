@@ -25,7 +25,7 @@ public class OrdemProducaoService extends CRUDServiceTemplateImpl<OrdemProducao>
 	protected OrdemProducaoDAO ordemProducaoDAO;
 
 	@Override
-	protected CRUDDAOTemplate<OrdemProducao> getCRUDDAO() {
+	public CRUDDAOTemplate<OrdemProducao> getCRUDDAO() {
 		return ordemProducaoDAO;
 	}
 	

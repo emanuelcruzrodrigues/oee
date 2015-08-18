@@ -26,20 +26,10 @@ public abstract class CRUDServiceTemplateImpl<T extends Serializable> implements
 	@Override
 	@Transactional
 	public T save(T t) {
-		return save(t, false);
-	}
-
-	@Override
-	@Transactional
-	public T saveAndFlush(T t) {
-		return save(t, true);
-	}
-	
-	private T save(T t, boolean flush){
 		OEEValidationStack beforeSaveValidationStack = getBeforeSaveValidationStack(t);
 		beforeSaveValidationStack.validate();
 		
-		getCRUDDAO().save(t, flush);
+		getCRUDDAO().save(t);
 		
 		getAfterSaveValidationStack(t).validate();
 		
@@ -84,7 +74,7 @@ public abstract class CRUDServiceTemplateImpl<T extends Serializable> implements
 		return new OEEValidationFakeStack();
 	}
 	
-	protected abstract CRUDDAOTemplate<T> getCRUDDAO();
+	public abstract CRUDDAOTemplate<T> getCRUDDAO();
 
 	public void setHandler(OEEValidationHandler handler) {
 		this.handler = handler;

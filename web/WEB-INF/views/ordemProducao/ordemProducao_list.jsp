@@ -76,7 +76,11 @@
 				
 				<div class="col-md-6">
 					<label for="equipamento"><spring:message code="EQUIPAMENTO"/></label>
-					<form:select path="equipamento" items="${equipamentos}" itemLabel="nome" itemValue="id" class="form-control"/>
+					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
+					<form:select path="equipamento" class="form-control">
+						<form:option value="" label="${selecione}" />
+						<form:options items="${equipamentos}" itemLabel="nome" itemValue="id" />
+					</form:select>
 				</div>
 					
 				<div class="col-md-2">

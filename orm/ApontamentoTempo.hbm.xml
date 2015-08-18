@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="br.feevale.tc.oee.domain.ApontamentoTempo" table="apontamentos_tempos">
+		<id name="id" column="id">
+			<generator class="sequence">
+				<param name="sequence">sq_apontamento_tempo</param>
+			</generator>
+		</id>
+		<discriminator column="dm_tipo_apontamento" type="string"/>
+		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
+		
+		<many-to-one name="ordemProducao" column="id_ordem_producao" />
+		<property name="dtHrEntrada" column="dt_hr_entrada" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
+		<property name="dtHrSaida" column="dt_hr_saida" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
+		<property name="tempoMinutos" column="tempo_minutos" />
+		
+		<property name="dtCriacao" column="dt_criacao" />
+		
+    	<subclass name="br.feevale.tc.oee.domain.ApontamentoTempoProducao" discriminator-value="P">
+			<join table="apontamentos_producoes">
+				<key column="id" />
+				<property name="desempenho" column="desempenho" />
+			</join>
+    	</subclass>
+    	
+    	<subclass name="br.feevale.tc.oee.domain.ApontamentoTempoParada" discriminator-value="S">
+			<join table="apontamentos_tempos_paradas">
+				<key column="id" />
+        		<many-to-one name="motivoParada" column="id_motivo_parada" />
+			</join>
+		</subclass>
+		
+		
+	</class>
+</hibernate-mapping>

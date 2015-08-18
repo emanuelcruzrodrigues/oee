@@ -76,6 +76,20 @@
 					<form:input type="text" path="dtFinal" id="dtFinal" class="form-control" />
 				</div>
 				
+				
+			</div>
+			
+			<div class="row form-group">
+			
+				<div class="col-md-4">
+					<label for="equipamento"><spring:message code="EQUIPAMENTO"/></label>
+					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
+					<form:select path="equipamento" class="form-control">
+						<form:option value="" label="${selecione}" />
+						<form:options items="${equipamentos}" itemLabel="nome" itemValue="id" />
+					</form:select>
+				</div>
+				
 				<div class="col-md-4">
 					<label for="ordemProducao"><spring:message code="ORDEM_PRODUCAO"/></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
@@ -86,18 +100,16 @@
 				</div>
 				
 				<div class="col-md-4">
-					<label for="dmQualidade"><spring:message code="QUALIDADE_PRODUCAO" /></label>
+					<label for="motivoParada"><spring:message code="MOTIVO_PARADA"/></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
-					<c:set var="enumValues" value="<%=br.feevale.tc.oee.enums.QualidadeProducao.values()%>"/>
-					<form:select path="dmQualidade" class="form-control">
+					<form:select path="motivoParada" class="form-control">
 						<form:option value="" label="${selecione}" />
-						<c:forEach items="${enumValues}" var="option">
-							<c:set var="optionLabel"><spring:message code="${option.meaningKey}"/></c:set>
-							<form:option value="${option}" label="${optionLabel}" />
-						</c:forEach>
+						<form:options items="${motivosParadas}" itemLabel="descricao" itemValue="id" />
 					</form:select>
 				</div>
+				
 			</div>
+			
 			<div class="row">
 				<div class="col-md-4">
 					<button type="submit" class="btn btn-default"><spring:message code="PESQUISAR" text="PESQUISAR" /></button>
@@ -112,21 +124,25 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
-						<th><spring:message code="DATA_HORA" /></th>
+						<th><spring:message code="DATA_HORA_ENTRADA" /></th>
+						<th><spring:message code="DATA_HORA_ENCERRAMENTO" /></th>
+						<th><spring:message code="EQUIPAMENTO" /></th>
 						<th><spring:message code="ORDEM_PRODUCAO" /></th>
-						<th><spring:message code="QUANTIDADE" /></th>
-						<th><spring:message code="QUALIDADE_PRODUCAO" /></th>
+						<th><spring:message code="MOTIVO_PARADA" /></th>
+						<th><spring:message code="TEMPO_MINUTOS" /></th>
 						<th><spring:message code="ACOES" /></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="apontamento">
 						<tr>
-							<td><joda:format value="${apontamento.dtHr}" style="SS" /></td>
+							<td><joda:format value="${apontamento.dtHrEntrada}" style="SS" /></td>
+							<td><joda:format value="${apontamento.dtHrSaida}" style="SS" /></td>
+							<td>${apontamento.equipamento.nome}</td>
 							<td>${apontamento.ordemProducao.descricao}</td>
-							<td class="numeric"><fmt:formatNumber type="number" value="${apontamento.quantidade}" minFractionDigits="3" maxFractionDigits="3"/></td>
-							<td><spring:message code="${apontamento.dmQualidade.meaningKey}" /></td>
-							<td>
+							<td>${apontamento.motivoParada.descricao}</td>
+							<td  class="numeric"><fmt:formatNumber type="number" value="${apontamento.tempoMinutos}" minFractionDigits="0" maxFractionDigits="0"/></td>
+							<td width="200px">
 								<button class="btn btn-default" onclick="actionEditar(${apontamento.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
 								<button class="btn btn-danger" onclick="actionExcluir(${apontamento.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
 							</td>

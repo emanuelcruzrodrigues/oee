@@ -22,7 +22,7 @@ public class UsuarioService extends CRUDServiceTemplateImpl<Usuario>{
 	protected UsuarioDAO usuarioDAO;
 
 	@Override
-	protected CRUDDAOTemplate<Usuario> getCRUDDAO() {
+	public CRUDDAOTemplate<Usuario> getCRUDDAO() {
 		return usuarioDAO;
 	}
 

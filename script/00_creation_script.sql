@@ -6,6 +6,13 @@ drop sequence if exists sq_usuario;
 drop table if exists apontamentos_quantidades;
 drop sequence if exists sq_apontamento_quantidade;
 
+drop table if exists apontamentos_tempos_paradas;
+
+drop table if exists apontamentos_producoes;
+
+drop sequence if exists sq_apontamento_tempo;
+drop table if exists apontamentos_tempos;
+
 drop table if exists ordens_producoes;
 drop sequence if exists sq_ordem_producao;
 
@@ -14,7 +21,6 @@ drop sequence if exists sq_equipamento;
 
 drop table if exists motivos_paradas;
 drop sequence if exists sq_motivo_parada;
-
 
 ----------------------------------------------------------------------------
 
@@ -86,3 +92,32 @@ create sequence sq_apontamento_quantidade;
 alter table apontamentos_quantidades add constraint fk_apqu_orpr foreign key(id_ordem_producao) references ordens_producoes(id);
 
 ----------------------------------------------------------------------------
+
+create table apontamentos_tempos(
+	id numeric(10) not null primary key,
+	dm_tipo_apontamento varchar(1) not null,
+	id_ordem_producao numeric(10) not null,
+	dt_hr_entrada timestamp not null,
+	dt_hr_saida timestamp,
+	tempo_minutos numeric(10),
+	dt_criacao timestamp not null,
+	dt_ultima_alteracao timestamp not null
+);
+create sequence sq_apontamento_tempo;
+alter table apontamentos_tempos add constraint fk_apte_orpr foreign key (id_ordem_producao) references ordens_producoes(id);
+
+----------------------------------------------------------------------------
+
+create table apontamentos_producoes(
+	id numeric(10) not null primary key,
+	desempenho numeric(16,6)
+);
+alter table apontamentos_producoes add constraint fk_apte_appd foreign key (id) references apontamentos_tempos(id);
+
+----------------------------------------------------------------------------
+
+create table apontamentos_tempos_paradas(
+	id numeric(10) not null primary key,
+	id_motivo_parada numeric(10) not null
+);
+alter table apontamentos_tempos_paradas add constraint fk_apte_aptp foreign key (id) references apontamentos_tempos(id);

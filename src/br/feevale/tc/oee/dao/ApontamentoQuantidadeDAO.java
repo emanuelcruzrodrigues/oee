@@ -22,12 +22,14 @@ import br.feevale.tc.oee.framework.dao.CRUDDAOTemplateImpl;
 public class ApontamentoQuantidadeDAO extends CRUDDAOTemplateImpl<ApontamentoQuantidade>{
 
 	@Override
-	protected Class<ApontamentoQuantidade> getBeanClazz() {
+	public Class<ApontamentoQuantidade> getBeanClazz() {
 		return ApontamentoQuantidade.class;
 	}
 
 	@Override
-	protected void initialize(ApontamentoQuantidade apontamentoQuantidade) {}
+	protected void initialize(ApontamentoQuantidade apontamentoQuantidade) {
+		dao.initialize(apontamentoQuantidade.getOrdemProducao());
+	}
 
 	@Override
 	protected List<Order> getDefaultOrders() {

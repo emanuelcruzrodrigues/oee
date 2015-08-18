@@ -11,7 +11,6 @@ import java.util.List;
  */
 public interface CRUDDAOTemplate<T extends Serializable> {
 	public T save(T t);
-	public T save(T t, boolean flush);
 	public List<T> queryByExample(T example);
 	public T get(Serializable id);
 	public void delete(T t);

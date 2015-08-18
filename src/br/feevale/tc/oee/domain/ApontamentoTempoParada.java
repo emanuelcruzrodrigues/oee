@@ -1,5 +1,6 @@
 package br.feevale.tc.oee.domain;
 
+
 /**
  * @author Emanuel
  * emanuelcruzrodrigues@gmail.com
@@ -7,5 +8,14 @@ package br.feevale.tc.oee.domain;
  */
 @SuppressWarnings("serial")
 public class ApontamentoTempoParada extends ApontamentoTempo{
+	
+	private MotivoParada motivoParada;
 
+	public MotivoParada getMotivoParada() {
+		return motivoParada;
+	}
+	public void setMotivoParada(MotivoParada motivoParada) {
+		this.motivoParada = motivoParada;
+	}
+	
 }

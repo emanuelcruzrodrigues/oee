@@ -1,12 +1,11 @@
-<%@page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
-<%@page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
+<%@ page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,15 +24,14 @@
     <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../resources/css/list.css" rel="stylesheet">
+    <link href="../resources/css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->    
+    <![endif]-->
     
-    <%=JSPUtils.printCRUDJavaScripts(request) %>
 </head>
 <body>
 
@@ -62,92 +60,49 @@
     </nav>
     		
 	<div class="container">	
+
+		<form:form action="salvar" modelAttribute="bean" method="POST" class="form-horizontal">
+			<form:input type="hidden" path="id" />
+			<form:input type="hidden" path="dtCriacao" />
+			<form:input type="hidden" path="dtUltimaAlteracao" />
 	
-		<form:form action="listar" modelAttribute="example" method="POST" class="form-horizontal">
-		
-			<div class="row form-group">
-				<div class="col-md-2">
-					<label for="dtInicial"><spring:message code="DATA_INICIAL" /></label>
-					<form:input type="text" path="dtInicial" id="dtInicial" class="form-control" />
-				</div>
-				
-				<div class="col-md-2">
-					<label for="dtFinal"><spring:message code="DATA_FINAL" /></label>
-					<form:input type="text" path="dtFinal" id="dtFinal" class="form-control" />
-				</div>
-				
-				<div class="col-md-4">
-					<label for="ordemProducao"><spring:message code="ORDEM_PRODUCAO"/></label>
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "ordemProducao")%>>
+				<div class="col-md-12">
+					<label class="control-label" for="ordemProducao"><spring:message code="ORDEM_PRODUCAO"/></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
 					<form:select path="ordemProducao" class="form-control">
 						<form:option value="" label="${selecione}" />
 						<form:options items="${ordensProducao}" itemLabel="descricao" itemValue="id" />
 					</form:select>
 				</div>
-				
-				<div class="col-md-4">
-					<label for="dmQualidade"><spring:message code="QUALIDADE_PRODUCAO" /></label>
-					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
-					<c:set var="enumValues" value="<%=br.feevale.tc.oee.enums.QualidadeProducao.values()%>"/>
-					<form:select path="dmQualidade" class="form-control">
-						<form:option value="" label="${selecione}" />
-						<c:forEach items="${enumValues}" var="option">
-							<c:set var="optionLabel"><spring:message code="${option.meaningKey}"/></c:set>
-							<form:option value="${option}" label="${optionLabel}" />
-						</c:forEach>
-					</form:select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<button type="submit" class="btn btn-default"><spring:message code="PESQUISAR" text="PESQUISAR" /></button>
-				</div>
 			</div>
 			
-		</form:form>
-		
-		<br/>
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "dtHrEntrada")%>>
+				<div class="col-md-4">
+					<label class="control-label" for="dtHrEntrada"><spring:message code="DATA_HORA_ENTRADA" /></label>
+					<form:input type="text" path="dtHrEntrada" id="dtHrEntrada" class="form-control" />
+				</div>					
+			</div>
+			
+			<div class=<%=JSPUtils.printFormGroupFeedback(request, "dtHrEntradaSaida")%>>
+				<div class="col-md-4">
+					<label class="control-label" for="dtHrSaida"><spring:message code="DATA_HORA_ENCERRAMENTO" /></label>
+					<form:input type="text" path="dtHrSaida" id="dtHrSaida" class="form-control"/>
+				</div>					
+			</div>
+						
+			<%=JSPUtils.printErrors(request)%>
 	
-		<div class="table-responsive">
-			<table class="table table-bordered table-hover">
-				<thead>
-					<tr>
-						<th><spring:message code="DATA_HORA" /></th>
-						<th><spring:message code="ORDEM_PRODUCAO" /></th>
-						<th><spring:message code="QUANTIDADE" /></th>
-						<th><spring:message code="QUALIDADE_PRODUCAO" /></th>
-						<th><spring:message code="ACOES" /></th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${list}" var="apontamento">
-						<tr>
-							<td><joda:format value="${apontamento.dtHr}" style="SS" /></td>
-							<td>${apontamento.ordemProducao.descricao}</td>
-							<td class="numeric"><fmt:formatNumber type="number" value="${apontamento.quantidade}" minFractionDigits="3" maxFractionDigits="3"/></td>
-							<td><spring:message code="${apontamento.dmQualidade.meaningKey}" /></td>
-							<td>
-								<button class="btn btn-default" onclick="actionEditar(${apontamento.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
-								<button class="btn btn-danger" onclick="actionExcluir(${apontamento.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+			<button type="submit" class="btn btn-default"><spring:message code="SALVAR" text="SALVAR" /></button>
 		
-		<form:form action="novo" method="GET" class="form-inline">
-			<button type="submit" class="btn btn-default"><spring:message code="NOVO" text="NOVO" /></button>
 		</form:form>
 		
 		<br/>
 		
 		<footer>
-	       	<p>&copy; Emanuel Cruz Rodrigues 2015</p>
-	    </footer>
-	    
+        	<p>&copy; Emanuel Cruz Rodrigues 2015</p>
+      	</footer>
     </div> <!-- /container -->
-    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -155,6 +110,7 @@
     <script src="../resources/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../resources/js/ie10-viewport-bug-workaround.js"></script>
+	
 	
 </body>
 </html>

@@ -22,15 +22,7 @@ public abstract class CRUDDAOTemplateImpl<T extends Serializable> implements CRU
 	
 	@Override
 	public T save(T t) {
-		return save(t, false);
-	}
-	
-	@Override
-	public T save(T t, boolean flush) {
 		dao.save(t);
-		if (flush){
-			dao.flush();
-		}
 		return t;
 	}
 
@@ -47,7 +39,7 @@ public abstract class CRUDDAOTemplateImpl<T extends Serializable> implements CRU
 		return new ArrayList<Criterion>();
 	}
 
-	protected abstract Class<T> getBeanClazz();
+	public abstract Class<T> getBeanClazz();
 
 	@Override
 	public T get(Serializable id) {

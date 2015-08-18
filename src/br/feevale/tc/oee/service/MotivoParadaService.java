@@ -1,5 +1,7 @@
 package br.feevale.tc.oee.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -23,13 +25,17 @@ public class MotivoParadaService extends CRUDServiceTemplateImpl<MotivoParada>{
 	protected MotivoParadaDAO motivoParadaDAO;
 
 	@Override
-	protected CRUDDAOTemplate<MotivoParada> getCRUDDAO() {
+	public CRUDDAOTemplate<MotivoParada> getCRUDDAO() {
 		return motivoParadaDAO;
 	}
 	
 	@Override
 	protected OEEValidationStack getBeforeSaveValidationStack(MotivoParada motivoParada) {
 		return new MotivoParadaSaveValidationStack(motivoParada, handler);
+	}
+
+	public List<MotivoParada> getMotivosParadasAtivos() {
+		return motivoParadaDAO.queryMotivosParadasAtivos();
 	}
 
 }

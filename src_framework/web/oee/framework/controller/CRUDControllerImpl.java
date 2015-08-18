@@ -88,6 +88,8 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 			getService().save(bean);
 			
 		} catch (Throwable e) {
+			e.printStackTrace();
+			
 			if (e instanceof OEEException){
 				model.addAttribute("errors", ((OEEException)e).getValidationResult());
 			}else{
@@ -117,6 +119,8 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 				getService().delete(bean);
 				
 			} catch (Throwable e) {
+				e.printStackTrace();
+				
 				if (e instanceof OEEException){
 					model.addAttribute("errors", ((OEEException)e).getValidationResult());
 				}else{

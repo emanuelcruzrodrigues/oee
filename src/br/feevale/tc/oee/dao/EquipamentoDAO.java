@@ -21,7 +21,7 @@ import br.feevale.tc.oee.framework.dao.UniqueKeyDAO;
 public class EquipamentoDAO extends CRUDDAOTemplateImpl<Equipamento> implements UniqueKeyDAO<Equipamento>{
 
 	@Override
-	protected Class<Equipamento> getBeanClazz() {
+	public Class<Equipamento> getBeanClazz() {
 		return Equipamento.class;
 	}
 

@@ -18,7 +18,7 @@ import br.feevale.tc.oee.framework.domain.Usuario;
 public class UsuarioDAO extends CRUDDAOTemplateImpl<Usuario>{
 
 	@Override
-	protected Class<Usuario> getBeanClazz() {
+	public Class<Usuario> getBeanClazz() {
 		return Usuario.class;
 	}
 

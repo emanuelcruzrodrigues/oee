@@ -48,6 +48,7 @@
 	       <list>
 	          <bean class="br.feevale.tc.oee.converters.IdToEquipamentoConverter"/>
 	          <bean class="br.feevale.tc.oee.converters.IdToOrdemProducaoConverter"/>
+	          <bean class="br.feevale.tc.oee.converters.IdToMotivoParadaConverter"/>
 	       </list>
 	    </property>
 	</bean>

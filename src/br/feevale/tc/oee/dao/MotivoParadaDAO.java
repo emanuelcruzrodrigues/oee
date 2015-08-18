@@ -21,7 +21,7 @@ import br.feevale.tc.oee.framework.dao.UniqueKeyDAO;
 public class MotivoParadaDAO extends CRUDDAOTemplateImpl<MotivoParada> implements UniqueKeyDAO<MotivoParada>{
 
 	@Override
-	protected Class<MotivoParada> getBeanClazz() {
+	public Class<MotivoParada> getBeanClazz() {
 		return MotivoParada.class;
 	}
 
@@ -40,7 +40,7 @@ public class MotivoParadaDAO extends CRUDDAOTemplateImpl<MotivoParada> implement
 		return Arrays.asList(Order.asc("codigo"));
 	}
 	
-	public List<MotivoParada> queryEquipamentosAtivos() {
+	public List<MotivoParada> queryMotivosParadasAtivos() {
 		StringBuilder hql = new StringBuilder();
 		hql.append("select mopa from MotivoParada mopa ");
 		hql.append(" where mopa.dmSituacao = ? ");

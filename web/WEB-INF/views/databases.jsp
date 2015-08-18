@@ -100,6 +100,16 @@
           <p><spring:message code="DESCRICAO_TABELA_APONTAMENTOS_QUANTIDADE" /></p>
           <p><a class="btn btn-default" href="../apontamentoQuantidade/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
         </div>
+        <div class="col-md-4">
+          <h2><spring:message code="APONTAMENTOS_PRODUCAO" /></h2>
+          <p><spring:message code="DESCRICAO_TABELA_APONTAMENTOS_PRODUCAO" /></p>
+          <p><a class="btn btn-default" href="../apontamentoTempoProducao/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2><spring:message code="APONTAMENTOS_PARADA" /></h2>
+          <p><spring:message code="DESCRICAO_TABELA_APONTAMENTOS_PARADA" /></p>
+          <p><a class="btn btn-default" href="../apontamentoTempoParada/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
+        </div>
       </div>
       
       

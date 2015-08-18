@@ -21,7 +21,7 @@ import br.feevale.tc.oee.framework.dao.UniqueKeyDAO;
 public class OrdemProducaoDAO extends CRUDDAOTemplateImpl<OrdemProducao> implements UniqueKeyDAO<OrdemProducao>{
 
 	@Override
-	protected Class<OrdemProducao> getBeanClazz() {
+	public Class<OrdemProducao> getBeanClazz() {
 		return OrdemProducao.class;
 	}
 

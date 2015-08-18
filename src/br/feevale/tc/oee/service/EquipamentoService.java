@@ -25,7 +25,7 @@ public class EquipamentoService extends CRUDServiceTemplateImpl<Equipamento>{
 	protected EquipamentoDAO equipamentoDAO;
 	
 	@Override
-	protected CRUDDAOTemplate<Equipamento> getCRUDDAO() {
+	public CRUDDAOTemplate<Equipamento> getCRUDDAO() {
 		return equipamentoDAO;
 	}
 	
