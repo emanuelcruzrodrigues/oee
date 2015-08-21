@@ -12,18 +12,18 @@ import org.springframework.format.annotation.NumberFormat.Style;
 /**
  * @author Emanuel
  * emanuelcruzrodrigues@gmail.com
- * 06/08/2015
+ * 20/08/2015
  */
 @SuppressWarnings("serial")
-public class ApontamentoTempo implements Serializable{
-
+public class ProgramacaoProducaoEquipamento implements Serializable{
+	
 	private Integer id;
 	
 	private Equipamento equipamento;
 	
-	private LocalDateTime dtHrEntrada;
+	private LocalDateTime dtHrInicio;
 	
-	private LocalDateTime dtHrSaida;
+	private LocalDateTime dtHrFim;
 	
 	@NumberFormat(style=Style.NUMBER,pattern="###,###")
 	private Integer tempoMinutos;
@@ -33,20 +33,20 @@ public class ApontamentoTempo implements Serializable{
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
 	private Date dtUltimaAlteracao;
-
+	
 	/**
 	 * atributos nao mapeados
 	 */
 	private LocalDate dtInicial;
 	private LocalDate dtFinal;
-	
+
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public Equipamento getEquipamento() {
 		return equipamento;
 	}
@@ -54,20 +54,20 @@ public class ApontamentoTempo implements Serializable{
 		this.equipamento = equipamento;
 	}
 
-	public LocalDateTime getDtHrEntrada() {
-		return dtHrEntrada;
+	public LocalDateTime getDtHrInicio() {
+		return dtHrInicio;
 	}
-	public void setDtHrEntrada(LocalDateTime dtHrEntrada) {
-		this.dtHrEntrada = dtHrEntrada;
+	public void setDtHrInicio(LocalDateTime dtHrInicio) {
+		this.dtHrInicio = dtHrInicio;
 	}
-	
-	public LocalDateTime getDtHrSaida() {
-		return dtHrSaida;
+
+	public LocalDateTime getDtHrFim() {
+		return dtHrFim;
 	}
-	public void setDtHrSaida(LocalDateTime dtHrSaida) {
-		this.dtHrSaida = dtHrSaida;
+	public void setDtHrFim(LocalDateTime dtHrFim) {
+		this.dtHrFim = dtHrFim;
 	}
-	
+
 	public Integer getTempoMinutos() {
 		return tempoMinutos;
 	}
@@ -119,10 +119,10 @@ public class ApontamentoTempo implements Serializable{
 		if (o == null) {
 			return false;
 		}
-		if (!(o instanceof ApontamentoTempo)) {
+		if (!(o instanceof ProgramacaoProducaoEquipamento)) {
 			return false;
 		}
-		ApontamentoTempo castedObj = (ApontamentoTempo) o;
+		ProgramacaoProducaoEquipamento castedObj = (ProgramacaoProducaoEquipamento) o;
 		if (this.getId() == null || castedObj.getId() == null) {
 			return false;
 		} else {
@@ -130,6 +130,4 @@ public class ApontamentoTempo implements Serializable{
 		}
 	}
 
-
-	
 }

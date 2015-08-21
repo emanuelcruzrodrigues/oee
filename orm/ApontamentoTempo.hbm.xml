@@ -13,7 +13,7 @@
 		<discriminator column="dm_tipo_apontamento" type="string"/>
 		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
 		
-		<many-to-one name="ordemProducao" column="id_ordem_producao" />
+		<many-to-one name="equipamento" column="id_equipamento" />
 		<property name="dtHrEntrada" column="dt_hr_entrada" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
 		<property name="dtHrSaida" column="dt_hr_saida" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
 		<property name="tempoMinutos" column="tempo_minutos" />
@@ -23,7 +23,7 @@
     	<subclass name="br.feevale.tc.oee.domain.ApontamentoTempoProducao" discriminator-value="P">
 			<join table="apontamentos_producoes">
 				<key column="id" />
-				<property name="desempenho" column="desempenho" />
+				<many-to-one name="ordemProducao" column="id_ordem_producao" />
 			</join>
     	</subclass>
     	

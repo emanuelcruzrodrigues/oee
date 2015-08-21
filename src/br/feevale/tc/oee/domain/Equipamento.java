@@ -17,7 +17,7 @@ import br.feevale.tc.oee.enums.AtivoInativo;
  * 06/08/2015
  */
 @SuppressWarnings("serial")
-public class Equipamento implements Serializable{
+public class Equipamento implements Serializable, Comparable<Equipamento>{
 	
 	private Integer id;
 	
@@ -103,6 +103,11 @@ public class Equipamento implements Serializable{
 		} else {
 			return this.getId().equals(castedObj.getId());
 		}
+	}
+	
+	@Override
+	public int compareTo(Equipamento other) {
+		return getCodigo().compareTo(other.getCodigo());
 	}
 	
 	

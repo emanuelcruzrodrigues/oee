@@ -45,6 +45,7 @@ public class OrdemProducaoDAO extends CRUDDAOTemplateImpl<OrdemProducao> impleme
 	public List<OrdemProducao> queryOrdensProducaoAbertas() {
 		StringBuilder hql = new StringBuilder();
 		hql.append("select orpr from OrdemProducao orpr ");
+		hql.append(" inner join fetch orpr.equipamento equi ");
 		hql.append(" where orpr.dmSituacao = ? ");
 		hql.append(" order by orpr.descricao ");
 		return dao.query(hql.toString(), SituacaoOrdemProducao.ABERTA);

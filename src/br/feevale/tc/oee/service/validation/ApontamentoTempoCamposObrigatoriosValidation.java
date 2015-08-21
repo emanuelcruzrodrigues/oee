@@ -14,11 +14,8 @@ public class ApontamentoTempoCamposObrigatoriosValidation<T extends ApontamentoT
 
 	@Override
 	public void validate(OEEValidationResult result) {
-		if (apontamento.getOrdemProducao() == null){
-			result.addFieldNotNullError("ORDEM_PRODUCAO", "ordemProducao");
-		}
-		if (apontamento.getDtHrEntrada() == null){
-			result.addFieldNotNullError("DATA_HORA_ENTRADA", "dtHrEntrada");
+		if (apontamento.getEquipamento() == null){
+			result.addFieldNotNullError("EQUIPAMENTO", "equipamento");
 		}
 	}
 

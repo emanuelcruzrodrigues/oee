@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="br.feevale.tc.oee.domain.ProgramacaoProducaoEquipamento" table="programacoes_equipamentos">
+		<id name="id" column="id">
+			<generator class="sequence">
+				<param name="sequence">sq_programacao_equipamento</param>
+			</generator>
+		</id>
+		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
+		
+		<many-to-one name="equipamento" column="id_equipamento" />
+		<property name="dtHrInicio" column="dt_hr_inicio" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
+		<property name="dtHrFim" column="dt_hr_fim" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
+		<property name="tempoMinutos" column="tempo_minutos" />
+		
+		<property name="dtCriacao" column="dt_criacao" />
+		
+	</class>
+</hibernate-mapping>

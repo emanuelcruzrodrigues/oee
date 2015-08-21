@@ -126,7 +126,7 @@
 							<td>${apontamento.equipamento.nome}</td>
 							<td>${apontamento.ordemProducao.descricao}</td>
 							<td  class="numeric"><fmt:formatNumber type="number" value="${apontamento.tempoMinutos}" minFractionDigits="0" maxFractionDigits="0"/></td>
-							<td>
+							<td width="200px">
 								<button class="btn btn-default" onclick="actionEditar(${apontamento.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
 								<button class="btn btn-danger" onclick="actionExcluir(${apontamento.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
 							</td>

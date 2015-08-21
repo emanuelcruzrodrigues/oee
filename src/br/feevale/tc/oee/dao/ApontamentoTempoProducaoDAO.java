@@ -11,6 +11,7 @@ import org.joda.time.LocalTime;
 import org.springframework.stereotype.Repository;
 
 import br.feevale.tc.oee.domain.ApontamentoTempoProducao;
+import br.feevale.tc.oee.domain.OrdemProducao;
 import br.feevale.tc.oee.framework.dao.CRUDDAOTemplateImpl;
 
 @Repository
@@ -63,6 +64,21 @@ public class ApontamentoTempoProducaoDAO extends CRUDDAOTemplateImpl<Apontamento
 	@Override
 	protected void initialize(ApontamentoTempoProducao apontamento) {
 		apontamentoTempoDAO.initialize(apontamento);
+		dao.initialize(apontamento.getOrdemProducao());
+	}
+
+	public ApontamentoTempoProducao getApontamentoAtual(OrdemProducao ordemProducao) {
+		StringBuilder hql = new StringBuilder();
+		List<Object> params = new ArrayList<>();
+		
+		hql.append(" select atpd from ApontamentoTempoProducao atpd ");
+		
+		hql.append(" where atpd.ordemProducao.id = ? ");
+		params.add(ordemProducao.getId());
+		
+		hql.append(" and atpd.dtHrSaida is null ");
+		
+		return dao.uniqueResult(hql.toString(), params.toArray());
 	}
 
 }

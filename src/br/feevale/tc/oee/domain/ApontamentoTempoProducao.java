@@ -8,13 +8,13 @@ package br.feevale.tc.oee.domain;
 @SuppressWarnings("serial")
 public class ApontamentoTempoProducao extends ApontamentoTempo{
 	
-	private Double desempenho;
-
-	public Double getDesempenho() {
-		return desempenho;
+	private OrdemProducao ordemProducao;
+	
+	public OrdemProducao getOrdemProducao() {
+		return ordemProducao;
 	}
-	public void setDesempenho(Double desempenho) {
-		this.desempenho = desempenho;
+	public void setOrdemProducao(OrdemProducao ordemProducao) {
+		this.ordemProducao = ordemProducao;
 	}
 
 }

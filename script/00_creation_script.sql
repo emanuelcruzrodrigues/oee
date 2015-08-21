@@ -16,6 +16,9 @@ drop table if exists apontamentos_tempos;
 drop table if exists ordens_producoes;
 drop sequence if exists sq_ordem_producao;
 
+drop table programacoes_equipamentos;
+drop sequence sq_programacao_equipamento;
+
 drop table if exists equipamentos;
 drop sequence if exists sq_equipamento;
 
@@ -96,7 +99,7 @@ alter table apontamentos_quantidades add constraint fk_apqu_orpr foreign key(id_
 create table apontamentos_tempos(
 	id numeric(10) not null primary key,
 	dm_tipo_apontamento varchar(1) not null,
-	id_ordem_producao numeric(10) not null,
+	id_equipamento numeric(10) not null,
 	dt_hr_entrada timestamp not null,
 	dt_hr_saida timestamp,
 	tempo_minutos numeric(10),
@@ -104,15 +107,16 @@ create table apontamentos_tempos(
 	dt_ultima_alteracao timestamp not null
 );
 create sequence sq_apontamento_tempo;
-alter table apontamentos_tempos add constraint fk_apte_orpr foreign key (id_ordem_producao) references ordens_producoes(id);
+alter table apontamentos_tempos add constraint fk_apte_equi foreign key (id_equipamento) references equipamentos(id);
 
 ----------------------------------------------------------------------------
 
 create table apontamentos_producoes(
 	id numeric(10) not null primary key,
-	desempenho numeric(16,6)
+	id_ordem_producao numeric(10) not null
 );
 alter table apontamentos_producoes add constraint fk_apte_appd foreign key (id) references apontamentos_tempos(id);
+alter table apontamentos_producoes add constraint fk_appd_orpr foreign key (id_ordem_producao) references ordens_producoes(id);
 
 ----------------------------------------------------------------------------
 
@@ -121,3 +125,18 @@ create table apontamentos_tempos_paradas(
 	id_motivo_parada numeric(10) not null
 );
 alter table apontamentos_tempos_paradas add constraint fk_apte_aptp foreign key (id) references apontamentos_tempos(id);
+
+----------------------------------------------------------------------------
+
+create table programacoes_equipamentos(
+	id numeric(10) not null primary key,
+	id_equipamento numeric(10) not null,
+	dt_hr_inicio timestamp not null,
+	dt_hr_fim timestamp not null,
+	tempo_minutos numeric(10),
+	dt_criacao timestamp not null,
+	dt_ultima_alteracao timestamp not null
+);
+create sequence sq_programacao_equipamento;
+alter table programacoes_equipamentos add constraint fk_preq_equi foreign key (id_equipamento) references equipamentos(id);
+

@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
-<%@ page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
+<%@page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
+<%@page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -49,8 +48,8 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="../home/"><spring:message code="INICIO" text="INICIO" /></a></li>
-            <li><a href="../stats/"><spring:message code="ESTATISTICAS" text="ESTATISTICAS" /></a></li>
-            <li class="active"><a href="../databases/"><spring:message code="BANCO_DE_DADOS" text="BANCO_DE_DADOS" /></a></li>
+            <li class="active"><a href="../stats/"><spring:message code="ESTATISTICAS" text="ESTATISTICAS" /></a></li>
+            <li><a href="../databases/"><spring:message code="BANCO_DE_DADOS" text="BANCO_DE_DADOS" /></a></li>
             <li><a href="../webservices/"><spring:message code="WEBSERVICES" text="WEBSERVICES" /></a></li>
           </ul>
           <%=JSPUtils.printEntrarSairButton(request)%>
@@ -61,52 +60,15 @@
     		
 	<div class="container">	
 
-		<form:form action="salvar" modelAttribute="bean" method="POST" class="form-horizontal">
-			<form:input type="hidden" path="id" />
-			<form:input type="hidden" path="dtCriacao" />
-			<form:input type="hidden" path="dtUltimaAlteracao" />
-	
-			<div class=<%=JSPUtils.printFormGroupFeedback(request, "equipamento")%>>
-				<div class="col-md-12">
-					<label class="control-label" for="ordemProducao"><spring:message code="EQUIPAMENTO"/></label>
-					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
-					<form:select path="equipamento" class="form-control">
-						<form:option value="" label="${selecione}" />
-						<form:options items="${equipamentos}" itemLabel="nome" itemValue="id" />
-					</form:select>
-				</div>
-			</div>
-			
-			<div class=<%=JSPUtils.printFormGroupFeedback(request, "motivoParada")%>>
-				<div class="col-md-12">
-					<label class="control-label" for="motivoParada"><spring:message code="MOTIVO_PARADA"/></label>
-					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
-					<form:select path="motivoParada" class="form-control">
-						<form:option value="" label="${selecione}" />
-						<form:options items="${motivosParadas}" itemLabel="descricao" itemValue="id" />
-					</form:select>
-				</div>
-			</div>
-			
-			<div class=<%=JSPUtils.printFormGroupFeedback(request, "dtHrEntrada")%>>
-				<div class="col-md-4">
-					<label class="control-label" for="dtHrEntrada"><spring:message code="DATA_HORA_ENTRADA" /></label>
-					<form:input type="text" path="dtHrEntrada" id="dtHrEntrada" class="form-control" />
-				</div>					
-			</div>
-			
-			<div class=<%=JSPUtils.printFormGroupFeedback(request, "dtHrEntradaSaida")%>>
-				<div class="col-md-4">
-					<label class="control-label" for="dtHrSaida"><spring:message code="DATA_HORA_ENCERRAMENTO" /></label>
-					<form:input type="text" path="dtHrSaida" id="dtHrSaida" class="form-control"/>
-				</div>					
-			</div>
-						
-			<%=JSPUtils.printErrors(request)%>
-	
-			<button type="submit" class="btn btn-default"><spring:message code="SALVAR" text="SALVAR" /></button>
+		<div class="row">
 		
-		</form:form>
+	        <div class="col-md-4">
+	          <h2><spring:message code="INDICE_OEE_POR_HORA" /></h2>
+	          <p><spring:message code="DESCRICAO_INDICE_OEE_POR_HORA" /></p>
+	          <p><a class="btn btn-default" href="hora" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
+	        </div>
+	        
+      	</div>
 		
 		<br/>
 		

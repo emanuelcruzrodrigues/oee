@@ -85,12 +85,21 @@
           <p><a class="btn btn-default" href="../motivoParada/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
         </div>
         
+                
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4">
+          <h2><spring:message code="PROGRAMACAO_PRODUCAO_EQUIPAMENTOS" /></h2>
+          <p><spring:message code="DESCRICAO_TABELA_PROGRAMACAO_PRODUCAO_EQUIPAMENTOS" /></p>
+          <p><a class="btn btn-default" href="../programacaoProducaoEquipamento/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
+        </div>
+        
         <div class="col-md-4">
           <h2><spring:message code="ORDENS_PRODUCAO" /></h2>
           <p><spring:message code="DESCRICAO_TABELA_ORDENS_PRODUCAO" /></p>
           <p><a class="btn btn-default" href="../ordemProducao/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
         </div>
-        
       </div>
       
       
@@ -111,6 +120,8 @@
           <p><a class="btn btn-default" href="../apontamentoTempoParada/" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
         </div>
       </div>
+      
+      
       
       
       <br/>

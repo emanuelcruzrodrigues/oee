@@ -11,6 +11,8 @@ import org.joda.time.LocalTime;
 import org.springframework.stereotype.Repository;
 
 import br.feevale.tc.oee.domain.ApontamentoTempoParada;
+import br.feevale.tc.oee.domain.Equipamento;
+import br.feevale.tc.oee.domain.MotivoParada;
 import br.feevale.tc.oee.framework.dao.CRUDDAOTemplateImpl;
 
 @Repository
@@ -35,7 +37,6 @@ public class ApontamentoTempoParadaDAO extends CRUDDAOTemplateImpl<ApontamentoTe
 		List<Object> params = new ArrayList<>();
 		
 		hql.append(" select atpa from ApontamentoTempoParada atpa ");
-		hql.append(" inner join atpa.ordemProducao orpr ");
 		
 		hql.append(" where atpa.dtHrEntrada >= ? ");
 		params.add(example.getDtInicial().toLocalDateTime(new LocalTime(0,0,0,0)));
@@ -43,13 +44,8 @@ public class ApontamentoTempoParadaDAO extends CRUDDAOTemplateImpl<ApontamentoTe
 		hql.append(" and atpa.dtHrEntrada <= ? ");
 		params.add(example.getDtFinal().toLocalDateTime(new LocalTime(23,59,59,999)));
 		
-		if (example.getOrdemProducao() != null){
-			hql.append(" and orpr.id = ? ");
-			params.add(example.getOrdemProducao().getId());
-		}
-		
 		if (example.getEquipamento() != null){
-			hql.append(" and orpr.equipamento.id = ? ");
+			hql.append(" and atpa.equipamento.id = ? ");
 			params.add(example.getEquipamento().getId());
 		}
 		
@@ -57,6 +53,8 @@ public class ApontamentoTempoParadaDAO extends CRUDDAOTemplateImpl<ApontamentoTe
 			hql.append(" and atpa.motivoParada.id = ? ");
 			params.add(example.getMotivoParada().getId());
 		}
+		
+		hql.append(" order by atpa.dtHrEntrada, atpa.dtHrSaida ");
 		
 		List<ApontamentoTempoParada> result = dao.query(hql.toString(), params.toArray());
 		for (ApontamentoTempoParada apontamento : result) {
@@ -69,6 +67,23 @@ public class ApontamentoTempoParadaDAO extends CRUDDAOTemplateImpl<ApontamentoTe
 	protected void initialize(ApontamentoTempoParada apontamento) {
 		apontamentoTempoDAO.initialize(apontamento);
 		dao.initialize(apontamento.getMotivoParada());
+	}
+
+	public ApontamentoTempoParada getApontamentoAtual(Equipamento equipamento, MotivoParada motivoParada) {
+		StringBuilder hql = new StringBuilder();
+		List<Object> params = new ArrayList<>();
+		
+		hql.append(" select atpa from ApontamentoTempoParada atpa ");
+		
+		hql.append(" where atpa.motivoParada.id = ? ");
+		params.add(motivoParada.getId());
+		
+		hql.append(" and atpa.equipamento.id = ? ");
+		params.add(equipamento.getId());
+		
+		hql.append(" and atpa.dtHrSaida is null ");
+		
+		return dao.uniqueResult(hql.toString(), params.toArray());
 	}
 
 }

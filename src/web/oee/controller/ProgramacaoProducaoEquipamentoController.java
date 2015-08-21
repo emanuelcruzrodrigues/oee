@@ -6,34 +6,28 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.oee.framework.controller.CRUDControllerImpl;
-import br.feevale.tc.oee.domain.ApontamentoTempoParada;
 import br.feevale.tc.oee.domain.Equipamento;
-import br.feevale.tc.oee.domain.MotivoParada;
+import br.feevale.tc.oee.domain.ProgramacaoProducaoEquipamento;
 import br.feevale.tc.oee.framework.service.CRUDServiceTemplate;
-import br.feevale.tc.oee.service.ApontamentoTempoParadaService;
 import br.feevale.tc.oee.service.EquipamentoService;
-import br.feevale.tc.oee.service.MotivoParadaService;
+import br.feevale.tc.oee.service.ProgramacaoProducaoEquipamentoService;
 
 @Controller
-@RequestMapping("/apontamentoTempoParada")
-public class ApontamentoTempoParadaController extends CRUDControllerImpl<ApontamentoTempoParada>{
-
+@RequestMapping("/programacaoProducaoEquipamento")
+public class ProgramacaoProducaoEquipamentoController extends CRUDControllerImpl<ProgramacaoProducaoEquipamento>{
+	
 	@Resource
-	private ApontamentoTempoParadaService apontamentoTempoParadaService;
+	private ProgramacaoProducaoEquipamentoService programacaoProducaoEquipamentoService;
 	
 	@Resource
 	private EquipamentoService equipamentoService;
-	
-	@Resource
-	private MotivoParadaService motivoParadaService;
-	
+
 	@Override
-	protected void updateExampleBean(ApontamentoTempoParada example, HttpServletRequest request) {
+	protected void updateExampleBean(ProgramacaoProducaoEquipamento example, HttpServletRequest request) {
 		if (example.getDtInicial() == null){
 			example.setDtInicial(new LocalDate().minusDays(1));
 		}
@@ -43,29 +37,25 @@ public class ApontamentoTempoParadaController extends CRUDControllerImpl<Apontam
 	}
 
 	@Override
-	protected ApontamentoTempoParada getNewInstance(HttpServletRequest request) {
-		ApontamentoTempoParada apontamento = new ApontamentoTempoParada();
-		apontamento.setDtHrEntrada(new LocalDateTime());
-		return apontamento;
+	protected ProgramacaoProducaoEquipamento getNewInstance(HttpServletRequest request) {
+		return new ProgramacaoProducaoEquipamento();
 	}
 
 	@Override
-	protected CRUDServiceTemplate<ApontamentoTempoParada> getService() {
-		return apontamentoTempoParadaService;
+	protected CRUDServiceTemplate<ProgramacaoProducaoEquipamento> getService() {
+		return programacaoProducaoEquipamentoService;
 	}
 	
 	@Override
 	protected void updateRequestBeforeGoToForm(HttpServletRequest request) {
 		super.updateRequestBeforeGoToForm(request);
 		updateEquipamentosAtivos(request);
-		updateMotivosParadasAtivos(request);
 	}
 
 	@Override
 	protected void updateRequestBeforeGoToList(HttpServletRequest request) {
 		super.updateRequestBeforeGoToList(request);
 		updateEquipamentosAtivos(request);
-		updateMotivosParadasAtivos(request);
 	}
 	
 	private void updateEquipamentosAtivos(HttpServletRequest request) {
@@ -73,9 +63,4 @@ public class ApontamentoTempoParadaController extends CRUDControllerImpl<Apontam
 		request.setAttribute("equipamentos", equipamentos);
 	}
 	
-	private void updateMotivosParadasAtivos(HttpServletRequest request) {
-		List<MotivoParada> motivosParadas = motivoParadaService.getMotivosParadasAtivos();
-		request.setAttribute("motivosParadas", motivosParadas);
-	}
-
 }

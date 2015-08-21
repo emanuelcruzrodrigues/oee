@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.feevale.tc.oee.dao.ApontamentoTempoProducaoDAO;
 import br.feevale.tc.oee.domain.ApontamentoTempoProducao;
+import br.feevale.tc.oee.domain.OrdemProducao;
 import br.feevale.tc.oee.framework.dao.CRUDDAOTemplate;
 import br.feevale.tc.oee.framework.service.CRUDServiceTemplateImpl;
 import br.feevale.tc.oee.service.validation.ApontamentoTempoProducaoSaveValidationStack;
@@ -30,13 +31,26 @@ public class ApontamentoTempoProducaoService extends CRUDServiceTemplateImpl<Apo
 	public ApontamentoTempoProducao save(ApontamentoTempoProducao apontamento) {
 		apontamentoTempoService.updateDefaultValuesBeforeSave(apontamento);
 		
+		if (apontamento.getOrdemProducao() != null){
+			apontamento.setEquipamento(apontamento.getOrdemProducao().getEquipamento());
+		}
+		
 		new ApontamentoTempoProducaoSaveValidationStack(apontamento, handler).validate();
+		
+		if (apontamento.getId() == null){
+			ApontamentoTempoProducao apontamentoAtual = getApontamentoAtual(apontamento.getOrdemProducao());
+			if (apontamentoAtual != null) return apontamentoAtual;
+		}
 		
 		apontamentoTempoProducaoDAO.save(apontamento);
 		
 		apontamentoTempoService.encerrarOutrosApontamentosAbertos(apontamento);
 		
 		return apontamento;
+	}
+
+	private ApontamentoTempoProducao getApontamentoAtual(OrdemProducao ordemProducao) {
+		return apontamentoTempoProducaoDAO.getApontamentoAtual(ordemProducao);
 	}
 
 }

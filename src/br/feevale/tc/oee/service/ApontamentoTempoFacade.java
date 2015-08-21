@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 
 import br.feevale.tc.oee.dao.ApontamentoTempoDAO;
@@ -29,7 +28,7 @@ public class ApontamentoTempoFacade {
 		List<ApontamentoTempo> apontamentos = apontamentoTempoDAO.queryOutrosApontamentosAbertos(apontamento);
 		
 		for (ApontamentoTempo outroApontamento : apontamentos) {
-			outroApontamento.setDtHrSaida(new LocalDateTime());
+			outroApontamento.setDtHrSaida(apontamento.getDtHrEntrada());
 			save(outroApontamento);
 		}
 	}

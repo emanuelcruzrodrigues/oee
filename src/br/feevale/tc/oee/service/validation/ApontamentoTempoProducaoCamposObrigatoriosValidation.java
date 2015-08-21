@@ -12,6 +12,10 @@ public class ApontamentoTempoProducaoCamposObrigatoriosValidation extends Aponta
 	@Override
 	public void validate(OEEValidationResult result) {
 		super.validate(result);
+		
+		if (apontamento.getOrdemProducao() == null){
+			result.addFieldNotNullError("ORDEM_PRODUCAO", "ordemProducao");
+		}
 	}
 
 }

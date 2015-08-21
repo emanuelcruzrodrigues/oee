@@ -5,8 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -76,11 +75,6 @@
 					<form:input type="text" path="dtFinal" id="dtFinal" class="form-control" />
 				</div>
 				
-				
-			</div>
-			
-			<div class="row form-group">
-			
 				<div class="col-md-8">
 					<label for="equipamento"><spring:message code="EQUIPAMENTO"/></label>
 					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
@@ -89,16 +83,7 @@
 						<form:options items="${equipamentos}" itemLabel="nome" itemValue="id" />
 					</form:select>
 				</div>
-				
-				<div class="col-md-4">
-					<label for="motivoParada"><spring:message code="MOTIVO_PARADA"/></label>
-					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
-					<form:select path="motivoParada" class="form-control">
-						<form:option value="" label="${selecione}" />
-						<form:options items="${motivosParadas}" itemLabel="descricao" itemValue="id" />
-					</form:select>
-				</div>
-				
+								
 			</div>
 			
 			<div class="row">
@@ -118,22 +103,20 @@
 						<th><spring:message code="DATA_HORA_ENTRADA" /></th>
 						<th><spring:message code="DATA_HORA_ENCERRAMENTO" /></th>
 						<th><spring:message code="EQUIPAMENTO" /></th>
-						<th><spring:message code="MOTIVO_PARADA" /></th>
 						<th><spring:message code="TEMPO_MINUTOS" /></th>
 						<th><spring:message code="ACOES" /></th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list}" var="apontamento">
+					<c:forEach items="${list}" var="programacao">
 						<tr>
-							<td><joda:format value="${apontamento.dtHrEntrada}" style="SS" /></td>
-							<td><joda:format value="${apontamento.dtHrSaida}" style="SS" /></td>
-							<td>${apontamento.equipamento.nome}</td>
-							<td>${apontamento.motivoParada.descricao}</td>
-							<td  class="numeric"><fmt:formatNumber type="number" value="${apontamento.tempoMinutos}" minFractionDigits="0" maxFractionDigits="0"/></td>
+							<td><joda:format value="${programacao.dtHrInicio}" style="SS" /></td>
+							<td><joda:format value="${programacao.dtHrFim}" style="SS" /></td>
+							<td>${programacao.equipamento.nome}</td>
+							<td  class="numeric"><fmt:formatNumber type="number" value="${programacao.tempoMinutos}" minFractionDigits="0" maxFractionDigits="0"/></td>
 							<td width="200px">
-								<button class="btn btn-default" onclick="actionEditar(${apontamento.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
-								<button class="btn btn-danger" onclick="actionExcluir(${apontamento.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
+								<button class="btn btn-default" onclick="actionEditar(${programacao.id});"><spring:message code="EDITAR" text="EDITAR" /></button>
+								<button class="btn btn-danger" onclick="actionExcluir(${programacao.id});"><spring:message code="EXCLUIR" text="EXCLUIR" /></button>
 							</td>
 						</tr>
 					</c:forEach>

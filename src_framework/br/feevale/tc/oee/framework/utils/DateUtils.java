@@ -3,6 +3,9 @@ package br.feevale.tc.oee.framework.utils;
 import java.util.Calendar;
 
 import org.joda.time.LocalDateTime;
+import org.joda.time.ReadablePartial;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import com.bullcontrol.util.Calculadora;
 
@@ -51,6 +54,11 @@ public class DateUtils {
 		calendar.set(Calendar.MILLISECOND, localDateTime.getMillisOfSecond());
 		
 		return calendar;
+	}
+	
+	public static String printFormatted(ReadablePartial date, String pattern) {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(pattern);
+		return dateTimeFormatter.print(date);
 	}
 
 }
