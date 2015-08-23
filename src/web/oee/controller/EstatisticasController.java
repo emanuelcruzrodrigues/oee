@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.feevale.tc.oee.domain.Equipamento;
+import br.feevale.tc.oee.enums.AnaliticoSintetico;
 import br.feevale.tc.oee.service.EquipamentoService;
 import br.feevale.tc.oee.stats.UnidadeIndiceOEE;
 import br.feevale.tc.oee.stats.horario.IndiceOEEPorHoraFilter;
@@ -45,14 +46,19 @@ public class EstatisticasController {
 			filter.setDt(new LocalDate());
 		}
 		
+		if (filter.getDmLayout() == null){
+			filter.setDmLayout(AnaliticoSintetico.SINTETICO);
+		}
+		
 		List<UnidadeIndiceOEE> indices = indiceOEEPorHoraService.listIndicesOEE(filter);
 		
 		model.addAttribute("indices", indices);
 		model.addAttribute("filter", filter);
+		model.addAttribute("isAnalitico", AnaliticoSintetico.ANALITICO == filter.getDmLayout());
 		updateEquipamentosAtivos(request);
 		
 		
-		return "/stats/hora";
+		return "/stats/indice_por_hora";
 	}
 	
 	private void updateEquipamentosAtivos(HttpServletRequest request) {

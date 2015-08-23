@@ -62,13 +62,15 @@ public class CalculadoraOEE {
 	}
 
 	/**
-	 * Desempenho = (1 / Tempo de ciclo teorico) / Tempo de ciclo real
+	 * Desempenho = (1 / Tempo de ciclo teorico) / Minutos por unidade
 	 */
 	public void calcularDesempenho(UnidadeIndiceOEE unidade) {
 		try {
+			calcularMinutosPorUnidade(unidade);
 			calcularTempoCicloReal(unidade);
 			Double desempenho = Calculadora.dividir(1, unidade.getTempoCicloTeoricoUnidadesPorMinuto(), ARREDONDAMENTO_DECIMAL);
-			desempenho = Calculadora.dividir(desempenho, unidade.getTempoCicloRealUnidadesPorMinuto(), ARREDONDAMENTO_DECIMAL);
+			desempenho = Calculadora.dividir(desempenho, unidade.getMinutosPorUnidade(), ARREDONDAMENTO_DECIMAL);
+			if (desempenho > 1D) desempenho = 1D;
 			unidade.setDesempenho(desempenho);
 		} catch (Exception e) {
 			unidade.setDesempenho(null);
@@ -76,16 +78,29 @@ public class CalculadoraOEE {
 	}
 
 	/**
-	 * Tempo de ciclo real = RT / Volume total produzido
+	 * Minutos por unidade = RT / Volume total produzido
+	 */
+	private void calcularMinutosPorUnidade(UnidadeIndiceOEE unidade) {
+		try {
+			Double result = Calculadora.dividir(unidade.getRuntimeMinutos(), unidade.getVolumeTotalProduzido(), ARREDONDAMENTO_DECIMAL);
+			unidade.setMinutosPorUnidade(result);
+		} catch (Exception e) {
+			unidade.setMinutosPorUnidade(null);
+		}
+	}
+	
+	/**
+	 * Tempo de ciclo real = Volume total produzido / RT
 	 */
 	private void calcularTempoCicloReal(UnidadeIndiceOEE unidade) {
 		try {
-			Double result = Calculadora.dividir(unidade.getRuntimeMinutos(), unidade.getVolumeTotalProduzido(), ARREDONDAMENTO_DECIMAL);
+			Double result = Calculadora.dividir(unidade.getVolumeTotalProduzido(), unidade.getRuntimeMinutos(), ARREDONDAMENTO_DECIMAL);
 			unidade.setTempoCicloRealUnidadesPorMinuto(result);
 		} catch (Exception e) {
 			unidade.setTempoCicloRealUnidadesPorMinuto(null);
 		}
 	}
+
 
 	/**
 	 * Qualidade = Unidades boas produzidas / Volume total produzido

@@ -1,0 +1,49 @@
+body {
+	padding-top: 60px;
+}
+
+table.stat th, table.stat td {
+	font-size: 85%;
+}
+
+td.detalhe {
+	color: gray;
+}
+
+td.numeric {
+	text-align: right;
+}
+
+.box {
+	margin: 0px auto;
+	width: 70%;
+}
+
+.box-chart {
+	width: 80%;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.legend {
+	width: 10em;
+	border: 0px;
+	margin-top: 20px;
+	margin-left: 50px;
+}
+
+.legend .title {
+	display: block;
+	margin-bottom: 0.5em;
+	line-height: 1.2em;
+	padding: 0 0.3em;
+}
+
+.legend .color-sample {
+	display: block;
+	float: left;
+	width: 1em;
+	height: 1em;
+	border: 2px solid;/* Comment out if you don't want to show the fillColor */
+	margin-right: 0.5em;
+}

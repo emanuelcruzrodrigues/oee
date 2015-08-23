@@ -49,6 +49,8 @@ public class ApontamentoTempoProducaoDAO extends CRUDDAOTemplateImpl<Apontamento
 			params.add(example.getEquipamento().getId());
 		}
 		
+		hql.append(" order by atpd.dtHrEntrada, atpd.dtHrSaida ");
+		
 		List<ApontamentoTempoProducao> result = dao.query(hql.toString(), params.toArray());
 		for (ApontamentoTempoProducao apontamentoTempoProducao : result) {
 			initialize(apontamentoTempoProducao);

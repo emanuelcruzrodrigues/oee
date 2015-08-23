@@ -1,7 +1,7 @@
 package br.feevale.tc.oee.stats.horario;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,9 +16,11 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import br.feevale.tc.oee.domain.ApontamentoQuantidade;
 import br.feevale.tc.oee.domain.ApontamentoTempoParada;
 import br.feevale.tc.oee.domain.MotivoParada;
 import br.feevale.tc.oee.domain.ProgramacaoProducaoEquipamento;
+import br.feevale.tc.oee.enums.QualidadeProducao;
 import br.feevale.tc.oee.enums.TipoParada;
 import br.feevale.tc.oee.stats.UnidadeIndiceOEE;
 
@@ -137,5 +139,48 @@ public class IndiceOEEPorHoraServiceTest {
 		assertEquals(fim, unidade.getFim());
 		assertEquals(tempoParada, unidade.getTempoParadaMinutos(dmTipoParada), 0);
 	}
+	
+	@Test
+	public void test_Update_Quantidades_Produzidas() {
+		IndiceOEEPorHoraFilter filter = new IndiceOEEPorHoraFilter();
+		filter.setDt(new LocalDate(2015,8,21));
+		
+		List<ApontamentoQuantidade> quantidades = new ArrayList<>();
+		quantidades.add(createApontamentoQuantidade(new LocalDateTime(2015,8,20,23, 0, 0), 10D, QualidadeProducao.DENTRO_DOS_PADROES));
+		quantidades.add(createApontamentoQuantidade(new LocalDateTime(2015,8,20,23, 0, 0), 20D, QualidadeProducao.REFUGO));
+		quantidades.add(createApontamentoQuantidade(new LocalDateTime(2015,8,21, 0, 0, 0), 30D, QualidadeProducao.DENTRO_DOS_PADROES));
+		quantidades.add(createApontamentoQuantidade(new LocalDateTime(2015,8,21, 0, 0, 0), 25D, QualidadeProducao.REFUGO));
+		quantidades.add(createApontamentoQuantidade(new LocalDateTime(2015,8,21, 1, 0, 0), 35D, QualidadeProducao.DENTRO_DOS_PADROES));
+		quantidades.add(createApontamentoQuantidade(new LocalDateTime(2015,8,21, 2, 0, 0), 15D, QualidadeProducao.REFUGO));
+		when(indiceOEEPorHoraDAO.queryUnidadesProduzidas(filter)).thenReturn(quantidades);
+		
+		Map<String, UnidadeIndiceOEE> unidadesPorHora = new HashMap<>();
+		service.updateUnidadesProduzidas(filter, unidadesPorHora);
+		
+		List<UnidadeIndiceOEE> result = new ArrayList<>(unidadesPorHora.values());
+		Collections.sort(result);
+		
+		assertQuantidadeEquals(result.get(0), new LocalDateTime(2015,8,21, 0, 0, 0), new LocalDateTime(2015,8,21, 0,59, 0), 30D, 55D);
+		assertQuantidadeEquals(result.get(1), new LocalDateTime(2015,8,21, 1, 0, 0), new LocalDateTime(2015,8,21, 1,59, 0), 35D, 35D);
+		assertQuantidadeEquals(result.get(2), new LocalDateTime(2015,8,21, 2, 0, 0), new LocalDateTime(2015,8,21, 2,59, 0),  0D, 15D);
+		
+	}
+
+
+	private ApontamentoQuantidade createApontamentoQuantidade(LocalDateTime dtHr, double quantidade, QualidadeProducao dmQualidade) {
+		ApontamentoQuantidade apontamento = new ApontamentoQuantidade();
+		apontamento.setDtHr(dtHr);
+		apontamento.setQuantidade(quantidade);
+		apontamento.setDmQualidade(dmQualidade);
+		return apontamento ;
+	}
+	
+	private void assertQuantidadeEquals(UnidadeIndiceOEE unidade, LocalDateTime inicio, LocalDateTime fim, Double unidadesBoas, double volumeTotal) {
+		assertEquals(inicio, unidade.getInicio());
+		assertEquals(fim, unidade.getFim());
+		assertEquals(unidadesBoas, unidade.getQuantidadeUnidadesBoasProduzidas(), 0);
+		assertEquals(volumeTotal, unidade.getVolumeTotalProduzido(), 0);
+	}
+
 
 }

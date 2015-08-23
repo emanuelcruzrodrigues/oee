@@ -49,8 +49,18 @@ public class CalculadoraOEETest {
 		
 		calculadora.calcularDesempenho(unidade);
 		
-		assertEquals(0.286300, unidade.getTempoCicloRealUnidadesPorMinuto(), 0.0001D);
+		assertEquals(0.286300, unidade.getMinutosPorUnidade(), 0.0001D);
+		assertEquals(3.492537, unidade.getTempoCicloRealUnidadesPorMinuto(), 0.0001D);
 		assertEquals(0.873134, unidade.getDesempenho(), 0.0001D);
+	}
+	
+	@Test
+	public void test_Calcular_Desempenho_Acima_De_100_por_cento() {
+		UnidadeIndiceOEE unidade = createUnidadeCasoTesteConformeHansen();
+		unidade.setVolumeTotalProduzido(unidade.getVolumeTotalProduzido() * 2);
+		calculadora.calcularDesempenho(unidade);
+		
+		assertEquals(1D, unidade.getDesempenho(), 0D);
 	}
 	
 	@Test
@@ -60,6 +70,19 @@ public class CalculadoraOEETest {
 		
 		calculadora.calcularDesempenho(unidade);
 		
+		assertNull(unidade.getMinutosPorUnidade());
+		assertEquals(0D, unidade.getTempoCicloRealUnidadesPorMinuto(), 0D);
+		assertNull(unidade.getDesempenho());
+	}
+	
+	@Test
+	public void test_Calcular_Desempenho_Sem_Runtime() {
+		UnidadeIndiceOEE unidade = createUnidadeCasoTesteConformeHansen();
+		unidade.setRuntimeMinutos(0);
+		
+		calculadora.calcularDesempenho(unidade);
+		
+		assertEquals(0D, unidade.getMinutosPorUnidade(), 0D);
 		assertNull(unidade.getTempoCicloRealUnidadesPorMinuto());
 		assertNull(unidade.getDesempenho());
 	}
