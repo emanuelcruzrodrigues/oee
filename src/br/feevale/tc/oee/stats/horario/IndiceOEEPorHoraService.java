@@ -18,6 +18,7 @@ import br.feevale.tc.oee.domain.OrdemProducao;
 import br.feevale.tc.oee.domain.ProgramacaoProducaoEquipamento;
 import br.feevale.tc.oee.framework.utils.DateUtils;
 import br.feevale.tc.oee.stats.CalculadoraOEE;
+import br.feevale.tc.oee.stats.DetalheUnidadeIndiceOEE;
 import br.feevale.tc.oee.stats.UnidadeIndiceOEE;
 
 /**
@@ -37,32 +38,56 @@ public class IndiceOEEPorHoraService {
 		
 		Map<String, UnidadeIndiceOEE> unidadesPorHora = new HashMap<>();
 		
+		updateProducao(filter, unidadesPorHora);
 		updateTempoCarga(filter, unidadesPorHora);
 		updateParadas(filter, unidadesPorHora);
 		updateUnidadesProduzidas(filter, unidadesPorHora);
-		updateProducao(filter, unidadesPorHora);
 		
 		List<UnidadeIndiceOEE> result = new ArrayList<>(unidadesPorHora.values());
 		Collections.sort(result);
 		CalculadoraOEE calculadoraOEE = new CalculadoraOEE();
 		for (UnidadeIndiceOEE unidade : result) {
-			for (UnidadeIndiceOEE detalhe : unidade.getDetalhes()) {
-				calculadoraOEE.calcularDesempenho(detalhe);
+			for (DetalheUnidadeIndiceOEE detalhe : unidade.getDetalhes()) {
 				calculadoraOEE.calcularQualidade(detalhe);
 			}
-			unidade.refreshTempoCicloTeoricoConformeDetalhes();
 			calculadoraOEE.calcularOEE(unidade);
 		}
 		return result;
+	}
+	
+	protected void updateProducao(IndiceOEEPorHoraFilter filter,Map<String, UnidadeIndiceOEE> unidadesPorHora) {
+		List<ApontamentoTempoProducao> apontamentos = indiceOEEPorHoraDAO.queryApontamentosProducao(filter);
+		for (ApontamentoTempoProducao apontamento : apontamentos) {
+			List<UnidadeIndiceOEE> unidades = gerarUnidadesIndiceOEE(filter, apontamento.getDtHrEntrada(), apontamento.getDtHrSaida());
+			for (UnidadeIndiceOEE novaUnidade : unidades) {
+				OrdemProducao ordemProducao = apontamento.getOrdemProducao();
+				novaUnidade.setRuntimeMinutos(novaUnidade.getTempoUtilMinutos());
+				UnidadeIndiceOEE unidade = unidadesPorHora.get(novaUnidade.getId());
+				if (unidade != null){
+					unidade.setTempoCicloTeoricoUnidadesPorMinuto(ordemProducao.getUnidadesPorMinuto());
+					unidade.addRuntime(novaUnidade.getTempoUtilMinutos());
+					unidade.addDetalhe(novaUnidade, ordemProducao);
+				}else{
+					unidadesPorHora.put(novaUnidade.getId(), novaUnidade);
+					novaUnidade.setTempoCicloTeoricoUnidadesPorMinuto(ordemProducao.getUnidadesPorMinuto());
+					novaUnidade.addDetalhe(novaUnidade, ordemProducao);
+				}
+			}
+		}
 	}
 
 	protected void updateTempoCarga(IndiceOEEPorHoraFilter filter, Map<String, UnidadeIndiceOEE> unidadesPorHora) {
 		List<ProgramacaoProducaoEquipamento> programacoes = indiceOEEPorHoraDAO.queryProgramacoes(filter);
 		for (ProgramacaoProducaoEquipamento programacao : programacoes) {
 			List<UnidadeIndiceOEE> unidades = gerarUnidadesIndiceOEE(filter, programacao.getDtHrInicio(), programacao.getDtHrFim());
-			for (UnidadeIndiceOEE unidade : unidades) {
-				unidadesPorHora.put(unidade.getId(), unidade);
-				unidade.setTempoCargaMinutos(unidade.getTempoUtilMinutos());
+			for (UnidadeIndiceOEE novaUnidade : unidades) {
+				UnidadeIndiceOEE unidade = unidadesPorHora.get(novaUnidade.getId());
+				if (unidade != null){
+					unidade.setTempoCargaMinutos(novaUnidade.getTempoUtilMinutos());
+				}else{
+					unidadesPorHora.put(novaUnidade.getId(), novaUnidade);
+					novaUnidade.setTempoCargaMinutos(novaUnidade.getTempoUtilMinutos());
+				}
 			}
 		}
 	}
@@ -87,44 +112,21 @@ public class IndiceOEEPorHoraService {
 		List<ApontamentoQuantidade> quantidades = indiceOEEPorHoraDAO.queryUnidadesProduzidas(filter);
 		for (ApontamentoQuantidade quantidade : quantidades) {
 			
-			UnidadeIndiceOEE novaUnidade = gerarUnidadeIndiceOEE(filter, quantidade);
+			UnidadeIndiceOEE novaUnidade = gerarDetalheIndiceOEE(filter, quantidade);
 			if (novaUnidade == null) continue;
 			
 			UnidadeIndiceOEE unidade = unidadesPorHora.get(novaUnidade.getId());
 			if (unidade != null){
 				unidade.addQuantidadeProduzida(quantidade.getQuantidade(), quantidade.getDmQualidade());
-				unidade.addDetalhe(novaUnidade);
+				unidade.addDetalhe(novaUnidade, quantidade.getOrdemProducao());
 			}else{
 				unidadesPorHora.put(novaUnidade.getId(), novaUnidade);
-				novaUnidade.addDetalhe(novaUnidade);
+				novaUnidade.addDetalhe(novaUnidade, quantidade.getOrdemProducao());
 			}
 		}
 	}
 	
-	private void updateProducao(IndiceOEEPorHoraFilter filter,Map<String, UnidadeIndiceOEE> unidadesPorHora) {
-		List<ApontamentoTempoProducao> apontamentos = indiceOEEPorHoraDAO.queryApontamentosProducao(filter);
-		for (ApontamentoTempoProducao apontamento : apontamentos) {
-			List<UnidadeIndiceOEE> unidades = gerarUnidadesIndiceOEE(filter, apontamento.getDtHrEntrada(), apontamento.getDtHrSaida());
-			for (UnidadeIndiceOEE novaUnidade : unidades) {
-				OrdemProducao ordemProducao = apontamento.getOrdemProducao();
-				novaUnidade.setOrdemProducao(ordemProducao);
-				novaUnidade.setRuntimeMinutos(novaUnidade.getTempoUtilMinutos());
-				novaUnidade.setTempoCicloTeoricoUnidadesPorMinuto(ordemProducao.getUnidadesPorMinuto());
-				UnidadeIndiceOEE unidade = unidadesPorHora.get(novaUnidade.getId());
-				if (unidade != null){
-					unidade.addRuntime(novaUnidade.getTempoUtilMinutos());
-					unidade.addDetalhe(novaUnidade);
-				}else{
-					unidadesPorHora.put(novaUnidade.getId(), novaUnidade);
-					novaUnidade.addDetalhe(novaUnidade);
-				}
-			}
-		}
-	}
-
-
-
-	private UnidadeIndiceOEE gerarUnidadeIndiceOEE(IndiceOEEPorHoraFilter filter, ApontamentoQuantidade quantidade) {
+	private UnidadeIndiceOEE gerarDetalheIndiceOEE(IndiceOEEPorHoraFilter filter, ApontamentoQuantidade quantidade) {
 		LocalDateTime dtHr = quantidade.getDtHr();
 		if (!dtHr.toLocalDate().equals(filter.getDt())) return null;
 		
@@ -138,7 +140,6 @@ public class IndiceOEEPorHoraService {
 		unidade.setInicio(dtHr);
 		unidade.setFim(dtHr.plusMinutes(59));
 		updateId(unidade);
-		unidade.setOrdemProducao(quantidade.getOrdemProducao());
 		unidade.addQuantidadeProduzida(quantidade.getQuantidade(), quantidade.getDmQualidade());
 		
 		return unidade;
@@ -182,9 +183,5 @@ public class IndiceOEEPorHoraService {
 		String id = DateUtils.printFormatted(unidade.getInicio(), "HH");
 		unidade.setId(id);
 	}
-	
-
-	
-	
 
 }

@@ -18,7 +18,9 @@ import org.mockito.MockitoAnnotations;
 
 import br.feevale.tc.oee.domain.ApontamentoQuantidade;
 import br.feevale.tc.oee.domain.ApontamentoTempoParada;
+import br.feevale.tc.oee.domain.ApontamentoTempoProducao;
 import br.feevale.tc.oee.domain.MotivoParada;
+import br.feevale.tc.oee.domain.OrdemProducao;
 import br.feevale.tc.oee.domain.ProgramacaoProducaoEquipamento;
 import br.feevale.tc.oee.enums.QualidadeProducao;
 import br.feevale.tc.oee.enums.TipoParada;
@@ -168,10 +170,14 @@ public class IndiceOEEPorHoraServiceTest {
 
 
 	private ApontamentoQuantidade createApontamentoQuantidade(LocalDateTime dtHr, double quantidade, QualidadeProducao dmQualidade) {
+		OrdemProducao ordemProducao = new OrdemProducao();
+		ordemProducao.setId(1);
+		
 		ApontamentoQuantidade apontamento = new ApontamentoQuantidade();
 		apontamento.setDtHr(dtHr);
 		apontamento.setQuantidade(quantidade);
 		apontamento.setDmQualidade(dmQualidade);
+		apontamento.setOrdemProducao(ordemProducao);
 		return apontamento ;
 	}
 	
@@ -182,5 +188,56 @@ public class IndiceOEEPorHoraServiceTest {
 		assertEquals(volumeTotal, unidade.getVolumeTotalProduzido(), 0);
 	}
 
+	@Test
+	public void test_Update_Producao() {
+		IndiceOEEPorHoraFilter filter = new IndiceOEEPorHoraFilter();
+		filter.setDt(new LocalDate(2015,8,21));
+		
+		OrdemProducao ordemProducao1 = createOrdemProducao(1, 4D);
+		OrdemProducao ordemProducao2 = createOrdemProducao(2, 4D);
+		
+		List<ApontamentoTempoProducao> apontamentos = new ArrayList<>();
+		apontamentos.add(createApontamentoProducao(new LocalDateTime(2015,8,20,23, 0, 0), new LocalDateTime(2015,8,21, 2, 0, 0), ordemProducao1));
+		apontamentos.add(createApontamentoProducao(new LocalDateTime(2015,8,21, 7,30, 0), new LocalDateTime(2015,8,21, 10, 0, 0), ordemProducao1));
+		apontamentos.add(createApontamentoProducao(new LocalDateTime(2015,8,21,10,30, 0), new LocalDateTime(2015,8,21, 11,30, 0), ordemProducao1));
+		apontamentos.add(createApontamentoProducao(new LocalDateTime(2015,8,21,11,30, 0), new LocalDateTime(2015,8,21, 11,45, 0), ordemProducao2));
+		when(indiceOEEPorHoraDAO.queryApontamentosProducao(filter)).thenReturn(apontamentos);
+		
+		Map<String, UnidadeIndiceOEE> unidadesPorHora = new HashMap<>();
+		service.updateProducao(filter, unidadesPorHora);
+		
+		List<UnidadeIndiceOEE> result = new ArrayList<>(unidadesPorHora.values());
+		Collections.sort(result);
+		
+		assertProducaoEquals(result.get(0), new LocalDateTime(2015,8,21, 0, 0, 0), new LocalDateTime(2015,8,21, 0,59, 0), 1);
+		assertProducaoEquals(result.get(1), new LocalDateTime(2015,8,21, 1, 0, 0), new LocalDateTime(2015,8,21, 1,59, 0), 1);
+		assertProducaoEquals(result.get(2), new LocalDateTime(2015,8,21, 7, 0, 0), new LocalDateTime(2015,8,21, 7,59, 0), 1);
+		assertProducaoEquals(result.get(3), new LocalDateTime(2015,8,21, 8, 0, 0), new LocalDateTime(2015,8,21, 8,59, 0), 1);
+		assertProducaoEquals(result.get(4), new LocalDateTime(2015,8,21, 9, 0, 0), new LocalDateTime(2015,8,21, 9,59, 0), 1);
+		assertProducaoEquals(result.get(5), new LocalDateTime(2015,8,21,10, 0, 0), new LocalDateTime(2015,8,21,10,59, 0), 1);
+		assertProducaoEquals(result.get(6), new LocalDateTime(2015,8,21,11, 0, 0), new LocalDateTime(2015,8,21,11,59, 0), 2);
+		
+	}
+	
+	private void assertProducaoEquals(UnidadeIndiceOEE unidade, LocalDateTime inicio, LocalDateTime fim, Integer qtdeDetalhes) {
+		assertEquals(inicio, unidade.getInicio());
+		assertEquals(fim, unidade.getFim());
+		assertEquals(qtdeDetalhes, unidade.getDetalhes().size(), 0);
+	}
+
+	private OrdemProducao createOrdemProducao(Integer id, Double unidadesPorMinuto) {
+		OrdemProducao ordemProducao = new OrdemProducao();
+		ordemProducao.setId(id);
+		ordemProducao.setUnidadesPorMinuto(unidadesPorMinuto);
+		return ordemProducao;
+	}
+
+	private ApontamentoTempoProducao createApontamentoProducao(LocalDateTime dtHrEntrada, LocalDateTime dtHrSaida, OrdemProducao ordemProducao) {
+		ApontamentoTempoProducao apontamento = new ApontamentoTempoProducao();
+		apontamento.setDtHrEntrada(dtHrEntrada);
+		apontamento.setDtHrSaida(dtHrSaida);
+		apontamento.setOrdemProducao(ordemProducao);
+		return apontamento;
+	}
 
 }

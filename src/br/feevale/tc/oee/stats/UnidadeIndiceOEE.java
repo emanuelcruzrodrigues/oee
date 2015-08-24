@@ -2,9 +2,7 @@ package br.feevale.tc.oee.stats;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.joda.time.LocalDateTime;
 
@@ -26,7 +24,6 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	
 	private String id;
 	private Equipamento equipamento;
-	private OrdemProducao ordemProducao;
 	private LocalDateTime inicio;
 	private LocalDateTime fim;
 	private Integer tempoUtilMinutos;
@@ -39,7 +36,6 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	private Integer tempoCargaMinutos;
 	private Double tempoCicloTeoricoUnidadesPorMinuto;
 	private Double tempoCicloRealUnidadesPorMinuto;
-	private Double minutosPorUnidade;
 	private Integer runtimeMinutos;
 	private Integer quantidadeUnidadesBoasProduzidas;
 	private Integer volumeTotalProduzido;
@@ -48,12 +44,11 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	private Double qualidade;
 	private Double oee;
 	
-	private UnidadeIndiceOEE grupoUnidade;
-	private Map<Integer, UnidadeIndiceOEE> unidadePorIdOrdemProducao;
+	private List<DetalheUnidadeIndiceOEE> detalhes;
 	
 	public UnidadeIndiceOEE() {
 		super();
-		unidadePorIdOrdemProducao = new LinkedHashMap<>();
+		detalhes = new ArrayList<>();
 	}
 		
 	public String getId() {
@@ -68,13 +63,6 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	}
 	public void setEquipamento(Equipamento equipamento) {
 		this.equipamento = equipamento;
-	}
-
-	public OrdemProducao getOrdemProducao() {
-		return ordemProducao;
-	}
-	public void setOrdemProducao(OrdemProducao ordemProducao) {
-		this.ordemProducao = ordemProducao;
 	}
 
 	public LocalDateTime getInicio() {
@@ -153,23 +141,6 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	public void setTempoCicloTeoricoUnidadesPorMinuto(Double tempoCicloTeoricoUnidadesPorMinuto) {
 		this.tempoCicloTeoricoUnidadesPorMinuto = tempoCicloTeoricoUnidadesPorMinuto;
 	}
-	public void refreshTempoCicloTeoricoConformeDetalhes() {
-		Double tempoUtilTotal = 0D;
-		Double ponderacaoTotal = 0D;
-		for (UnidadeIndiceOEE unidade : unidadePorIdOrdemProducao.values()) {
-			tempoUtilTotal = Calculadora.somar(tempoUtilTotal, unidade.getTempoUtilMinutos(), 0);
-			
-			OrdemProducao ordemProducao = unidade.getOrdemProducao();
-			Double ponderacao = Calculadora.multiplicar(ordemProducao.getUnidadesPorMinuto(), unidade.getTempoUtilMinutos(), CalculadoraOEE.ARREDONDAMENTO_DECIMAL);
-			ponderacaoTotal = Calculadora.somar(ponderacaoTotal, ponderacao, CalculadoraOEE.ARREDONDAMENTO_DECIMAL);
-		}
-		if (tempoUtilTotal > 0D){
-			Double tempoCicloTeoricoPonderado = Calculadora.dividir(ponderacaoTotal, tempoUtilTotal, CalculadoraOEE.ARREDONDAMENTO_DECIMAL);
-			setTempoCicloTeoricoUnidadesPorMinuto(tempoCicloTeoricoPonderado);
-		}else{
-			setTempoCicloTeoricoUnidadesPorMinuto(null);
-		}
-	}
 	
 	public Double getTempoCicloRealUnidadesPorMinuto() {
 		return tempoCicloRealUnidadesPorMinuto;
@@ -177,13 +148,6 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	public void setTempoCicloRealUnidadesPorMinuto(
 			Double tempoCicloRealUnidadesPorMinuto) {
 		this.tempoCicloRealUnidadesPorMinuto = tempoCicloRealUnidadesPorMinuto;
-	}
-
-	public Double getMinutosPorUnidade() {
-		return minutosPorUnidade;
-	}
-	public void setMinutosPorUnidade(Double minutosPorUnidade) {
-		this.minutosPorUnidade = minutosPorUnidade;
 	}
 
 	public Integer getRuntimeMinutos() {
@@ -214,6 +178,9 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 		return disponibilidade;
 	}
 	public void setDisponibilidade(Double disponibilidade) {
+		if (disponibilidade != null && disponibilidade > 1D){
+			disponibilidade = 1D;
+		}
 		this.disponibilidade = disponibilidade;
 	}
 
@@ -221,6 +188,9 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 		return desempenho;
 	}
 	public void setDesempenho(Double desempenho) {
+		if (desempenho != null && desempenho > 1D){
+			desempenho = 1D;
+		}
 		this.desempenho = desempenho;
 	}
 
@@ -228,6 +198,9 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 		return qualidade;
 	}
 	public void setQualidade(Double qualidade) {
+		if (qualidade != null && qualidade > 1D){
+			qualidade = 1D;
+		}
 		this.qualidade = qualidade;
 	}
 
@@ -238,22 +211,25 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 		this.oee = oee;
 	}
 
-	public UnidadeIndiceOEE getGrupoUnidade() {
-		return grupoUnidade;
+	public List<DetalheUnidadeIndiceOEE> getDetalhes() {
+		return detalhes;
 	}
-	public void setGrupoUnidade(UnidadeIndiceOEE grupoUnidade) {
-		this.grupoUnidade = grupoUnidade;
+	public void addDetalhe(UnidadeIndiceOEE unidade, OrdemProducao ordemProducao) {
+		DetalheUnidadeIndiceOEE detalhe = new DetalheUnidadeIndiceOEE(ordemProducao);
+		detalhe.setQuantidadeUnidadesBoasProduzidas(unidade.getQuantidadeUnidadesBoasProduzidas());
+		detalhe.setRuntimeMinutos(unidade.getRuntimeMinutos());
+		detalhe.setTempoCicloTeoricoUnidadesPorMinuto(ordemProducao.getUnidadesPorMinuto());
+		detalhe.setTempoUtilMinutos(unidade.getTempoUtilMinutos());
+		detalhe.setVolumeTotalProduzido(unidade.getVolumeTotalProduzido());
+		addDetalhe(detalhe);
 	}
-
-	public List<UnidadeIndiceOEE> getDetalhes() {
-		return new ArrayList<UnidadeIndiceOEE>(unidadePorIdOrdemProducao.values());
-	}
-	public void addDetalhe(UnidadeIndiceOEE novoDetalhe) {
-		novoDetalhe.setGrupoUnidade(this);
-		UnidadeIndiceOEE detalhe = unidadePorIdOrdemProducao.get(novoDetalhe.getOrdemProducao().getId());
-		if (detalhe == null){
-			unidadePorIdOrdemProducao.put(novoDetalhe.getOrdemProducao().getId(), novoDetalhe);
+	public void addDetalhe(DetalheUnidadeIndiceOEE novoDetalhe) {
+		novoDetalhe.setUnidadeIndiceOEE(this);
+		int index = getDetalhes().indexOf(novoDetalhe);
+		if (index < 0){
+			getDetalhes().add(novoDetalhe);
 		}else{
+			DetalheUnidadeIndiceOEE detalhe = getDetalhes().get(index);
 			detalhe.addValues(novoDetalhe);
 		}
 	}
@@ -316,19 +292,19 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 			setQuantidadeUnidadesBoasProduzidas(Calculadora.somar(getQuantidadeUnidadesBoasProduzidas(), 0, 0).intValue());
 		}
 	}
-	
-	public void addValues(UnidadeIndiceOEE other) {
-		setTempoUtilMinutos(Calculadora.somar(getTempoUtilMinutos(), other.getTempoUtilMinutos(), 0).intValue());
-		setDtTecnicaMinutos(Calculadora.somar(getDtTecnicaMinutos(), other.getDtTecnicaMinutos(), 0).intValue());
-		setDtOperacionalMinutos(Calculadora.somar(getDtOperacionalMinutos(), other.getDtOperacionalMinutos(), 0).intValue());
-		setDtQualidadeMinutos(Calculadora.somar(getDtQualidadeMinutos(), other.getDtQualidadeMinutos(), 0).intValue());
-		setStOperacionalMinutos(Calculadora.somar(getStOperacionalMinutos(), other.getStOperacionalMinutos(), 0).intValue());
-		setStInduzidoMinutos(Calculadora.somar(getStInduzidoMinutos(), other.getStInduzidoMinutos(), 0).intValue());
-		setTempoCargaMinutos(Calculadora.somar(getTempoCargaMinutos(), other.getTempoCargaMinutos(), 0).intValue());
-		setRuntimeMinutos(Calculadora.somar(getRuntimeMinutos(), other.getRuntimeMinutos(), 0).intValue());
-		setQuantidadeUnidadesBoasProduzidas(Calculadora.somar(getQuantidadeUnidadesBoasProduzidas(), other.getQuantidadeUnidadesBoasProduzidas(), 0).intValue());
-		setVolumeTotalProduzido(Calculadora.somar(getVolumeTotalProduzido(), other.getVolumeTotalProduzido(), 0).intValue());
-		setTempoCicloTeoricoUnidadesPorMinuto(other.getTempoCicloTeoricoUnidadesPorMinuto());
+
+	public void refreshTempoCicloTeoricoConformeDetalhes() {
+		Double tempoCicloTeorico = getTempoCicloTeoricoConformeDetalhes();
+		setTempoCicloTeoricoUnidadesPorMinuto(tempoCicloTeorico);
+	}
+
+	private Double getTempoCicloTeoricoConformeDetalhes() {
+		if (getDetalhes().size() == 0) return null;
+		Double tempoCicloTeorico = getDetalhes().get(0).getTempoCicloTeoricoUnidadesPorMinuto();
+		for (DetalheUnidadeIndiceOEE detalhe : detalhes) {
+			if (!detalhe.getTempoCicloTeoricoUnidadesPorMinuto().equals(tempoCicloTeorico)) return null;
+		}
+		return tempoCicloTeorico;
 	}
 
 }

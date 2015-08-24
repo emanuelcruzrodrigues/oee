@@ -101,7 +101,7 @@ public class OEEJSPUtils {
 		result.append("\n     };    ");
 		result.append("\n     window.onload = function(){   ");
 		result.append("\n         var ctx = document.getElementById(\"grafico\").getContext(\"2d\");    ");
-		result.append("\n         var LineChart = new Chart(ctx).Bar(data, options);   ");
+		result.append("\n         var LineChart = new Chart(ctx).Line(data, options);   ");
 		result.append("\n         legend(document.getElementById('placeholder'), data);   ");
 		result.append("\n     } ");
 		result.append("\n     </script> ");

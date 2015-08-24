@@ -61,56 +61,93 @@ public class CalculadoraOEE {
 		unidade.setDtTotalMinutos(result.intValue());
 	}
 
+	public void calcularDesempenho(UnidadeIndiceOEE unidade) {
+		try {
+			unidade.setTempoCicloTeoricoUnidadesPorMinuto(null);
+			Double desempenhoPonderadoTotal = 0D;
+			Double somatorioRuntime = 0D;
+			for (DetalheUnidadeIndiceOEE detalhe : unidade.getDetalhes()) {
+				calcularDesempenho(detalhe);
+				Double desempenhoPonderado = Calculadora.multiplicar(detalhe.getDesempenho(), detalhe.getRuntimeMinutos(), ARREDONDAMENTO_DECIMAL);
+				desempenhoPonderadoTotal = Calculadora.somar(desempenhoPonderadoTotal, desempenhoPonderado, ARREDONDAMENTO_DECIMAL);
+				somatorioRuntime = Calculadora.somar(somatorioRuntime, detalhe.getRuntimeMinutos(), ARREDONDAMENTO_DECIMAL);
+			}
+			Double desempenho = Calculadora.dividir(desempenhoPonderadoTotal, somatorioRuntime, ARREDONDAMENTO_DECIMAL);
+			unidade.setDesempenho(desempenho);
+			calcularTempoCicloReal(unidade);
+			unidade.refreshTempoCicloTeoricoConformeDetalhes();
+		} catch (Exception e) {
+			unidade.setDesempenho(null);
+			unidade.setTempoCicloRealUnidadesPorMinuto(null);
+		}	
+	}
+
 	/**
 	 * Desempenho = (1 / Tempo de ciclo teorico) / Minutos por unidade
 	 */
-	public void calcularDesempenho(UnidadeIndiceOEE unidade) {
+	private void calcularDesempenho(DetalheUnidadeIndiceOEE detalhe) {
 		try {
-			calcularMinutosPorUnidade(unidade);
-			calcularTempoCicloReal(unidade);
-			Double desempenho = Calculadora.dividir(1, unidade.getTempoCicloTeoricoUnidadesPorMinuto(), ARREDONDAMENTO_DECIMAL);
-			desempenho = Calculadora.dividir(desempenho, unidade.getMinutosPorUnidade(), ARREDONDAMENTO_DECIMAL);
-			if (desempenho > 1D) desempenho = 1D;
-			unidade.setDesempenho(desempenho);
+			calcularTempoCicloReal(detalhe);
+			calcularMinutosPorUnidade(detalhe);
+			Double desempenho = Calculadora.dividir(1, detalhe.getTempoCicloTeoricoUnidadesPorMinuto(), ARREDONDAMENTO_DECIMAL);
+			desempenho = Calculadora.dividir(desempenho, detalhe.getMinutosPorUnidade(), ARREDONDAMENTO_DECIMAL);
+			detalhe.setDesempenho(desempenho);
 		} catch (Exception e) {
-			unidade.setDesempenho(null);
+			detalhe.setDesempenho(null);
 		}
 	}
 
 	/**
 	 * Minutos por unidade = RT / Volume total produzido
 	 */
-	private void calcularMinutosPorUnidade(UnidadeIndiceOEE unidade) {
+	private void calcularMinutosPorUnidade(DetalheUnidadeIndiceOEE detalhe) {
 		try {
-			Double result = Calculadora.dividir(unidade.getRuntimeMinutos(), unidade.getVolumeTotalProduzido(), ARREDONDAMENTO_DECIMAL);
-			unidade.setMinutosPorUnidade(result);
+			Double result = Calculadora.dividir(detalhe.getRuntimeMinutos(), detalhe.getVolumeTotalProduzido(), ARREDONDAMENTO_DECIMAL);
+			detalhe.setMinutosPorUnidade(result);
 		} catch (Exception e) {
-			unidade.setMinutosPorUnidade(null);
+			detalhe.setMinutosPorUnidade(null);
 		}
+	}
+	
+	private void calcularTempoCicloReal(UnidadeIndiceOEE unidade) {
+		Double result = calcularTempoCicloReal(unidade.getVolumeTotalProduzido(), unidade.getRuntimeMinutos());
+		unidade.setTempoCicloRealUnidadesPorMinuto(result);
+	}
+	
+	private void calcularTempoCicloReal(DetalheUnidadeIndiceOEE detalhe) {
+		Double result = calcularTempoCicloReal(detalhe.getVolumeTotalProduzido(), detalhe.getRuntimeMinutos());
+		detalhe.setTempoCicloRealUnidadesPorMinuto(result);
 	}
 	
 	/**
 	 * Tempo de ciclo real = Volume total produzido / RT
 	 */
-	private void calcularTempoCicloReal(UnidadeIndiceOEE unidade) {
+	private Double calcularTempoCicloReal(Integer volumeTotalProduzido, Integer runtimeMinutos) {
 		try {
-			Double result = Calculadora.dividir(unidade.getVolumeTotalProduzido(), unidade.getRuntimeMinutos(), ARREDONDAMENTO_DECIMAL);
-			unidade.setTempoCicloRealUnidadesPorMinuto(result);
+			return Calculadora.dividir(volumeTotalProduzido, runtimeMinutos, ARREDONDAMENTO_DECIMAL);
 		} catch (Exception e) {
-			unidade.setTempoCicloRealUnidadesPorMinuto(null);
+			return null;
 		}
 	}
 
-
+	public void calcularQualidade(UnidadeIndiceOEE unidade) {
+		Double qualidade = calcularQualidade(unidade.getQuantidadeUnidadesBoasProduzidas(), unidade.getVolumeTotalProduzido());
+		unidade.setQualidade(qualidade);
+	}
+	
+	public void calcularQualidade(DetalheUnidadeIndiceOEE detalhe) {
+		Double qualidade = calcularQualidade(detalhe.getQuantidadeUnidadesBoasProduzidas(), detalhe.getVolumeTotalProduzido());
+		detalhe.setQualidade(qualidade);
+	}
+	
 	/**
 	 * Qualidade = Unidades boas produzidas / Volume total produzido
 	 */
-	public void calcularQualidade(UnidadeIndiceOEE unidade) {
+	public Double calcularQualidade(Integer unidadesBoas, Integer volumeTotal) {
 		try {
-			Double qualidade = Calculadora.dividir(unidade.getQuantidadeUnidadesBoasProduzidas(), unidade.getVolumeTotalProduzido(), ARREDONDAMENTO_DECIMAL);
-			unidade.setQualidade(qualidade);
+			return Calculadora.dividir(unidadesBoas, volumeTotal, ARREDONDAMENTO_DECIMAL);
 		} catch (Exception e) {
-			unidade.setQualidade(null);
+			return null;
 		}
 	}
 
