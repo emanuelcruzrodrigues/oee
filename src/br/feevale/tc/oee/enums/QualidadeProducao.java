@@ -29,8 +29,8 @@ public enum QualidadeProducao implements OEEEnum{
 	}
 	
 	public static QualidadeProducao getFromValue(String value) {
-		for (QualidadeProducao qualidadeProducao : values()) {
-			if (qualidadeProducao.getValue().equals(value)) return qualidadeProducao;
+		for (QualidadeProducao enumValue : values()) {
+			if (enumValue.getValue().equals(value)) return enumValue;
 		}
 		return null;
 	}

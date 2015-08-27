@@ -16,8 +16,8 @@ drop table if exists apontamentos_tempos;
 drop table if exists ordens_producoes;
 drop sequence if exists sq_ordem_producao;
 
-drop table programacoes_equipamentos;
-drop sequence sq_programacao_equipamento;
+drop table if exists programacoes_equipamentos;
+drop sequence if exists sq_programacao_equipamento;
 
 drop table if exists equipamentos;
 drop sequence if exists sq_equipamento;

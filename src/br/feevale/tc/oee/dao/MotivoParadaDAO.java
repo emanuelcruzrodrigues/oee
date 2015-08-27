@@ -48,4 +48,14 @@ public class MotivoParadaDAO extends CRUDDAOTemplateImpl<MotivoParada> implement
 		return dao.query(hql.toString(), AtivoInativo.ATIVO);
 	}
 
+	public MotivoParada getByCodigo(Integer codigo) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("select mopa from MotivoParada mopa where mopa.codigo = ? ");
+		MotivoParada result = dao.uniqueResult(hql.toString(), codigo);
+		if (result != null){
+			initialize(result);
+		}
+		return result;
+	}
+
 }

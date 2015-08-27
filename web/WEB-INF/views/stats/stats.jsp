@@ -67,6 +67,11 @@
 	          <p><spring:message code="DESCRICAO_INDICE_OEE_POR_HORA" /></p>
 	          <p><a class="btn btn-default" href="hora" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
 	        </div>
+	        <div class="col-md-4">
+	          <h2><spring:message code="INDICE_OEE_POR_DIA" /></h2>
+	          <p><spring:message code="DESCRICAO_INDICE_OEE_POR_DIA" /></p>
+	          <p><a class="btn btn-default" href="dia" role="button"><spring:message code="VER_DETALHES" /> &raquo;</a></p>
+	        </div>
 	        
       	</div>
 		

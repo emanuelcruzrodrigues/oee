@@ -1,6 +1,7 @@
 package br.feevale.tc.oee.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
 import br.feevale.tc.oee.domain.ApontamentoTempo;
+import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.framework.dao.DAO;
 
 @Repository
@@ -35,6 +37,20 @@ public class ApontamentoTempoDAO{
 		
 		return dao.query(hql.toString(), params.toArray());
 		
+	}
+
+	public List<ApontamentoTempo> queryApontamentosAbertos(Equipamento equipamento) {
+		if (equipamento == null || equipamento.getId() == null) return Collections.emptyList();
+		StringBuilder hql = new StringBuilder();
+		List<Object> params = new ArrayList<>();
+		hql.append("select apte from ApontamentoTempo apte ");
+		
+		hql.append(" where apte.dtHrSaida is null ");
+		
+		hql.append(" and apte.equipamento.id = ? ");
+		params.add(equipamento.getId());
+		
+		return dao.query(hql.toString(), params.toArray());
 	}
 
 }

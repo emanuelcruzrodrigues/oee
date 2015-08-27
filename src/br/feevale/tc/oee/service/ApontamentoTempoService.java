@@ -3,9 +3,11 @@ package br.feevale.tc.oee.service;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.feevale.tc.oee.dao.ApontamentoTempoDAO;
 import br.feevale.tc.oee.domain.ApontamentoTempo;
+import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.framework.utils.DateUtils;
 
 @Service
@@ -34,6 +36,11 @@ public class ApontamentoTempoService {
 		if (apontamento.getDtHrSaida() == null){
 			apontamentoTempoFacade.encerrarOutrosApontamentosAbertos(apontamento);
 		}
+	}
+
+	@Transactional
+	public void encerrarApontamentosAbertos(Equipamento equipamento) {
+		apontamentoTempoFacade.encerrarApontamentosAbertos(equipamento);
 	}
 
 }

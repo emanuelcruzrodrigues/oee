@@ -48,4 +48,14 @@ public class EquipamentoDAO extends CRUDDAOTemplateImpl<Equipamento> implements 
 		return dao.query(hql.toString(), AtivoInativo.ATIVO);
 	}
 
+	public Equipamento getByCodigo(Integer codigo) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("select equi from Equipamento equi where equi.codigo = ? ");
+		Equipamento equipamento = dao.uniqueResult(hql.toString(), codigo);
+		if (equipamento != null){
+			initialize(equipamento);
+		}
+		return equipamento;
+	}
+
 }

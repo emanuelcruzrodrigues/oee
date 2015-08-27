@@ -28,5 +28,9 @@ public class OEEServices implements ApplicationContextAware{
 	public static <T> Map<String, T>  getBeansOfType(Class<T> type){
 		return applicationContext.getBeansOfType(type);
 	}
+	
+	public static void autowireBean(Object bean){
+		applicationContext.getAutowireCapableBeanFactory().autowireBean(bean);
+	}
 
 }

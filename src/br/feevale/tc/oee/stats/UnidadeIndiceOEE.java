@@ -285,9 +285,9 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	}
 
 	public void addQuantidadeProduzida(Double quantidade, QualidadeProducao dmQualidade) {
-		setVolumeTotalProduzido(Calculadora.somar(getVolumeTotalProduzido(), quantidade, 0).intValue());
+		setVolumeTotalProduzido(Calculadora.somar(getVolumeTotalProduzido(), quantidade, CalculadoraOEE.ARREDONDAMENTO_DECIMAL).intValue());
 		if (QualidadeProducao.DENTRO_DOS_PADROES == dmQualidade){
-			setQuantidadeUnidadesBoasProduzidas(Calculadora.somar(getQuantidadeUnidadesBoasProduzidas(), quantidade, 0).intValue());
+			setQuantidadeUnidadesBoasProduzidas(Calculadora.somar(getQuantidadeUnidadesBoasProduzidas(), quantidade, CalculadoraOEE.ARREDONDAMENTO_DECIMAL).intValue());
 		}else{
 			setQuantidadeUnidadesBoasProduzidas(Calculadora.somar(getQuantidadeUnidadesBoasProduzidas(), 0, 0).intValue());
 		}

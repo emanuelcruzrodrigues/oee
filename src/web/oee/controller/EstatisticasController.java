@@ -16,8 +16,10 @@ import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.enums.AnaliticoSintetico;
 import br.feevale.tc.oee.service.EquipamentoService;
 import br.feevale.tc.oee.stats.UnidadeIndiceOEE;
-import br.feevale.tc.oee.stats.horario.IndiceOEEPorHoraFilter;
-import br.feevale.tc.oee.stats.horario.IndiceOEEPorHoraService;
+import br.feevale.tc.oee.stats.periodo.filter.IndiceOEEPorDiaFilter;
+import br.feevale.tc.oee.stats.periodo.filter.IndiceOEEPorHoraFilter;
+import br.feevale.tc.oee.stats.periodo.service.IndiceOEEPorDiaService;
+import br.feevale.tc.oee.stats.periodo.service.IndiceOEEPorHoraService;
 
 /**
  * @author Emanuel
@@ -32,6 +34,9 @@ public class EstatisticasController {
 	private IndiceOEEPorHoraService indiceOEEPorHoraService;
 	
 	@Resource
+	private IndiceOEEPorDiaService indiceOEEPorDiaService;
+	
+	@Resource
 	private EquipamentoService equipamentoService;
 	
 	@RequestMapping("/")
@@ -40,7 +45,7 @@ public class EstatisticasController {
 	}
 	
 	@RequestMapping("/hora")
-	public String actionConfigurarEstatisticasPorHora(@Valid IndiceOEEPorHoraFilter filter, BindingResult bindingResult, Model model, HttpServletRequest request){
+	public String actionGetEstatisticasPorHora(@Valid IndiceOEEPorHoraFilter filter, BindingResult bindingResult, Model model, HttpServletRequest request){
 		
 		if (filter.getDt() == null){
 			filter.setDt(new LocalDate());
@@ -59,6 +64,32 @@ public class EstatisticasController {
 		
 		
 		return "/stats/indice_por_hora";
+	}
+	
+	@RequestMapping("/dia")
+	public String actionGetEstatisticasPorHora(@Valid IndiceOEEPorDiaFilter filter, BindingResult bindingResult, Model model, HttpServletRequest request){
+		
+		if (filter.getDtInicial() == null){
+			filter.setDtInicial(new LocalDate().minusDays(10));
+		}
+		
+		if (filter.getDtFinal() == null){
+			filter.setDtFinal(new LocalDate());
+		}
+		
+		if (filter.getDmLayout() == null){
+			filter.setDmLayout(AnaliticoSintetico.SINTETICO);
+		}
+		
+		List<UnidadeIndiceOEE> indices = indiceOEEPorDiaService.listIndicesOEE(filter);
+		
+		model.addAttribute("indices", indices);
+		model.addAttribute("filter", filter);
+		model.addAttribute("isAnalitico", AnaliticoSintetico.ANALITICO == filter.getDmLayout());
+		updateEquipamentosAtivos(request);
+		
+		
+		return "/stats/indice_por_dia";
 	}
 	
 	private void updateEquipamentosAtivos(HttpServletRequest request) {

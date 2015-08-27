@@ -6,10 +6,12 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 
 import br.feevale.tc.oee.dao.ApontamentoTempoDAO;
 import br.feevale.tc.oee.domain.ApontamentoTempo;
+import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.framework.dao.CRUDDAOTemplateImpl;
 import br.feevale.tc.oee.framework.service.CRUDServiceTemplateImpl;
 import br.feevale.tc.oee.framework.service.OEEServices;
@@ -30,6 +32,15 @@ public class ApontamentoTempoFacade {
 		for (ApontamentoTempo outroApontamento : apontamentos) {
 			outroApontamento.setDtHrSaida(apontamento.getDtHrEntrada());
 			save(outroApontamento);
+		}
+	}
+	
+	public void encerrarApontamentosAbertos(Equipamento equipamento) {
+		List<ApontamentoTempo> apontamentos = apontamentoTempoDAO.queryApontamentosAbertos(equipamento);
+		
+		for (ApontamentoTempo apontamento : apontamentos) {
+			apontamento.setDtHrSaida(new LocalDateTime());
+			save(apontamento);
 		}
 	}
 
@@ -55,6 +66,5 @@ public class ApontamentoTempoFacade {
 		}
 		return servicesMap;
 	}
-	
 
 }

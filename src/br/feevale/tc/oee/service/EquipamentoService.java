@@ -38,4 +38,8 @@ public class EquipamentoService extends CRUDServiceTemplateImpl<Equipamento>{
 		return equipamentoDAO.queryEquipamentosAtivos();
 	}
 
+	public Equipamento getByCodigo(Integer codigo) {
+		return equipamentoDAO.getByCodigo(codigo);
+	}
+
 }

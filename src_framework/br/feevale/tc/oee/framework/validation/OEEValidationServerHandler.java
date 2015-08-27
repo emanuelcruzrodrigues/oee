@@ -1,12 +1,10 @@
 package br.feevale.tc.oee.framework.validation;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 import br.feevale.tc.oee.framework.exceptions.OEEException;
+import br.feevale.tc.oee.framework.service.OEEServices;
 
 /**
  * @author Emanuel
@@ -14,15 +12,13 @@ import br.feevale.tc.oee.framework.exceptions.OEEException;
  * 06/08/2015
  */
 @Service
-public class OEEValidationServerHandler implements OEEValidationHandler, ApplicationContextAware{
+public class OEEValidationServerHandler implements OEEValidationHandler{
 	
 	protected Logger logger;
 	
-	private ApplicationContext applicationContext;
-	
 	@Override
 	public void injectDependencies(OEEValidation validation) {
-		applicationContext.getAutowireCapableBeanFactory().autowireBean(validation);
+		OEEServices.autowireBean(validation);
 	}
 
 	@Override
@@ -33,10 +29,6 @@ public class OEEValidationServerHandler implements OEEValidationHandler, Applica
 		}
 	}
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
 
 
 }

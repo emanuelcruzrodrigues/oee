@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified" 
+	targetNamespace="apontamento.ws.oee.tc.feevale.br" 
+	xmlns:ns1="apontamento.ws.oee.tc.feevale.br">
+	
+  <xs:element name="inserirApontamentoQuantidadeRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:codigoOrdemProducao"/>
+        <xs:element ref="ns1:quantidade"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="codigoOrdemProducao" type="xs:int"/>
+  <xs:element name="quantidade" type="xs:double"/>
+     
+  <xs:element name="inserirApontamentoQuantidadeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:erros"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="erros" type="xs:string"/>
+  
+</xs:schema>

@@ -47,5 +47,35 @@ public class DefaultMessages {
 		}
 	}
 	
+	public static String get(Locale locale, OEEValidationMessage message){
+		List<String> parameters = new ArrayList<>(message.getParameters().length);
+		for (String parameter : message.getParameters()) {
+			parameters.add(get(locale, parameter));
+		}
+		return get(locale, message.getMessage(), parameters.toArray());
+	}
+	
+	public static String get(Locale locale, String meaningKey) {
+		return get(locale, meaningKey, new Object[]{});
+	}
+	
+	public static String get(Locale locale, String meaningKey, Object[] parameters) {
+		try {
+			ResourceBundle bundle = getResourceBundle(locale);
+			String message = bundle.getString(meaningKey);
+			if (parameters != null && parameters.length > 0){
+				message = String.format(message, (Object[])parameters);
+			}
+			
+			if (message.contains("\\n")){
+				message = message.replace("\\n", "\n");
+			}
+			
+			return message;
+		} catch (RuntimeException e) {
+			return meaningKey;
+		}
+	}
+	
 
 }

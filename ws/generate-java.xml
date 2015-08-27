@@ -24,7 +24,7 @@
 		<basename property="FileName" file="${theFile}" suffix=".xsd"/>
     	<mkdir dir="${java.dir}/${FileName}" />
         <exec executable="xjc">
-            <arg line=" -d ${java.dir}/${FileName} -p ws.oee ${schema.dir}/${FileName}.xsd" />
+            <arg line=" -d ${java.dir}/${FileName} -p ws.oee.types ${schema.dir}/${FileName}.xsd" />
         </exec>
     </target>
 </project>

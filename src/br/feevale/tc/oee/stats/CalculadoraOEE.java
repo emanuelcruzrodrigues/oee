@@ -63,7 +63,7 @@ public class CalculadoraOEE {
 
 	public void calcularDesempenho(UnidadeIndiceOEE unidade) {
 		try {
-			unidade.setTempoCicloTeoricoUnidadesPorMinuto(null);
+			unidade.refreshTempoCicloTeoricoConformeDetalhes();
 			Double desempenhoPonderadoTotal = 0D;
 			Double somatorioRuntime = 0D;
 			for (DetalheUnidadeIndiceOEE detalhe : unidade.getDetalhes()) {
@@ -75,7 +75,6 @@ public class CalculadoraOEE {
 			Double desempenho = Calculadora.dividir(desempenhoPonderadoTotal, somatorioRuntime, ARREDONDAMENTO_DECIMAL);
 			unidade.setDesempenho(desempenho);
 			calcularTempoCicloReal(unidade);
-			unidade.refreshTempoCicloTeoricoConformeDetalhes();
 		} catch (Exception e) {
 			unidade.setDesempenho(null);
 			unidade.setTempoCicloRealUnidadesPorMinuto(null);

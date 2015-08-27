@@ -1,7 +1,6 @@
 <%@page import="br.feevale.tc.oee.utils.OEEJSPUtils"%>
 <%@page import="br.feevale.tc.oee.stats.UnidadeIndiceOEE"%>
 <%@page import="java.util.List"%>
-<%@page import="br.feevale.tc.oee.stats.horario.IndiceOEEPorHoraFilter"%>
 <%@page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
 <%@page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -149,7 +148,7 @@
 							<td class="numeric"><fmt:formatNumber type="number" value="${indice.quantidadeUnidadesBoasProduzidas}" minFractionDigits="0" maxFractionDigits="0"/></td>
 							<td class="numeric"><strong><fmt:formatNumber type="number" value="${indice.qualidade}" minFractionDigits="3" maxFractionDigits="3"/></strong></td>
 							
-							<td class="numeric"><fmt:formatNumber type="number" value="${indice.runtimeMinutos}" minFractionDigits="3" maxFractionDigits="3"/></td>
+							<td class="numeric"><fmt:formatNumber type="number" value="${indice.runtimeMinutos}" minFractionDigits="0" maxFractionDigits="0"/></td>
 							<td class="numeric"><fmt:formatNumber type="number" value="${indice.tempoCicloTeoricoUnidadesPorMinuto}" minFractionDigits="3" maxFractionDigits="3"/></td>
 							<td class="numeric"><fmt:formatNumber type="number" value="${indice.tempoCicloRealUnidadesPorMinuto}" minFractionDigits="3" maxFractionDigits="3"/></td>
 							<td class="numeric"><strong><fmt:formatNumber type="number" value="${indice.desempenho}" minFractionDigits="3" maxFractionDigits="3"/></strong></td>
@@ -177,6 +176,7 @@
 				</tbody>
 			</table>
 		</div>
+
 		
 		<br/>
 		

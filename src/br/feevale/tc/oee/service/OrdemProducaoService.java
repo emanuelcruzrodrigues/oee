@@ -38,4 +38,8 @@ public class OrdemProducaoService extends CRUDServiceTemplateImpl<OrdemProducao>
 		return ordemProducaoDAO.queryOrdensProducaoAbertas();
 	}
 
+	public OrdemProducao getByCodigo(Integer codigo) {
+		return ordemProducaoDAO.getByCodigo(codigo);
+	}
+
 }

@@ -38,4 +38,8 @@ public class MotivoParadaService extends CRUDServiceTemplateImpl<MotivoParada>{
 		return motivoParadaDAO.queryMotivosParadasAtivos();
 	}
 
+	public MotivoParada getByCodigo(Integer codigo) {
+		return motivoParadaDAO.getByCodigo(codigo);
+	}
+
 }

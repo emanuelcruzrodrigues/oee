@@ -51,4 +51,14 @@ public class OrdemProducaoDAO extends CRUDDAOTemplateImpl<OrdemProducao> impleme
 		return dao.query(hql.toString(), SituacaoOrdemProducao.ABERTA);
 	}
 
+	public OrdemProducao getByCodigo(Integer codigo) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("select orpr from OrdemProducao orpr where orpr.codigo = ? ");
+		OrdemProducao result = dao.uniqueResult(hql.toString(), codigo);
+		if (result != null){
+			initialize(result);
+		}
+		return result;
+	}
+
 }

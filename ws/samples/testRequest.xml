@@ -1,0 +1,5 @@
+<inserirOuAlterarMotivoParadaRequest xmlns="ws.oee.motivoParada.inserirOuAlterarMotivoParada">
+	<idEquipamento>10</idEquipamento>
+	<inicio ano="2015" mes="8" dia="26" hora="17" minuto="30"/>    
+	<fim ano="2015" mes="8" dia="26" hora="17" minuto="30"/>    
+</inserirOuAlterarMotivoParadaRequest>

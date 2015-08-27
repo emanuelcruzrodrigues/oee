@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="ws.oee.motivoParada.inserirOuAlterarMotivoParada" xmlns:ns1="ws.oee.motivoParada.inserirOuAlterarMotivoParada">
+  <xs:element name="inserirOuAlterarMotivoParadaRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:idEquipamento"/>
+        <xs:element ref="ns1:inicio"/>
+        <xs:element ref="ns1:fim"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="idEquipamento" type="xs:integer"/>
+  <xs:element name="inicio">
+    <xs:complexType>
+      <xs:attribute name="ano" use="required" type="xs:integer"/>
+      <xs:attribute name="dia" use="required" type="xs:integer"/>
+      <xs:attribute name="hora" use="required" type="xs:integer"/>
+      <xs:attribute name="mes" use="required" type="xs:integer"/>
+      <xs:attribute name="minuto" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="fim">
+    <xs:complexType>
+      <xs:attribute name="ano" use="required" type="xs:integer"/>
+      <xs:attribute name="dia" use="required" type="xs:integer"/>
+      <xs:attribute name="hora" use="required" type="xs:integer"/>
+      <xs:attribute name="mes" use="required" type="xs:integer"/>
+      <xs:attribute name="minuto" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
