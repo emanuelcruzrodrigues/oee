@@ -1,2 +1,2 @@
 # oee
-This system aims to calculate and provide information to all levels of the organization by providing the Overall Equipment Effectiveness (OEE) index in real time as an independent service, enabling existing systems to add the overall efficiency index of equipment between its functionality in a minimally invasive way.
+Este sistema possui o intuito de prover informacao a todos os niveis da organizacao atraves da disponibilizacao do indice de eficiencia global dos equipamentos em tempo real como um serviço independente, possibilitando que sistemas existentes possam agregar o OEE entre suas funcionalidades de maneira pouco invasiva
