@@ -13,7 +13,6 @@ img.locale{
 	float: right;
 	padding: 1px;
 }
-footer{
-	position: fixed;
-	bottom: 0px;
+td.numeric{
+	text-align: right;
 }

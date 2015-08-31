@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified" 
+	targetNamespace="indice.ws.oee.tc.feevale.br" 
+	xmlns:ns1="indice.ws.oee.tc.feevale.br">
+	
+  <xs:element name="getIndiceOEETempoRealRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:codigoEquipamento"/>
+        <xs:element ref="ns1:periodoMinutos"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="codigoEquipamento" type="xs:int"/>
+  <xs:element name="periodoMinutos" type="xs:int"/>
+     
+  <xs:element name="getIndiceOEETempoRealResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:disponibilidade"/>
+        <xs:element ref="ns1:desempenho"/>
+        <xs:element ref="ns1:qualidade"/>
+        <xs:element ref="ns1:oee"/>
+        <xs:element ref="ns1:erros"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="disponibilidade" type="xs:double"/>
+  <xs:element name="desempenho" type="xs:double"/>
+  <xs:element name="qualidade" type="xs:double"/>
+  <xs:element name="oee" type="xs:double"/>
+  <xs:element name="erros" type="xs:string"/>
+  
+</xs:schema>

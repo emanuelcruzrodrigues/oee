@@ -1,7 +1,14 @@
+<%@page import="org.apache.commons.collections.CollectionUtils"%>
+<%@page import="br.feevale.tc.oee.stats.UnidadeIndiceOEE"%>
+<%@page import="br.feevale.tc.oee.utils.OEEJSPUtils"%>
+<%@page import="br.feevale.tc.oee.framework.i18n.DefaultMessages"%>
 <%@page import="br.feevale.tc.oee.framework.utils.JSPUtils"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 	"http://www.w3.org/TR/html4/loose.dtd">
@@ -45,7 +52,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><spring:message code="INICIO" text="INICIO" /></a></li>
+            <li class="active"><a href="../home/"><spring:message code="INICIO" text="INICIO" /></a></li>
             <li><a href="../stats/"><spring:message code="ESTATISTICAS" text="ESTATISTICAS" /></a></li>
             <li><a href="../databases/"><spring:message code="BANCO_DE_DADOS" text="BANCO_DE_DADOS" /></a></li>
             <li><a href="../webservices/"><spring:message code="WEBSERVICES" text="WEBSERVICES" /></a></li>
@@ -61,13 +68,51 @@
 		<!-- Current Locale : ${pageContext.response.locale} -->
 	</div>	
 	
-    <div class="container">
-    
-    	<!-- CONTEUDO -->
+    <div class="container">   
+   	
+   		
+   		<h2><spring:message code="EQUIPAMENTOS_EM_EXECUCAO" /></h2>
+   	
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th><spring:message code="EQUIPAMENTO" /></th>
+						<th><spring:message code="DISPONIBILIDADE" /></th>
+						<th><spring:message code="DESEMPENHO" /></th>
+						<th><spring:message code="QUALIDADE" /></th>
+						<th><spring:message code="OEE" /></th>
+					</tr>
+				</thead>
+				<tbody>
+				
+						<c:forEach items="${indices}" var="indice">
+							<tr class="<%=OEEJSPUtils.getOEEStyle(((UnidadeIndiceOEE)pageContext.getAttribute("indice")).getOee()) %>">
+								<td><a href="../stats/equipamento?id=${indice.equipamento.id}">${indice.equipamento.nome}</a></td>
+								<td class="numeric"><fmt:formatNumber type="number" value="${indice.disponibilidade}" minFractionDigits="3" maxFractionDigits="3"/></td>
+								<td class="numeric"><fmt:formatNumber type="number" value="${indice.desempenho}" minFractionDigits="3" maxFractionDigits="3"/></td>
+								<td class="numeric"><fmt:formatNumber type="number" value="${indice.qualidade}" minFractionDigits="3" maxFractionDigits="3"/></td>
+								<td class="numeric"><fmt:formatNumber type="number" value="${indice.oee}" minFractionDigits="3" maxFractionDigits="3"/></td>
+							</tr>
+						</c:forEach>
+					
+				</tbody>
+			</table>
+		</div>
+		
+		<br/>
+		<%=DefaultMessages.get(request, "INFORMACAO_REFERENTE_AOS_ULTIMOS_X_MINUTOS", new String[]{"30"}) %>
+		
+		<br/>
+		
+	
+	
+	
+	<br/>
     	
-		<footer>
-	     	<p>&copy; Emanuel Cruz Rodrigues 2015</p>
-	  	</footer>
+	<footer>
+     	<p>&copy; Emanuel Cruz Rodrigues 2015</p>
+  	</footer>
     	
     </div> <!-- /container -->
 

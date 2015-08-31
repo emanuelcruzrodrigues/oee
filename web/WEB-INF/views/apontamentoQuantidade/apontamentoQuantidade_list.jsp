@@ -75,6 +75,16 @@
 					<label for="dtFinal"><spring:message code="DATA_FINAL" /></label>
 					<form:input type="text" path="dtFinal" id="dtFinal" class="form-control" />
 				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-4">
+					<label for="equipamento"><spring:message code="EQUIPAMENTO"/></label>
+					<c:set var="selecione"><spring:message code="SELECIONE"/></c:set>
+					<form:select path="equipamento" class="form-control">
+						<form:option value="" label="${selecione}" />
+						<form:options items="${equipamentos}" itemLabel="nome" itemValue="id" />
+					</form:select>
+				</div>
 				
 				<div class="col-md-4">
 					<label for="ordemProducao"><spring:message code="ORDEM_PRODUCAO"/></label>

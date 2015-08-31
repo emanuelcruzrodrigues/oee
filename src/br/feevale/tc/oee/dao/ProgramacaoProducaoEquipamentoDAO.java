@@ -38,7 +38,7 @@ public class ProgramacaoProducaoEquipamentoDAO extends CRUDDAOTemplateImpl<Progr
 			result.add(Restrictions.ge("dtHrInicio", example.getDtInicial().toLocalDateTime(new LocalTime(0,0,0,0))));
 		}
 		if (example.getDtFinal() != null){
-			result.add(Restrictions.le("dtHrFim", example.getDtFinal().toLocalDateTime(new LocalTime(23,59,59,999))));
+			result.add(Restrictions.le("dtHrInicio", example.getDtFinal().toLocalDateTime(new LocalTime(23,59,59,999))));
 		}
 		return result;
 	}

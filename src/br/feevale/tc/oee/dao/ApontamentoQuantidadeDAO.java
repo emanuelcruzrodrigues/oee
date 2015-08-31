@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalTime;
 import org.springframework.stereotype.Repository;
 
@@ -37,15 +35,42 @@ public class ApontamentoQuantidadeDAO extends CRUDDAOTemplateImpl<ApontamentoQua
 	}
 	
 	@Override
-	protected List<Criterion> getAdicionalFiltersAtQueryByExample(ApontamentoQuantidade example) {
-		List<Criterion> result = new ArrayList<>();
+	public List<ApontamentoQuantidade> queryByExample(ApontamentoQuantidade example) {
+		StringBuilder hql = new StringBuilder();
+		List<Object> params = new ArrayList<>();
+		hql.append("select apqu from ApontamentoQuantidade apqu ");
+		hql.append(" inner join apqu.ordemProducao orpr ");
+		hql.append(" inner join orpr.equipamento equi ");
+		hql.append(" where 1=1 ");
+		
 		if (example.getDtInicial() != null){
-			result.add(Restrictions.ge("dtHr", example.getDtInicial().toLocalDateTime(new LocalTime(0,0,0,0))));
+			hql.append(" and apqu.dtHr >= ? ");
+			params.add(example.getDtInicial().toLocalDateTime(new LocalTime(0,0,0,0)));
 		}
-		if (example.getDtFinal() != null){
-			result.add(Restrictions.le("dtHr", example.getDtFinal().toLocalDateTime(new LocalTime(23,59,59,999))));
+		
+		if (example.getDtInicial() != null){
+			hql.append(" and apqu.dtHr <= ? ");
+			params.add(example.getDtFinal().toLocalDateTime(new LocalTime(23,59,59,999)));
 		}
-		return result;
+		
+		if (example.getOrdemProducao() != null){
+			hql.append(" and orpr.id = ? ");
+			params.add(example.getOrdemProducao().getId());
+		}
+		
+		if (example.getDmQualidade() != null){
+			hql.append(" and apqu.dmQualidade = ? ");
+			params.add(example.getDmQualidade());
+		}
+		
+		if (example.getEquipamento() != null){
+			hql.append(" and equi.id = ? ");
+			params.add(example.getEquipamento().getId());
+		}
+		
+		hql.append(" order by apqu.dtHr ");
+		
+		return dao.query(hql.toString(), params.toArray());
 	}
 
 }

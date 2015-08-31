@@ -1,5 +1,7 @@
 package br.feevale.tc.oee.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -41,6 +43,11 @@ public class ApontamentoTempoService {
 	@Transactional
 	public void encerrarApontamentosAbertos(Equipamento equipamento) {
 		apontamentoTempoFacade.encerrarApontamentosAbertos(equipamento);
+	}
+
+
+	public List<Equipamento> getEquipamentosEmExecucao() {
+		return apontamentoTempoDAO.queryEquipamentosEmExecucao();
 	}
 
 }

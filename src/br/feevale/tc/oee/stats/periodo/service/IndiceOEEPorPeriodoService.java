@@ -88,9 +88,11 @@ public abstract class IndiceOEEPorPeriodoService<T extends IndiceOEEPorPeriodoFi
 				UnidadeIndiceOEE unidade = unidadesPorCorte.get(novaUnidade.getId());
 				if (unidade != null){
 					unidade.addTempoParada(apontamento.getMotivoParada().getDmTipoParada(), novaUnidade.getTempoUtilMinutos());
+					unidade.addParada(apontamento, novaUnidade.getTempoUtilMinutos());
 				}else{
 					unidadesPorCorte.put(novaUnidade.getId(), novaUnidade);
 					novaUnidade.addTempoParada(apontamento.getMotivoParada().getDmTipoParada(), novaUnidade.getTempoUtilMinutos());
+					novaUnidade.addParada(apontamento, novaUnidade.getTempoUtilMinutos());
 				}
 			}
 		}

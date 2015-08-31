@@ -1,10 +1,12 @@
 package br.feevale.tc.oee.utils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
 import br.feevale.tc.oee.framework.exceptions.OEEException;
 import br.feevale.tc.oee.framework.i18n.DefaultMessages;
+import br.feevale.tc.oee.framework.utils.ReflectionUtils;
 import br.feevale.tc.oee.framework.validation.OEEValidationMessage;
 import br.feevale.tc.oee.framework.validation.OEEValidationResult;
 
@@ -23,7 +25,8 @@ public class WSUtils {
 				stackTrace.append(stackElement.toString()).append("\n");
 			}
 			
-//			result.setErrors(stackTrace.toString());
+			Field field = ReflectionUtils.getField(result.getClass(), "erros");
+			ReflectionUtils.invokeMethodSet(field, stackTrace.toString(), result);
 		}
 	}
 	
@@ -36,7 +39,8 @@ public class WSUtils {
 			errors.append(DefaultMessages.get(Locale.getDefault(), error)).append("\n");
 		}
 		
-//		result.setErrors(errors.toString());
+		Field field = ReflectionUtils.getField(result.getClass(), "erros");
+		ReflectionUtils.invokeMethodSet(field, errors.toString(), result);
 	}
 	
 	public static Throwable getOriginalException(Throwable exception){

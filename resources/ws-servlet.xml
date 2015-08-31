@@ -83,6 +83,13 @@
 		<sws:xsd location="/WEB-INF/schemas/xsd/inserirApontamentoQuantidadeRefugoService.xsd" />
 	</sws:dynamic-wsdl>
 	
+	<sws:dynamic-wsdl 
+	    id="getIndiceOEETempoRealServiceDefinition"
+	    portTypeName="getIndiceOEETempoReal"
+		locationUri="/ws/getIndiceOEETempoReal/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/getIndiceOEETempoRealService.xsd" />
+	</sws:dynamic-wsdl>
+	
 	<sws:interceptors>
   		<bean class="ws.oee.WSDebugInterceptor" name="wsDebugInterceptor"/>
 	</sws:interceptors>

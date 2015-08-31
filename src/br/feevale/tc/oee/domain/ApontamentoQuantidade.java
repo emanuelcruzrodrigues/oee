@@ -39,6 +39,7 @@ public class ApontamentoQuantidade implements Serializable{
 	/**
 	 * atributos nao mapeados
 	 */
+	private Equipamento equipamento;
 	private LocalDate dtInicial;
 	private LocalDate dtFinal;
 
@@ -89,6 +90,13 @@ public class ApontamentoQuantidade implements Serializable{
 	}
 	public void setDtUltimaAlteracao(Date dtUltimaAlteracao) {
 		this.dtUltimaAlteracao = dtUltimaAlteracao;
+	}
+	
+	public Equipamento getEquipamento() {
+		return equipamento;
+	}
+	public void setEquipamento(Equipamento equipamento) {
+		this.equipamento = equipamento;
 	}
 	
 	public LocalDate getDtInicial() {

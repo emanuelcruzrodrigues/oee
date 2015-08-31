@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.joda.time.LocalDateTime;
 
+import br.feevale.tc.oee.domain.ApontamentoTempoParada;
 import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.domain.OrdemProducao;
 import br.feevale.tc.oee.enums.QualidadeProducao;
@@ -45,10 +46,18 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	private Double oee;
 	
 	private List<DetalheUnidadeIndiceOEE> detalhes;
+	private List<ParadaUnidadeIndiceOEE> paradas;
 	
 	public UnidadeIndiceOEE() {
 		super();
-		detalhes = new ArrayList<>();
+		this.detalhes = new ArrayList<>();
+		this.paradas = new ArrayList<>();
+		this.dtTecnicaMinutos = 0;
+		this.dtOperacionalMinutos = 0;
+		this.dtQualidadeMinutos = 0;
+		this.dtTotalMinutos = 0;
+		this.stOperacionalMinutos = 0;
+		this.stInduzidoMinutos = 0;
 	}
 		
 	public String getId() {
@@ -232,6 +241,27 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 			DetalheUnidadeIndiceOEE detalhe = getDetalhes().get(index);
 			detalhe.addValues(novoDetalhe);
 		}
+	}
+	
+	public List<ParadaUnidadeIndiceOEE> getParadas() {
+		return paradas;
+	}
+	public void setParadas(List<ParadaUnidadeIndiceOEE> paradas) {
+		this.paradas = paradas;
+	}
+	public void addParada(ApontamentoTempoParada apontamento, Integer tempo){
+		ParadaUnidadeIndiceOEE parada = new ParadaUnidadeIndiceOEE(apontamento, tempo);
+		int index = getParadas().indexOf(parada);
+		if(index >= 0){
+			ParadaUnidadeIndiceOEE paradaExistente = getParadas().get(index);
+			paradaExistente.addTempo(tempo);
+		}else{
+			getParadas().add(parada);
+		}
+	}
+
+	public void setDetalhes(List<DetalheUnidadeIndiceOEE> detalhes) {
+		this.detalhes = detalhes;
 	}
 
 	@Override

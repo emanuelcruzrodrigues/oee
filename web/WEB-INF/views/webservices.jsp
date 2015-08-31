@@ -55,17 +55,86 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    
+    <br/>
     	
 	<div class="container">	
 	
-      <div class="row">
-        <div class="col-md-4">
-          <h2><spring:message code="EQUIPAMENTOS" text="EQUIPAMENTOS" /></h2>
-          <p><spring:message code="DESCRICAO_WEBSERVICE_EQUIPAMENTOS" /></p>
-          <p><a class="btn btn-default" href="../ws/equipmentSaveDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></p>
-        </div>
-      </div>
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th><spring:message code="WEBSERVICE" /></th>
+					<th><spring:message code="DESCRICAO" /></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+		          <td><spring:message code="EQUIPAMENTOS" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_EQUIPAMENTOS" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarEquipamentoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="MOTIVOS_PARADA" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_MOTIVOS_PARADA" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarMotivoParadaServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				<tr>
+		          <td><spring:message code="ORDENS_PRODUCAO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_ORDENS_PRODUCAO" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarOrdemProducaoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INSERIR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirProgramacaoProducaoEquipamentoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="EXCLUIR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_EXCLUIR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
+		          <td><a class="btn btn-default" href="../ws/excluirProgramacaoProducaoEquipamentoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INICIAR_APONTAMENTO_PRODUCAO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INICIAR_APONTAMENTO_PRODUCAO" /></td>
+		          <td><a class="btn btn-default" href="../ws/iniciarApontamentoProducaoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INICIAR_APONTAMENTO_PARADA" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INICIAR_APONTAMENTO_PARADA" /></td>
+		          <td><a class="btn btn-default" href="../ws/iniciarApontamentoParadaServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="ENCERRAR_APONTAMENTO_DO_EQUIPAMENTO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_ENCERRAR_APONTAMENTO_DO_EQUIPAMENTO" /></td>
+		          <td><a class="btn btn-default" href="../ws/encerrarApontamentoEquipamentoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INSERIR_APONTAMENTO_QUANTIDADE" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_APONTAMENTO_QUANTIDADE" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirApontamentoQuantidadeServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INSERIR_APONTAMENTO_QUANTIDADE_REFUGO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_APONTAMENTO_QUANTIDADE_REFUGO" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirApontamentoQuantidadeRefugoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INDICE_OEE_EM_TEMPO_REAL" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INDICE_OEE_EM_TEMPO_REAL" /></td>
+		          <td><a class="btn btn-default" href="../ws/getIndiceOEETempoRealServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	
+
+          
+      
+
+
+      
+      
 
       <footer>
         <p>&copy; Emanuel Cruz Rodrigues 2015</p>

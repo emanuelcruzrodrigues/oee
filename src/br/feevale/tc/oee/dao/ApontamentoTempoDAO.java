@@ -53,4 +53,15 @@ public class ApontamentoTempoDAO{
 		return dao.query(hql.toString(), params.toArray());
 	}
 
+	public List<Equipamento> queryEquipamentosEmExecucao() {
+		StringBuilder hql = new StringBuilder();
+		List<Object> params = new ArrayList<>();
+		hql.append("select distinct equi from ApontamentoTempo apte ");
+		hql.append(" inner join apte.equipamento equi ");
+		hql.append(" where apte.dtHrSaida is null ");
+		hql.append(" order by equi.nome ");
+		
+		return dao.query(hql.toString(), params.toArray());
+	}
+
 }
