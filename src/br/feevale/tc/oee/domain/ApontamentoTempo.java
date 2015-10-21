@@ -19,6 +19,8 @@ public class ApontamentoTempo implements Serializable{
 
 	private Integer id;
 	
+	private Integer codigo;
+	
 	private Equipamento equipamento;
 	
 	private LocalDateTime dtHrEntrada;
@@ -45,6 +47,13 @@ public class ApontamentoTempo implements Serializable{
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Integer getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 	
 	public Equipamento getEquipamento() {

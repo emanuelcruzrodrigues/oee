@@ -19,6 +19,8 @@ public class ProgramacaoProducaoEquipamento implements Serializable{
 	
 	private Integer id;
 	
+	private Integer codigo;
+	
 	private Equipamento equipamento;
 	
 	private LocalDateTime dtHrInicio;
@@ -46,7 +48,14 @@ public class ProgramacaoProducaoEquipamento implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
+	public Integer getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+	
 	public Equipamento getEquipamento() {
 		return equipamento;
 	}

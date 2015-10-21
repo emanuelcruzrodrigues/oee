@@ -40,5 +40,9 @@ public class ApontamentoQuantidadeService extends CRUDServiceTemplateImpl<Aponta
 	protected OEEValidationStack getBeforeSaveValidationStack(ApontamentoQuantidade apontamento) {
 		return new ApontamentoQuantidadeSaveValidationStack(apontamento, handler);
 	}
+	
+	public ApontamentoQuantidade getByCodigo(Integer codigo) {
+		return apontamentoQuantidadeDAO.getByCodigo(codigo);
+	}
 
 }

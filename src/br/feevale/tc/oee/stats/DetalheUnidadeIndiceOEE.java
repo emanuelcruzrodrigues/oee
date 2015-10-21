@@ -96,6 +96,9 @@ public class DetalheUnidadeIndiceOEE implements Serializable{
 		return desempenho;
 	}
 	public void setDesempenho(Double desempenho) {
+		if (desempenho != null && desempenho > 1D){
+			desempenho = 1D;
+		}
 		this.desempenho = desempenho;
 	}
 

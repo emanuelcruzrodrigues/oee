@@ -7,8 +7,10 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import ws.oee.ordemProducao.types.InserirOuAlterarOrdemProducaoRequest;
-import ws.oee.ordemProducao.types.InserirOuAlterarOrdemProducaoResponse;
+import ws.oee.ordemProducao.exclusao.types.ExcluirOrdemProducaoRequest;
+import ws.oee.ordemProducao.exclusao.types.ExcluirOrdemProducaoResponse;
+import ws.oee.ordemProducao.inclusao.types.InserirOuAlterarOrdemProducaoRequest;
+import ws.oee.ordemProducao.inclusao.types.InserirOuAlterarOrdemProducaoResponse;
 import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.domain.OrdemProducao;
 import br.feevale.tc.oee.enums.SituacaoOrdemProducao;
@@ -43,6 +45,20 @@ public class OrdemProducaoWSEndpoint {
 			
 			ordemProducao.setDmSituacao(SituacaoOrdemProducao.getFromValue(request.getSituacao()));
 			ordemProducaoService.save(ordemProducao);
+		} catch (Throwable e) {
+			WSUtils.updateErrors(result, e);
+		}
+		return result;
+    }
+	
+	@PayloadRoot(localPart="excluirOrdemProducaoRequest", namespace="ordemProducao.ws.oee.tc.feevale.br")
+    public @ResponsePayload ExcluirOrdemProducaoResponse excluir(@RequestPayload ExcluirOrdemProducaoRequest request) {
+		ExcluirOrdemProducaoResponse result = new ExcluirOrdemProducaoResponse();
+		try {
+			OrdemProducao ordemProducao = ordemProducaoService.getByCodigo(request.getCodigo());
+			if (ordemProducao != null){
+				ordemProducaoService.delete(ordemProducao);
+			}
 		} catch (Throwable e) {
 			WSUtils.updateErrors(result, e);
 		}

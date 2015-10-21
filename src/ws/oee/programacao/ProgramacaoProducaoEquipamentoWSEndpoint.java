@@ -2,20 +2,18 @@ package ws.oee.programacao;
 
 import javax.annotation.Resource;
 
-import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import ws.oee.programacao.exclusao.types.Data;
 import ws.oee.programacao.exclusao.types.ExcluirProgramacaoProducaoEquipamentoRequest;
 import ws.oee.programacao.exclusao.types.ExcluirProgramacaoProducaoEquipamentoResponse;
 import ws.oee.programacao.inclusao.types.DataHoraFinal;
 import ws.oee.programacao.inclusao.types.DataHoraInicial;
-import ws.oee.programacao.inclusao.types.InserirProgramacaoProducaoEquipamentoRequest;
-import ws.oee.programacao.inclusao.types.InserirProgramacaoProducaoEquipamentoResponse;
+import ws.oee.programacao.inclusao.types.InserirOuAlterarProgramacaoProducaoEquipamentoRequest;
+import ws.oee.programacao.inclusao.types.InserirOuAlterarProgramacaoProducaoEquipamentoResponse;
 import br.feevale.tc.oee.domain.Equipamento;
 import br.feevale.tc.oee.domain.ProgramacaoProducaoEquipamento;
 import br.feevale.tc.oee.service.EquipamentoService;
@@ -35,28 +33,29 @@ public class ProgramacaoProducaoEquipamentoWSEndpoint {
     public @ResponsePayload ExcluirProgramacaoProducaoEquipamentoResponse excluir(@RequestPayload ExcluirProgramacaoProducaoEquipamentoRequest request) {
 		ExcluirProgramacaoProducaoEquipamentoResponse result = new ExcluirProgramacaoProducaoEquipamentoResponse();
 		try {
-			Equipamento equipamento = equipamentoService.getByCodigo(request.getCodigoEquipamento());
-			if (equipamento != null){
-				programacaoProducaoEquipamentoService.excluirProgramacao(equipamento, toLocalDate(request.getData()));
+			ProgramacaoProducaoEquipamento programacao = programacaoProducaoEquipamentoService.getByCodigo(request.getCodigo());
+			if (programacao != null){
+				programacaoProducaoEquipamentoService.delete(programacao);
 			}
 		} catch (Throwable e) {
 			WSUtils.updateErrors(result, e);
 		}
 		return result;
     }
-
 	
-	private LocalDate toLocalDate(Data dt) {
-		return new LocalDate(dt.getAno(), dt.getMes(), dt.getDia());
-	}
-
-	@PayloadRoot(localPart="inserirProgramacaoProducaoEquipamentoRequest", namespace="programacao.ws.oee.tc.feevale.br")
-    public @ResponsePayload InserirProgramacaoProducaoEquipamentoResponse inserir(@RequestPayload InserirProgramacaoProducaoEquipamentoRequest request) {
-		InserirProgramacaoProducaoEquipamentoResponse result = new InserirProgramacaoProducaoEquipamentoResponse();
+	@PayloadRoot(localPart="inserirOuAlterarProgramacaoProducaoEquipamentoRequest", namespace="programacao.ws.oee.tc.feevale.br")
+    public @ResponsePayload InserirOuAlterarProgramacaoProducaoEquipamentoResponse inserirOuAlterar(@RequestPayload InserirOuAlterarProgramacaoProducaoEquipamentoRequest request) {
+		InserirOuAlterarProgramacaoProducaoEquipamentoResponse result = new InserirOuAlterarProgramacaoProducaoEquipamentoResponse();
 		try {
+			
+			ProgramacaoProducaoEquipamento programacao = programacaoProducaoEquipamentoService.getByCodigo(request.getCodigo());
+			if (programacao == null){
+				programacao = new ProgramacaoProducaoEquipamento();
+			}
+			
 			Equipamento equipamento = equipamentoService.getByCodigo(request.getCodigoEquipamento());
-			ProgramacaoProducaoEquipamento programacao = new ProgramacaoProducaoEquipamento();
 			programacao.setEquipamento(equipamento);
+			programacao.setCodigo(request.getCodigo());
 			programacao.setDtHrInicio(toLocalDateTime(request.getDataHoraInicial()));
 			programacao.setDtHrFim(toLocalDateTime(request.getDataHoraFinal()));
 			programacaoProducaoEquipamentoService.save(programacao);

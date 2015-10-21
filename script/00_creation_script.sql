@@ -84,6 +84,7 @@ create sequence sq_ordem_producao;
 
 create table apontamentos_quantidades(
 	id numeric(10) not null primary key,
+	codigo numeric(10),
 	id_ordem_producao numeric(10) not null,
 	dt_hr timestamp not null,
 	quantidade numeric(16,6) not null,
@@ -93,11 +94,12 @@ create table apontamentos_quantidades(
 );
 create sequence sq_apontamento_quantidade;
 alter table apontamentos_quantidades add constraint fk_apqu_orpr foreign key(id_ordem_producao) references ordens_producoes(id);
-
+create unique index idx_apqu_codigo on apontamentos_quantidades(codigo);
 ----------------------------------------------------------------------------
 
 create table apontamentos_tempos(
 	id numeric(10) not null primary key,
+	codigo numeric(10),
 	dm_tipo_apontamento varchar(1) not null,
 	id_equipamento numeric(10) not null,
 	dt_hr_entrada timestamp not null,
@@ -108,6 +110,7 @@ create table apontamentos_tempos(
 );
 create sequence sq_apontamento_tempo;
 alter table apontamentos_tempos add constraint fk_apte_equi foreign key (id_equipamento) references equipamentos(id);
+create unique index idx_apte_codigo on apontamentos_tempos(codigo);
 
 ----------------------------------------------------------------------------
 
@@ -124,12 +127,14 @@ create table apontamentos_tempos_paradas(
 	id numeric(10) not null primary key,
 	id_motivo_parada numeric(10) not null
 );
-alter table apontamentos_tempos_paradas add constraint fk_apte_aptp foreign key (id) references apontamentos_tempos(id);
+alter table apontamentos_tempos_paradas add constraint fk_aptp_apte foreign key (id) references apontamentos_tempos(id);
+alter table apontamentos_tempos_paradas add constraint fk_aptp_mopa foreign key (id_motivo_parada) references motivos_paradas(id);
 
 ----------------------------------------------------------------------------
 
 create table programacoes_equipamentos(
 	id numeric(10) not null primary key,
+	codigo numeric(10),
 	id_equipamento numeric(10) not null,
 	dt_hr_inicio timestamp not null,
 	dt_hr_fim timestamp not null,
@@ -139,4 +144,4 @@ create table programacoes_equipamentos(
 );
 create sequence sq_programacao_equipamento;
 alter table programacoes_equipamentos add constraint fk_preq_equi foreign key (id_equipamento) references equipamentos(id);
-
+create unique index idx_preq_codigo on programacoes_equipamentos(codigo);

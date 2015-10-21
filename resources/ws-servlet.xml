@@ -21,10 +21,24 @@
 	</sws:dynamic-wsdl>
 	
 	<sws:dynamic-wsdl 
+	    id="excluirEquipamentoServiceDefinition" 
+	    portTypeName="excluirEquipamento"
+		locationUri="/ws/excluirEquipamento/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/excluirEquipamentoService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
 	    id="inserirOuAlterarMotivoParadaServiceDefinition" 
 	    portTypeName="inserirOuAlterarMotivoParada"
 		locationUri="/ws/inserirOuAlterarMotivoParada/">
 		<sws:xsd location="/WEB-INF/schemas/xsd/inserirOuAlterarMotivoParadaService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
+	    id="excluirMotivoParadaServiceDefinition" 
+	    portTypeName="excluirMotivoParada"
+		locationUri="/ws/excluirMotivoParada/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/excluirMotivoParadaService.xsd" />
 	</sws:dynamic-wsdl>
 	
 	<sws:dynamic-wsdl 
@@ -35,10 +49,17 @@
 	</sws:dynamic-wsdl>
 	
 	<sws:dynamic-wsdl 
-	    id="inserirProgramacaoProducaoEquipamentoServiceDefinition"
-	    portTypeName="inserirProgramacaoProducaoEquipamento"
+	    id="excluirOrdemProducaoServiceDefinition"
+	    portTypeName="excluirOrdemProducao"
+		locationUri="/ws/excluirOrdemProducao/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/excluirOrdemProducaoService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
+	    id="inserirOuAlterarProgramacaoProducaoEquipamentoServiceDefinition"
+	    portTypeName="inserirOuAlterarProgramacaoProducaoEquipamento"
 		locationUri="/ws/inserirProgramacaoProducaoEquipamento/">
-		<sws:xsd location="/WEB-INF/schemas/xsd/inserirProgramacaoProducaoEquipamentoService.xsd" />
+		<sws:xsd location="/WEB-INF/schemas/xsd/inserirOuAlterarProgramacaoProducaoEquipamentoService.xsd" />
 	</sws:dynamic-wsdl>
 	
 	<sws:dynamic-wsdl 
@@ -49,13 +70,6 @@
 	</sws:dynamic-wsdl>
 	
 	<sws:dynamic-wsdl 
-	    id="encerrarApontamentoEquipamentoServiceDefinition"
-	    portTypeName="encerrarApontamentoEquipamento"
-		locationUri="/ws/encerrarApontamentoEquipamento/">
-		<sws:xsd location="/WEB-INF/schemas/xsd/encerrarApontamentoEquipamentoService.xsd" />
-	</sws:dynamic-wsdl>
-	
-	<sws:dynamic-wsdl 
 	    id="iniciarApontamentoParadaServiceDefinition"
 	    portTypeName="iniciarApontamentoParada"
 		locationUri="/ws/iniciarApontamentoParada/">
@@ -63,10 +77,45 @@
 	</sws:dynamic-wsdl>
 	
 	<sws:dynamic-wsdl 
+	    id="inserirOuAlterarApontamentoParadaServiceDefinition"
+	    portTypeName="inserirOuAlterarApontamentoParada"
+		locationUri="/ws/inserirOuAlterarApontamentoParada/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/inserirOuAlterarApontamentoParadaService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
+	    id="excluirApontamentoParadaServiceDefinition"
+	    portTypeName="excluirApontamentoParada"
+		locationUri="/ws/excluirApontamentoParada/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/excluirApontamentoParadaService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
 	    id="iniciarApontamentoProducaoServiceDefinition"
 	    portTypeName="iniciarApontamentoProducao"
 		locationUri="/ws/iniciarApontamentoProducao/">
 		<sws:xsd location="/WEB-INF/schemas/xsd/iniciarApontamentoProducaoService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
+	    id="inserirOuAlterarApontamentoProducaoServiceDefinition"
+	    portTypeName="inserirOuAlterarApontamentoProducao"
+		locationUri="/ws/inserirOuAlterarApontamentoProducao/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/inserirOuAlterarApontamentoProducaoService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
+	    id="excluirApontamentoProducaoServiceDefinition"
+	    portTypeName="excluirApontamentoProducao"
+		locationUri="/ws/excluirApontamentoProducao/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/excluirApontamentoProducaoService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
+	    id="encerrarApontamentoEquipamentoServiceDefinition"
+	    portTypeName="encerrarApontamentoEquipamento"
+		locationUri="/ws/encerrarApontamentoEquipamento/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/encerrarApontamentoEquipamentoService.xsd" />
 	</sws:dynamic-wsdl>
 	
 	<sws:dynamic-wsdl 
@@ -84,11 +133,26 @@
 	</sws:dynamic-wsdl>
 	
 	<sws:dynamic-wsdl 
+	    id="inserirOuAlterarApontamentoQuantidadeServiceDefinition"
+	    portTypeName="inserirOuAlterarApontamentoQuantidade"
+		locationUri="/ws/inserirOuAlterarApontamentoQuantidade/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/inserirOuAlterarApontamentoQuantidadeService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
+	    id="excluirApontamentoQuantidadeServiceDefinition"
+	    portTypeName="excluirApontamentoQuantidade"
+		locationUri="/ws/excluirApontamentoQuantidade/">
+		<sws:xsd location="/WEB-INF/schemas/xsd/excluirApontamentoQuantidadeService.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<sws:dynamic-wsdl 
 	    id="getIndiceOEETempoRealServiceDefinition"
 	    portTypeName="getIndiceOEETempoReal"
 		locationUri="/ws/getIndiceOEETempoReal/">
 		<sws:xsd location="/WEB-INF/schemas/xsd/getIndiceOEETempoRealService.xsd" />
 	</sws:dynamic-wsdl>
+	
 	
 	<sws:interceptors>
   		<bean class="ws.oee.WSDebugInterceptor" name="wsDebugInterceptor"/>

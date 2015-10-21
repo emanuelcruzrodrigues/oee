@@ -85,5 +85,18 @@ public class ApontamentoTempoParadaDAO extends CRUDDAOTemplateImpl<ApontamentoTe
 		
 		return dao.uniqueResult(hql.toString(), params.toArray());
 	}
+	
+	public ApontamentoTempoParada getByCodigo(Integer codigo) {
+		if (codigo == null) return null;
+		
+		String hql = "select atpa from ApontamentoTempoParada atpa where atpa.codigo = ? ";
+		
+		ApontamentoTempoParada result = dao.uniqueResult(hql, codigo);
+		if (result != null){
+			initialize(result);
+		}
+		
+		return result;
+	}
 
 }

@@ -72,5 +72,18 @@ public class ApontamentoQuantidadeDAO extends CRUDDAOTemplateImpl<ApontamentoQua
 		
 		return dao.query(hql.toString(), params.toArray());
 	}
+	
+	public ApontamentoQuantidade getByCodigo(Integer codigo) {
+		if (codigo == null) return null;
+		
+		String hql = "select apqu from ApontamentoQuantidade apqu where apqu.codigo = ? ";
+		
+		ApontamentoQuantidade result = dao.uniqueResult(hql, codigo);
+		if (result != null){
+			initialize(result);
+		}
+		
+		return result;
+	}
 
 }

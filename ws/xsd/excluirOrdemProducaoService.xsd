@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified" 
+	targetNamespace="ordemProducao.ws.oee.tc.feevale.br" 
+	xmlns:ns1="ordemProducao.ws.oee.tc.feevale.br">
+	
+  <xs:element name="excluirOrdemProducaoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:codigo"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="codigo" type="xs:int"/>
+  
+  <xs:element name="excluirOrdemProducaoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:erros"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="erros" type="xs:string"/>
+  
+</xs:schema>

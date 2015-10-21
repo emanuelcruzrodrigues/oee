@@ -49,5 +49,9 @@ public class ApontamentoTempoParadaService extends CRUDServiceTemplateImpl<Apont
 	private ApontamentoTempoParada getApontamentoAtual(Equipamento equipamento, MotivoParada motivoParada) {
 		return apontamentoTempoParadaDAO.getApontamentoAtual(equipamento, motivoParada);
 	}
+	
+	public ApontamentoTempoParada getByCodigo(Integer codigo) {
+		return apontamentoTempoParadaDAO.getByCodigo(codigo);
+	}
 
 }

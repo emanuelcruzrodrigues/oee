@@ -7,8 +7,10 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import ws.oee.motivoParada.types.InserirOuAlterarMotivoParadaRequest;
-import ws.oee.motivoParada.types.InserirOuAlterarMotivoParadaResponse;
+import ws.oee.motivoParada.exclusao.types.ExcluirMotivoParadaRequest;
+import ws.oee.motivoParada.exclusao.types.ExcluirMotivoParadaResponse;
+import ws.oee.motivoParada.inclusao.types.InserirOuAlterarMotivoParadaRequest;
+import ws.oee.motivoParada.inclusao.types.InserirOuAlterarMotivoParadaResponse;
 import br.feevale.tc.oee.domain.MotivoParada;
 import br.feevale.tc.oee.enums.AtivoInativo;
 import br.feevale.tc.oee.enums.TipoParada;
@@ -34,6 +36,20 @@ public class MotivoParadaWSEndpoint {
 			motivo.setDmTipoParada(TipoParada.getFromValue(request.getTipoParada()));
 			motivo.setDmSituacao(AtivoInativo.getFromValue(request.getSituacao()));
 			motivoParadaService.save(motivo);
+		} catch (Throwable e) {
+			WSUtils.updateErrors(result, e);
+		}
+		return result;
+    }
+	
+	@PayloadRoot(localPart="excluirMotivoParadaRequest", namespace="motivoParada.ws.oee.tc.feevale.br")
+    public @ResponsePayload ExcluirMotivoParadaResponse excluir(@RequestPayload ExcluirMotivoParadaRequest request) {
+		ExcluirMotivoParadaResponse result = new ExcluirMotivoParadaResponse();
+		try {
+			MotivoParada motivoParada = motivoParadaService.getByCodigo(request.getCodigo());
+			if (motivoParada != null){
+				motivoParadaService.delete(motivoParada);
+			}
 		} catch (Throwable e) {
 			WSUtils.updateErrors(result, e);
 		}

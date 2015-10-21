@@ -15,6 +15,17 @@
   
   <xs:element name="codigoOrdemProducao" type="xs:int"/>
   <xs:element name="quantidade" type="xs:double"/>
+  
+  <xs:element name="dataHora">
+    <xs:complexType>
+      <xs:attribute name="ano" use="required" type="xs:int"/>
+      <xs:attribute name="mes" use="required" type="xs:int"/>
+      <xs:attribute name="dia" use="required" type="xs:int"/>
+      <xs:attribute name="hora" use="required" type="xs:int"/>
+      <xs:attribute name="minuto" use="required" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+  
      
   <xs:element name="inserirApontamentoQuantidadeResponse">
     <xs:complexType>

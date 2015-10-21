@@ -7,22 +7,13 @@
   <xs:element name="excluirProgramacaoProducaoEquipamentoRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="ns1:codigoEquipamento"/>
-        <xs:element ref="ns1:data"/>
+        <xs:element ref="ns1:codigo"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   
-  <xs:element name="codigoEquipamento" type="xs:int"/>
+  <xs:element name="codigo" type="xs:int" nillable="true"/>
   
-  <xs:element name="data">
-    <xs:complexType>
-      <xs:attribute name="ano" use="required" type="xs:int"/>
-      <xs:attribute name="mes" use="required" type="xs:int"/>
-      <xs:attribute name="dia" use="required" type="xs:int"/>
-    </xs:complexType>
-  </xs:element>
-   
   <xs:element name="excluirProgramacaoProducaoEquipamentoResponse">
     <xs:complexType>
       <xs:sequence>

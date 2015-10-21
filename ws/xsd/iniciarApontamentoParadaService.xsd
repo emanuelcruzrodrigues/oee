@@ -15,7 +15,7 @@
   
   <xs:element name="codigoEquipamento" type="xs:int"/>
   <xs:element name="codigoMotivoParada" type="xs:int"/>
-     
+  
   <xs:element name="iniciarApontamentoParadaResponse">
     <xs:complexType>
       <xs:sequence>

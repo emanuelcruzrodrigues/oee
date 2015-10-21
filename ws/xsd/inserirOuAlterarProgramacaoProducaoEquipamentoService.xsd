@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified" 
+	targetNamespace="programacao.ws.oee.tc.feevale.br" 
+	xmlns:ns1="programacao.ws.oee.tc.feevale.br">
+	
+  <xs:element name="inserirOuAlterarProgramacaoProducaoEquipamentoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:codigo"/>
+        <xs:element ref="ns1:codigoEquipamento"/>
+        <xs:element ref="ns1:dataHoraInicial"/>
+        <xs:element ref="ns1:dataHoraFinal"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="codigo" type="xs:int" nillable="true"/>
+  
+  <xs:element name="codigoEquipamento" type="xs:int"/>
+  
+  <xs:element name="dataHoraInicial">
+    <xs:complexType>
+      <xs:attribute name="ano" use="required" type="xs:int"/>
+      <xs:attribute name="mes" use="required" type="xs:int"/>
+      <xs:attribute name="dia" use="required" type="xs:int"/>
+      <xs:attribute name="hora" use="required" type="xs:int"/>
+      <xs:attribute name="minuto" use="required" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="dataHoraFinal">
+    <xs:complexType>
+      <xs:attribute name="ano" use="required" type="xs:int"/>
+      <xs:attribute name="mes" use="required" type="xs:int"/>
+      <xs:attribute name="dia" use="required" type="xs:int"/>
+      <xs:attribute name="hora" use="required" type="xs:int"/>
+      <xs:attribute name="minuto" use="required" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+   
+  <xs:element name="inserirOuAlterarProgramacaoProducaoEquipamentoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:erros"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="erros" type="xs:string"/>
+  
+</xs:schema>

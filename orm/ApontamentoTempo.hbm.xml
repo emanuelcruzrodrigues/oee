@@ -13,6 +13,8 @@
 		<discriminator column="dm_tipo_apontamento" type="string"/>
 		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
 		
+		<property name="codigo" column="codigo" />
+		
 		<many-to-one name="equipamento" column="id_equipamento" />
 		<property name="dtHrEntrada" column="dt_hr_entrada" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
 		<property name="dtHrSaida" column="dt_hr_saida" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />

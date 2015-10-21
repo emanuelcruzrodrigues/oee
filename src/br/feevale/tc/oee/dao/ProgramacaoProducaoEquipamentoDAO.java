@@ -43,4 +43,17 @@ public class ProgramacaoProducaoEquipamentoDAO extends CRUDDAOTemplateImpl<Progr
 		return result;
 	}
 
+	public ProgramacaoProducaoEquipamento getByCodigo(Integer codigo) {
+		if (codigo == null) return null;
+		
+		String hql = "select ppeq from ProgramacaoProducaoEquipamento ppeq where ppeq.codigo = ? ";
+		
+		ProgramacaoProducaoEquipamento result = dao.uniqueResult(hql, codigo);
+		if (result != null){
+			initialize(result);
+		}
+		
+		return result;
+	}
+
 }

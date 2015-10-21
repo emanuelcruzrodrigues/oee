@@ -71,23 +71,38 @@
 			</thead>
 			<tbody>
 				<tr>
-		          <td><spring:message code="EQUIPAMENTOS" /></td>
-		          <td><spring:message code="DESCRICAO_WEBSERVICE_EQUIPAMENTOS" /></td>
+		          <td><spring:message code="INSERIR_OU_ALTERAR_EQUIPAMENTOS" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_OU_ALTERAR_EQUIPAMENTOS" /></td>
 		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarEquipamentoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
 				</tr>
 				<tr>
-		          <td><spring:message code="MOTIVOS_PARADA" /></td>
-		          <td><spring:message code="DESCRICAO_WEBSERVICE_MOTIVOS_PARADA" /></td>
+		          <td><spring:message code="EXCLUIR_EQUIPAMENTOS" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_EXCLUIR_EQUIPAMENTOS" /></td>
+		          <td><a class="btn btn-default" href="../ws/excluirEquipamentoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INSERIR_OU_ALTERAR_MOTIVOS_PARADA" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_OU_ALTERAR_MOTIVOS_PARADA" /></td>
 		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarMotivoParadaServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
 				<tr>
-		          <td><spring:message code="ORDENS_PRODUCAO" /></td>
-		          <td><spring:message code="DESCRICAO_WEBSERVICE_ORDENS_PRODUCAO" /></td>
+				<tr>
+		          <td><spring:message code="EXCLUIR_MOTIVOS_PARADA" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_EXCLUIR_MOTIVOS_PARADA" /></td>
+		          <td><a class="btn btn-default" href="../ws/excluirMotivoParadaServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				<tr>
+		          <td><spring:message code="INSERIR_OU_ALTERAR_ORDENS_PRODUCAO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_OU_ALTERAR_ORDENS_PRODUCAO" /></td>
 		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarOrdemProducaoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
 				</tr>
 				<tr>
-		          <td><spring:message code="INSERIR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
-		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
-		          <td><a class="btn btn-default" href="../ws/inserirProgramacaoProducaoEquipamentoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+		          <td><spring:message code="EXCLUIR_ORDENS_PRODUCAO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_EXCLUIR_ORDENS_PRODUCAO" /></td>
+		          <td><a class="btn btn-default" href="../ws/excluirOrdemProducaoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INSERIR_OU_ALTERAR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_OU_ALTERAR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarProgramacaoProducaoEquipamentoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
 				</tr>
 				<tr>
 		          <td><spring:message code="EXCLUIR_PROGRAMACAO_PRODUCAO_EQUIPAMENTO" /></td>
@@ -100,9 +115,29 @@
 		          <td><a class="btn btn-default" href="../ws/iniciarApontamentoProducaoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
 				</tr>
 				<tr>
+		          <td><spring:message code="INSERIR_OU_ALTERAR_APONTAMENTO_PRODUCAO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_OU_ALTERAR_APONTAMENTO_PRODUCAO" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarApontamentoProducaoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="EXCLUIR_APONTAMENTO_PRODUCAO" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_EXCLUIR_APONTAMENTO_PRODUCAO" /></td>
+		          <td><a class="btn btn-default" href="../ws/excluirApontamentoProducaoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
 		          <td><spring:message code="INICIAR_APONTAMENTO_PARADA" /></td>
 		          <td><spring:message code="DESCRICAO_WEBSERVICE_INICIAR_APONTAMENTO_PARADA" /></td>
 		          <td><a class="btn btn-default" href="../ws/iniciarApontamentoParadaServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INSERIR_OU_ALTERAR_APONTAMENTO_PARADA" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_OU_ALTERAR_APONTAMENTO_PARADA" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarApontamentoParadaServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="EXCLUIR_APONTAMENTO_PARADA" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_EXCLUIR_APONTAMENTO_PARADA" /></td>
+		          <td><a class="btn btn-default" href="../ws/excluirApontamentoParadaServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
 				</tr>
 				<tr>
 		          <td><spring:message code="ENCERRAR_APONTAMENTO_DO_EQUIPAMENTO" /></td>
@@ -118,6 +153,16 @@
 		          <td><spring:message code="INSERIR_APONTAMENTO_QUANTIDADE_REFUGO" /></td>
 		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_APONTAMENTO_QUANTIDADE_REFUGO" /></td>
 		          <td><a class="btn btn-default" href="../ws/inserirApontamentoQuantidadeRefugoServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="INSERIR_OU_ALTERAR_APONTAMENTO_QUANTIDADE" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_INSERIR_OU_ALTERAR_APONTAMENTO_QUANTIDADE" /></td>
+		          <td><a class="btn btn-default" href="../ws/inserirOuAlterarApontamentoQuantidadeServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
+				</tr>
+				<tr>
+		          <td><spring:message code="EXCLUIR_APONTAMENTO_QUANTIDADE" /></td>
+		          <td><spring:message code="DESCRICAO_WEBSERVICE_EXCLUIR_APONTAMENTO_QUANTIDADE" /></td>
+		          <td><a class="btn btn-default" href="../ws/excluirApontamentoQuantidadeServiceDefinition.wsdl" role="button"><spring:message code="VER_DETALHES" text="VER_DETALHES" /> &raquo;</a></td>
 				</tr>
 				<tr>
 		          <td><spring:message code="INDICE_OEE_EM_TEMPO_REAL" /></td>

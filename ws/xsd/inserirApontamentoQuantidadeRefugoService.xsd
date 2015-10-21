@@ -15,7 +15,7 @@
   
   <xs:element name="codigoOrdemProducao" type="xs:int"/>
   <xs:element name="quantidade" type="xs:double"/>
-     
+  
   <xs:element name="inserirApontamentoQuantidadeRefugoResponse">
     <xs:complexType>
       <xs:sequence>

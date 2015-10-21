@@ -15,6 +15,7 @@
 		</id>
 		<timestamp name="dtUltimaAlteracao" column="dt_ultima_alteracao" />
 		<many-to-one name="ordemProducao" column="id_ordem_producao" />
+		<property name="codigo" column="codigo" />
 		<property name="dtHr" column="dt_hr" type="br.feevale.tc.oee.framework.dao.PersistentLocalDateTime" />
 		<property name="quantidade" column="quantidade" />
 		<property name="dmQualidade" column="dm_qualidade" type="qualidade" />

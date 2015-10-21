@@ -59,5 +59,9 @@ public class ProgramacaoProducaoEquipamentoService extends CRUDServiceTemplateIm
 		return programacoes;
 	}
 	
+	public ProgramacaoProducaoEquipamento getByCodigo(Integer codigo){
+		return programacaoProducaoEquipamentoDAO.getByCodigo(codigo);
+	}
+	
 
 }

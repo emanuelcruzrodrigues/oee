@@ -37,7 +37,7 @@ public class ApontamentoTempoProducaoService extends CRUDServiceTemplateImpl<Apo
 		
 		new ApontamentoTempoProducaoSaveValidationStack(apontamento, handler).validate();
 		
-		if (apontamento.getId() == null){
+		if (apontamento.getId() == null && apontamento.getCodigo() == null){
 			ApontamentoTempoProducao apontamentoAtual = getApontamentoAtual(apontamento.getOrdemProducao());
 			if (apontamentoAtual != null) return apontamentoAtual;
 		}
@@ -51,6 +51,10 @@ public class ApontamentoTempoProducaoService extends CRUDServiceTemplateImpl<Apo
 
 	private ApontamentoTempoProducao getApontamentoAtual(OrdemProducao ordemProducao) {
 		return apontamentoTempoProducaoDAO.getApontamentoAtual(ordemProducao);
+	}
+	
+	public ApontamentoTempoProducao getByCodigo(Integer codigo) {
+		return apontamentoTempoProducaoDAO.getByCodigo(codigo);
 	}
 
 }

@@ -116,11 +116,19 @@
 		        </div>
 		        
 		        <div class="col-md-8">
-					<div class="box-chart">
-						<canvas id="GraficoPizza" style="width:100%;"></canvas>
-						<div id="placeholder"></div>
-						<%=OEEJSPUtils.printGraficoParadas(request) %>
-					</div>
+		        	<div class="panel panel-default">
+			        	<div class="panel-heading">
+			              <h3 class="panel-title"><spring:message code="MOTIVOS_DE_PARADA_NO_PERIODO" /></h3>
+			            </div>
+			            <div class="panel-body">
+							<div class="box-chart">
+								<canvas id="GraficoPizza" style="width:100%;"></canvas>
+								<div id="placeholder"></div>
+								<%=OEEJSPUtils.printGraficoParadas(request) %>
+							</div>
+			            </div>
+		        	</div>
+		        	
 				</div>
 		        
 			</div>

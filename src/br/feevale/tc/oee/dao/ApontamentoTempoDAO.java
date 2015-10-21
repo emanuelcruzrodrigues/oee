@@ -63,5 +63,5 @@ public class ApontamentoTempoDAO{
 		
 		return dao.query(hql.toString(), params.toArray());
 	}
-
+	
 }

@@ -21,6 +21,8 @@ public class ApontamentoQuantidade implements Serializable{
 	
 	private Integer id;
 	
+	private Integer codigo;
+	
 	private OrdemProducao ordemProducao;
 	
 	private LocalDateTime dtHr;
@@ -49,7 +51,14 @@ public class ApontamentoQuantidade implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
+	public Integer getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+	
 	public OrdemProducao getOrdemProducao() {
 		return ordemProducao;
 	}
