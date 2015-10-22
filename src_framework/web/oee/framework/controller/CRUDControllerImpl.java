@@ -27,6 +27,11 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 	
 	@RequestMapping("/")
 	public String acaoDefault(@Valid T example, BindingResult result, Model model, HttpServletRequest request){
+		@SuppressWarnings("unchecked")
+		T sessionExample = (T) request.getSession().getAttribute(getBeanName()+"_example");
+		if (sessionExample != null){
+			example = sessionExample;
+		}
 		return acaoListar(example, result,  model, request);
 	}
 	
@@ -42,6 +47,8 @@ public abstract class CRUDControllerImpl<T extends Serializable> implements CRUD
 		model.addAttribute("example", example);
 		
 		updateRequestBeforeGoToList(request);
+		
+		request.getSession().setAttribute(getBeanName()+"_example", example);
 		
 		return getListView();
 	}
