@@ -143,6 +143,11 @@ public class UnidadeIndiceOEE implements Serializable, Comparable<UnidadeIndiceO
 	public void setTempoCargaMinutos(Integer tempoCargaMinutos) {
 		this.tempoCargaMinutos = tempoCargaMinutos;
 	}
+	public void addTempoCargaMinutos(Integer tempoCarga) {
+		tempoCarga = Calculadora.somar(getTempoCargaMinutos(), tempoCarga, 0).intValue();
+		setTempoCargaMinutos(tempoCarga);
+	}
+
 	
 	public Double getTempoCicloTeoricoUnidadesPorMinuto() {
 		return tempoCicloTeoricoUnidadesPorMinuto;
