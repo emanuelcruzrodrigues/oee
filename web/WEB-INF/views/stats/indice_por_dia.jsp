@@ -167,7 +167,7 @@
 									<td class="detalhe numeric"><fmt:formatNumber type="number" value="${detalhe.quantidadeUnidadesBoasProduzidas}" minFractionDigits="0" maxFractionDigits="0"/></td>
 									<td class="detalhe numeric"><strong><fmt:formatNumber type="number" value="${detalhe.qualidade}" minFractionDigits="3" maxFractionDigits="3"/></strong></td>
 									
-									<td class="detalhe numeric"><fmt:formatNumber type="number" value="${detalhe.runtimeMinutos}" minFractionDigits="3" maxFractionDigits="3"/></td>
+									<td class="detalhe numeric"><fmt:formatNumber type="number" value="${detalhe.runtimeMinutos}" minFractionDigits="0" maxFractionDigits="0"/></td>
 									<td class="detalhe numeric"><fmt:formatNumber type="number" value="${detalhe.tempoCicloTeoricoUnidadesPorMinuto}" minFractionDigits="3" maxFractionDigits="3"/></td>
 									<td class="detalhe numeric"><fmt:formatNumber type="number" value="${detalhe.tempoCicloRealUnidadesPorMinuto}" minFractionDigits="3" maxFractionDigits="3"/></td>
 									<td class="detalhe numeric"><strong><fmt:formatNumber type="number" value="${detalhe.desempenho}" minFractionDigits="3" maxFractionDigits="3"/></strong></td>

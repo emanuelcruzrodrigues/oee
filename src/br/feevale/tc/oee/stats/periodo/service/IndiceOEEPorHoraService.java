@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 import org.springframework.stereotype.Service;
 
 import br.feevale.tc.oee.domain.ApontamentoQuantidade;
@@ -49,7 +51,10 @@ public class IndiceOEEPorHoraService extends IndiceOEEPorPeriodoService<IndiceOE
 
 	@Override
 	public List<UnidadeIndiceOEE> gerarUnidadesIndiceOEE(IndiceOEEPorHoraFilter filter, LocalDateTime dtHrInicio, LocalDateTime dtHrFim) {
-		if (dtHrFim == null) dtHrFim = new LocalDateTime();
+		if (dtHrFim == null) {
+			LocalTime horaAtual = new LocalTime();
+			dtHrFim = new LocalDate().toLocalDateTime(new LocalTime(horaAtual.getHourOfDay(), horaAtual.getMinuteOfHour(), 0, 0));
+		}
 		List<UnidadeIndiceOEE> result = new ArrayList<UnidadeIndiceOEE>();
 		
 		int year = dtHrInicio.getYear();

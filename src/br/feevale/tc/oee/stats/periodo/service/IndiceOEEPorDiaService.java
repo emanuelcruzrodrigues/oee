@@ -43,7 +43,10 @@ public class IndiceOEEPorDiaService extends IndiceOEEPorPeriodoService<IndiceOEE
 
 	@Override
 	public List<UnidadeIndiceOEE> gerarUnidadesIndiceOEE(IndiceOEEPorDiaFilter filter, LocalDateTime dtHrInicio, LocalDateTime dtHrFim) {
-		if (dtHrFim == null) dtHrFim = new LocalDateTime();
+		if (dtHrFim == null) {
+			LocalTime horaAtual = new LocalTime();
+			dtHrFim = new LocalDate().toLocalDateTime(new LocalTime(horaAtual.getHourOfDay(), horaAtual.getMinuteOfHour(), 0, 0));
+		}
 		List<UnidadeIndiceOEE> result = new ArrayList<UnidadeIndiceOEE>();
 		
 		int year = dtHrInicio.getYear();
