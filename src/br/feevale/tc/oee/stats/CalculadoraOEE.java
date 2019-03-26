@@ -33,7 +33,7 @@ public class CalculadoraOEE {
 
 
 	/**
-	 * Disponibilidade = (Tempo de carga – DT) / Tempo de carga
+	 * Disponibilidade = (Tempo de carga - DT) / Tempo de carga
 	 */
 	public void calcularDisponibilidade(UnidadeIndiceOEE unidade) {
 		calcularDtTotal(unidade);
